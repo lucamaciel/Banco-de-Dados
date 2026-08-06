@@ -1,0 +1,13 @@
+﻿-- Exercício 1: Modelo relacional simples
+-- Enunciado: Crie tabelas para representar Alunos e Cursos, e escreva uma consulta
+-- Exemplo de criação:
+-- CREATE TABLE Aluno (
+--   id INTEGER PRIMARY KEY,
+--   nome TEXT NOT NULL,
+--   email TEXT
+-- );
+-- CREATE TABLE Curso (
+--   id INTEGER PRIMARY KEY,
+--   titulo TEXT NOT NULL
+-- );
+-- Insira dados de teste e escreva uma consulta que liste alunos e seus cursos.
