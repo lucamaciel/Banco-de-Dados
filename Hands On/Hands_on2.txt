@@ -1,0 +1,79 @@
+===============================================
+HANDS ON 2 - MODELO CONCEITUAL (DER)
+===============================================
+
+OBJETIVO:
+Gerar um modelo conceitual representado como um diagrama entidade-relacionamento (DER) 
+usando a notação de Peter Chen.
+
+===============================================
+DESCRIÇÃO DO MINIMUNDO - SAM v1.0
+===============================================
+
+Sistema Acadêmico de Matrículas (SAM)
+
+ENTIDADES E ATRIBUTOS:
+
+-ENTIDADE REPRESENTADA POR RETANGULO SEMPRE
+
+-SE EXISTE UM RELACIONAMENTO ENTRE CURSO E AREA
+DEVEM TER UM LOSANGO
+
+-NOME DE RELACIONAMENTO NÃO PRECISA SER EXCLUSIVO, APENAS
+PRECISA REPRESENTAR A RELAÇÃO ENTRE ELES
+
+-
+
+1. ÁREA
+   - Sigla (identificador) = aTRIBUTTO DE 
+   - Nome
+   - Pode integrar outras áreas (relacionamento recursivo)
+
+2. CURSO
+   - Sigla (identificador)
+   - Nome
+   - Custo
+   - Pertence a uma ÁREA (obrigatoriamente)
+   - Professores(Atributo Multivalorado)
+
+3. PROFESSOR
+   - CPF (identificador)
+   - Nome
+   - Leciona em CURSO
+
+4. ALUNO
+   - CPF (identificador)
+   - Primeiro Nome
+   - Sobrenome
+   - Sexo
+   - Data de Nascimento
+
+5. MÓDULO
+   - Sigla (identificador)
+   - Nome
+   - Compõe apenas um CURSO
+
+6. TÓPICO
+   - Sigla (identificador)
+   - Nome
+   - Horas (carga horária)
+   - Pertence a apenas um MÓDULO
+
+RELACIONAMENTOS:
+
+- ÁREA pertence a ÁREA (1:N) - recursivo
+- CURSO pertence a ÁREA (N:1)
+- PROFESSOR leciona CURSO (N:N)
+- ALUNO matricula em CURSO (N:N)
+  * Atributos do relacionamento: Data da matrícula, Pagamento (sim/não)
+- CURSO contém MÓDULO (1:N)
+- MÓDULO contém TÓPICO (1:N)
+
+RESTRIÇÕES:
+- Um curso pertence obrigatoriamente a uma área
+- Uma área pode integrar apenas uma outra área
+- Um módulo compõe apenas um curso (não existem módulos órfãos)
+- Um tópico existe apenas em função de um módulo
+- As horas do curso são derivadas da soma das horas dos tópicos dos seus módulos
+
+
