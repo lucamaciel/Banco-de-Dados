@@ -1,0 +1,53 @@
+Exercício 1
+Pergunta: Quais são os nomes e sobrenomes dos atores do sexo feminino?
+
+Álgebra Relacional:
+π first_name, last_name (σ gender = 'F' (actors));
+
+
+Exercício 2
+Pergunta: Quais são os títulos dos filmes lançados após o ano 1999?
+
+Álgebra Relacional:
+π title (σ year > 1999 (movies));
+
+Exercício 3
+Pergunta: Quais são os filmes e seus diretores?
+
+Álgebra Relacional:
+π m.title → nome_filme, d.name → nome_diretor (movies ⋈ m.director_id = d.id directors);
+
+Exercício 4
+Pergunta: Quais filmes, atores e papéis possuem avaliação maior que 6?
+
+Álgebra Relacional:
+π m.title → nome_filme, a.first_name → nome_ator, a.last_name → sobrenome_ator, ma.role → papel (
+    σ m.rating > 6 (movies ⋈ m.id = ma.movie_id movie_actors ⋈ ma.actor_id = a.id actors)
+);
+
+Exercício 5
+Pergunta: Quantos filmes cada diretor possui, mostrando também diretores sem filmes?
+
+Álgebra Relacional:
+γ d.name → nome_diretor, COUNT(m.id) → quantidade_filmes (
+    directors ⟕ d.id = m.director_id movies
+);
+
+Exercício 6
+Pergunta: Quantos filmes existem em cada gênero, incluindo gêneros sem filmes?
+
+Álgebra Relacional:
+γ g.name → genero, COUNT(m.id) → quantidade_filmes (
+    genres ⟕ g.id = m.genre_id movies
+);
+
+Exercício 7
+Pergunta: Qual é a média, menor e maior avaliação de cada gênero?
+
+Álgebra Relacional:
+γ g.name → genero, AVG(m.rating) → media_ranking, MIN(m.rating) → menor_ranking, MAX(m.rating) → maior_ranking (
+    genres ⟕ g.id = m.genre_id movies
+);
+
+Fim dos exercícios.
+
