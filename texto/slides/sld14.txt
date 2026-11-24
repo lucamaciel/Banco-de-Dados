@@ -1,0 +1,312 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+indexação de nível único
+Indexação
+
+o Construção de índices para acelerar recuperação de registros de arquivos
+ndã Índice → Caminho alternativo de acesso a registros de um arquivo
+Bra .com PROFESSOR
+  o o CPF                                                                  ÍNDICE
+                                                                             Ponteiro Departamento
+os da 12345678900
+ard ran .0 21345678900
+4 32145678900
+
+  ir C irb D ···
+m m -N 52345678902
+                               Nome        Sexo Salario Departamento
+                        Roberto Machado
+                        Carlos A. Martins  M 1200.00  1                    #00  1
+                        Ana Maria Freitas
+                                                                      #00
+                                  ···
+                                           M 3200.00  1                    #10  2
+                         Luiz A. Barbosa
+                                           F 7500.00  2               #10  ···  ···
+
+                                           ···  ···   ···                  #FF  N
+
+Wlad .wlad Y-NC Arquivo de índice → arquivo adicional ao arquivo de dados (indexado)M 5300.00N#FF
+www CC B Contém campos de indexação provenientes do arquivo indexado
+Registro → campos de indexação + ponteiro para bloco que armazena o
+
+registro do arquivo indexado referenciado pelos campos de indexação
+
+www.wladmirbrandao.com                                                                              3 / 15
+Indexação
+
+o Índice de nível único → arquivo ordenado pelo campo de indexação
+randã m Denso → um registro de índice para cada registro no arquivo indexado
+                        B .co PROFESSOR                                                 ÍNDICE
+                          o o CPF                                                         Ponteiro Departamento
+                        os da 12345678900 Roberto Machado
+                                     Nome               Sexo Salario Departamento
+
+                                                        rd #00
+                        a ran .0 21345678900                                            #00
+                                                        M 1200.00  1                         1
+
+                        4 32145678900
+                                     Carlos A. Martins  M 3200.00  1                    #00  1
+dmir CdmirbC-ND Esparso → registros de índice para alguns registros no arquivo indexado
+                                     Ana Maria Freitas  F 7500.00  2               #10  #10  2
+
+                        la la -N PROFESSOR
+                         W .w Y CPF
+                        ww C B 12345678900 Roberto MachadoNomeSexo Salario Departamento ÍNDICE
+                                                                                          Ponteiro Departamento
+
+                        w C 21345678900                 M 1200.00  1                    #00  1
+
+                                                                                   #00
+
+                                     Carlos A. Martins  M 3200.00  1                    #10  2
+
+                        32145678900  Ana Maria Freitas  F 7500.00  2               #10
+
+www.wladmirbrandao.com                                                                                           4 / 15
+Índice Primário
+
+o Índice esparso com registros de tamanho ﬁxo
+ndã PROFESSOR
+  ra om CPF                                                                ÍNDICE
+
+B .c 12345678900
+so ao 12345678901
+o d 21345678900
+ard ran .0 32145678900
+ir C irb 4 52345678902
+                               Nome        Sexo Salario Departamento       Ponteiro  CPF
+                        Roberto Machado
+                                           M 1200.00  1                    #00 12345678900
+                         Manuela Costa
+                        Carlos A. Martins                             #00
+                        Ana Maria Freitas
+                         Luiz A. Barbosa   F 2700.00  3                    #10 21345678900
+
+                                           M 3200.00  1                    #20 52345678902
+
+                                                                      #10
+
+                                           F 7500.00  2
+ladm ladm -NC-ND Campo de indexação → referencia chave primária do arquivo indexado
+W .w Y Demanda arquivo indexado ordenado pela chave primáriaM 5300.003#20
+www CC B Um registro de índice para cada bloco do arquivo indexado
+
+Primeiro registro de cada bloco do arquivo indexado (âncora do bloco)
+encontra-se referenciado por um registro no arquivo de índice
+
+www.wladmirbrandao.com                                                                      5 / 15
+Índice Primário
+
+o Para um arquivo indexado de Professor, com 10.000 registros de tamanho ﬁxo
+dã de 185B, ordenado pela chave primária CPF e armazenado em um disco com
+ran m blocos de 4KB, teremos:
+so B ao.co Fator de Bloco → F =
+                                4KB      4×1.024B
+                                185B        185B
+ardo rand 4.0 # Blocos → B =          =            ≈  22, 14  = 22
+
+                        10.000
+                           22
+mir C mirb -ND Espaço → S = 455 × 4KB = 1.820KB ≈ 1,77MB≈454, 54= 455
+
+lad lad -NC Pesquisas nesse arquivo demandarão acessos a blocos de disco:
+Wwww.wCC BY Pela chave primária → A = log2 455 ≈ 8,83 = 9
+Por outro campo → A = 455
+
+www.wladmirbrandao.com                                                        6 / 15
+Índice Primário
+
+o Para um índice primário criado sobre a chave primária CPF de 11B, onde o
+dã ponteiro de bloco ocupa 16B, teremos:
+Bran .com Fator de Bloco → FP =
+                                 4KB       4×1.024B
+                             11B +16B         27B
+ardosroandao.0 # Blocos → BP =         =
+                                                     ≈ 151, 70 = 151
+
+                        455  ≈  3, 01  =4
+                        151
+ir C irb D 4 Espaço → SP = 4 × 4KB = 16KB
+ladm ladm -NC-N Pesquisas nesse arquivo só podem ser realizadas pelo campo de indexação e
+W .w Y demandarão acessos a blocos de disco:
+
+  www CC B AP = log2 4 = 2
+
++1 acesso para recuperar o registro no arquivo indexado
+
+www.wladmirbrandao.com                                                                     7 / 15
+Índice Primário
+
+  o Arquivo de índice é signiﬁcativamente menor que arquivo indexado, ocupando
+  dã menos blocos em disco
+
+     Bran .com Esparsidade → menos registros no arquivo de índice
+     so ao Tamanho → registros de índice menores que registros do arquivo indexado
+     ardo rand .0 Ordenação → arquivo ordenado com pesquisa de complexidade logarítmica
+
+       ir C irb D 4 Pesquisa binária no arquivo de índice para encontrar a chave procurada
+       m m -N Acesso direto ao registro de dados através do endereço de bloco recuperado a
+       lad lad -NC partir do índice
+  W w.w BY Operações de atualização no arquivo indexado podem envolver reordenação de
+  ww CC registros do próprio arquivo indexado e do arquivo de índice
+
+www.wladmirbrandao.com                                                                      8 / 15
+Índice de Agrupamento
+
+o Ou índice clustering, é um índice esparso com registros de tamanho ﬁxo
+ndã PROFESSOR
+  ra m CPF                                                                 ÍNDICE
+                                                                             Ponteiro Departamento
+B .co 12345678900
+o o 21345678900
+os da 32145678900
+ard ran .0 12345678901
+ir C irb 4 52345678902
+                               Nome        Sexo Salario Departamento
+                        Roberto Machado
+                        Carlos A. Martins  M 1200.00  1                    #00  1
+                        Ana Maria Freitas
+                                                                      #00
+                         Manuela Costa
+                         Luiz A. Barbosa   M 3200.00  1                    #10  2
+
+                                           F 7500.00  2                    #10  3
+
+                                                                      #10
+
+                                           F 2700.00  3
+dm dm C-ND Campo de indexação → referencia campo de agrupamento (chave não
+la la -N exclusiva) do arquivo indexado    M 5300.00  3               #20
+W w.w BY Demanda arquivo indexado ordenado pelo campo de agrupamento
+ww CC Um registro de índice para cada valor distinto no campo de agrupamento
+
+Bloco de primeira ocorrência de um valor distinto no campo de agrupamento
+encontra-se referenciado por um registro no arquivo de índice
+
+www.wladmirbrandao.com                                                                              9 / 15
+Índice de Agrupamento
+
+o No arquivo indexado de Professor, para um índice de agrupamento criado sobre
+dã o campo Departamento de 8B, contendo 200 valores distintos, onde o ponteiro de
+ran m bloco ocupa 16B, teremos:
+so B ao.co Fator de Bloco → FC =
+                                4KB        4×1.024B
+                             8B +16B          24B
+ardo rand 4.0 # Blocos → BC =          =
+                                                     ≈ 170, 66 = 170
+
+                        200
+                        170
+mir C mirb -ND Espaço → SC = 2 × 4KB = 8KB≈1, 17=2
+
+Wlad .wlad Y-NC Pesquisas nesse arquivo só podem ser realizadas pelo campo de indexação e
+www CC B demandarão acessos a blocos de disco:
+AC = log2 2 = 1
+
++1 acesso para recuperar o registro no arquivo indexado
+
+www.wladmirbrandao.com                                                                     10 / 15
+Índice Secundário
+
+o Índice denso com registros de tamanho ﬁxo
+ndã PROFESSOR
+  ra om CPF                                                                ÍNDICE
+                                                                             Ponteiro Departamento
+B .c 12345678900
+so ao 12345678901
+o d 21345678900
+ard ran .0 32145678900
+ir C irb 4 52345678902
+                               Nome        Sexo Salario Departamento
+                        Roberto Machado
+                                           M 1200.00  1                    #00  1
+                         Manuela Costa
+                        Carlos A. Martins                             #00
+                        Ana Maria Freitas
+                         Luiz A. Barbosa   F 2700.00  3                    #10  1
+
+                                           M 3200.00  1                    #10  2
+
+                                                                      #10
+
+                                           F 7500.00  2                    #00  3
+ladm ladm -NC-ND Campo de indexação → referencia campo não ordenado do arquivo indexado
+W .w Y Não demanda ordenação no arquivo indexadoM 5300.003            #20  #20  3
+www CC B Um registro de índice para cada registro do arquivo indexado
+
+Bloco de cada registro do arquivo indexado encontra-se referenciado por um
+registro no arquivo de índice
+
+www.wladmirbrandao.com                                                                              11 / 15
+Índice Secundário
+
+o No arquivo indexado de Professor, para um índice secundário criado sobre o
+dã campo Departamento de 8B, onde o ponteiro de bloco ocupa 16B, teremos:
+Bran .com Fator de Bloco → FS =
+                                   4KB      4×1.024B
+                                8B +16B        24B
+ardosroandao.0 # Blocos → BS =           =
+                                                      ≈ 170, 66 = 170
+
+                        10.000  ≈  58, 82   = 59
+                          170
+ir C irb D 4 Espaço → SS = 59 × 4KB = 236KB
+ladm ladm -NC-N Pesquisas nesse arquivo só podem ser realizadas pelo campo de indexação e
+W .w Y demandarão acessos a blocos de disco:
+
+  www CC B AS = log2 59 ≈ 5,88 = 6
+
++1 acesso para recuperar o registro no arquivo indexado
+
+www.wladmirbrandao.com                                                                     12 / 15
+Índice Secundário
+
+  o Arquivo de índice tipicamente menor que arquivo indexado
+     randã m Tamanho → registros de índice menores que registros do arquivo indexado
+     B .co Ordenação → arquivo ordenado com pesquisa binária
+     oso dao Flexibilidade → múltiplos índices sobre um mesmo arquivo
+       ard ran 4.0 Não demandam arquivo indexado ordenado
+       ir C irb D Somente um índice primário ou de agrupamento por arquivo indexado, por
+       m m -N demandarem ordenação
+     lad lad -NC Desempenho → proporcionalmente, maior ganho em tempo de pesquisa
+       W w.w BY Para índices primário ou de agrupamento, tem-se a opção de pesquisa binária
+       ww CC tanto no arquivo indexado, quanto no arquivo índice
+
+www.wladmirbrandao.com                                                                       13 / 15
+Indexação
+
+o Comparativo entre diferentes tipos de índices de nível único
+randãom Tipo
+o B o.c Primário        Esparsidade   Arquivo               Quantidade
+ardosranda .0 Agrupamento  Esparso   Indexado                Registros
+Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 SecundárioEsparsoOrdenado
+                            Denso              Número de blocos do arquivo in-
+                                     Ordenado  dexado
+                                               Número de valores distintos no
+                                     Qualquer  campo de agrupamento
+                                               Número de registros do arquivo
+                                               indexado
+
+www.wladmirbrandao.com                                                          14 / 15
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            15 / 15
+

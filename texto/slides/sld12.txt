@@ -1,0 +1,499 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+organização de dados
+Organização de Dados
+
+  o A forma como dados são dispostos em memória secundária impacta o
+  dã desempenho do SGBD para recuperação e manipulação desses dados
+
+     Bran .com Tipicamente dados são organizados como arquivos de registros
+  oso dao Registro → coleção de valores relacionados a fatos sobre o minimundo, tais
+  ard ran .0 como atributos, instâncias de entidades e relacionamentos
+
+                ir C irb D 4 12345678900 Roberto Machado M 1200.00 1
+  ladm ladm -NC-N Arquivo → coleção de registros relacionados
+
+      Wwww.wCC BY 12345678900 Roberto Machado M 1200.00 1 ··· 32145678900 Ana Maria Freitas F 7500.00 2
+
+     Registros devem ser organizados de forma a serem rapidamente localizados
+
+www.wladmirbrandao.com                                                                                   3 / 32
+Organização de Dados
+
+o Um arquivo possui um cabeçalho (descritor) contendo metadados úteis aos
+dã programas que acessam seus registros
+
+  Bran .com Ordem, tipo e tamanho de campos dos registros
+  so ao Endereços dos blocos que armazenam registros do arquivo
+  ardo rand .0 Códigos de caracteres especiais, como separadores de campos
+                        dmir CdmirbC-ND 4 R1
+                        Wwlaww.wClaC BY-N CabeçalhoR2R3  ···  RN
+
+www.wladmirbrandao.com                                                      4 / 32
+Arquivos de Registros
+
+  o Cada valor de um registro está restrito a um tipo de dado, sendo que o número
+  dã de bytes para cada tipo é ﬁxo, dependendo do sistema computacional
+
+     Bran .com Booleano: 1 byte
+     oso dao Inteiro: 4 bytes
+     ard ran 4.0 Número real: 4 bytes
+     mir C mirb -ND Inteiro longo: 8 bytes
+     lad lad C Data: 10 bytes (formato DD-MM-AAAA)
+     W w.w BY-N String: n bytes, onde n é o número de caracteres
+     ww CC BLOB: p + n bytes, onde p é o tamanho do ponteiro no registro para o
+
+           endereço de bloco onde o objeto binário de tamanho n está armazenado
+
+www.wladmirbrandao.com                                                             5 / 32
+Arquivos de Registros
+
+  o Arquivos podem ser compostos por registros de tamanho:
+     randã m Fixo → cada registro no arquivo tem o mesmo tamanho
+     B .co Variável → registros no arquivo possuem tamanhos diferentes
+       oso dao Campos de tamanho variável → VARCHAR, TEXT
+       ard ran .0 Campos opcionais → NULL
+       ir C irb D 4 Campos multivalorados
+       m m -N Arquivos mistos com registros de instâncias de entidades diferentes
+
+  Wlad .wlad Y-NC Tipicamente, todos os registros em um arquivo referem-se às instâncias de uma
+  www CC B mesma entidade
+
+           Arquivo Professor → Entidade Professor
+
+www.wladmirbrandao.com                                                                           6 / 32
+Arquivos de Registros
+
+o Um arquivo é alocado em diferentes blocos de disco, sendo que seus registros
+dã podem estar alocados em um ou vários blocos
+Bran .com Não Espalhado → registro não pode atravessar o limite de um bloco
+                        so ao Bloco i
+                        rdo nd R1
+                                                Bloco i+1
+ir Ca irbra D 4.0 Espalhado → registro é armazenado em múltiplos blocos
+  dm dm C-N Ponteiro no ﬁm de cada bloco aponta para o bloco de continuidade do registroR2R3R4
+
+                        Wla w.wla BY-N Bloco i  Bloco i+1
+                         ww CC R1
+                        R2  R3 •                R3         R4      R5
+
+www.wladmirbrandao.com                                                                    7 / 32
+Arquivos de Registros
+
+o Blocagem, ou Fator de Bloco, ou Fator de Blocagem de um arquivo é a
+dã quantidade de registros desse arquivo que cabem em um bloco de disco
+ran om Considere:
+oso B ao.c Blocos com t bytes
+ard rand .0 Registros de r bytes, sendo r ≤ t
+mir C mirb -ND 4 Fator de Bloco → F =
+lad lad -NC Em arquivo com registros de tamanho ﬁxo, r é o tamanho do registro, enquantot
+W w.w BY em arquivo com registros de tamanho variável, considera-se r o tamanho médior
+ww CC de registros
+
+www.wladmirbrandao.com                                                                    8 / 32
+Arquivos de Registros
+
+o Se r é suﬁcientemente grande, tal que r > t/2, o espaço não usado em disco pode
+dã ser grande e o espalhamento de registros passa a ser vantajoso para reduzir
+ran m esse "espaço perdido"
+
+  so B ao.co Espaço não usado → U = t − (F × r)
+ardo rand 4.0 O número de blocos (B) necessários para armazenar um arquivo é:
+Wwlawdwm.wirClaCCdBmYi-rNbC-ND B =
+n                       , onde n é o número de registros do arquivo
+F
+
+www.wladmirbrandao.com                                                             9 / 32
+Arquivos de Registros
+
+o Por exemplo, considere um arquivo de Professor armazenado em um disco com
+dã blocos de t = 4KB, onde:
+
+  Bran .com r = 185B
+  so ao n = 10.000
+ir Cardirobrand 4.0 Nesse caso, teremos:
+dm dm C-ND F =
+4KB                        4×1.024B
+185B                          185B
+Wla w.wla BY-N U = 4KB − (22 × 185B) = 4.096B − 4.070B = 26B=≈22, 14= 22
+
+ww CC B =
+10.000                  ≈  454, 54   = 455
+   22
+
+Consumo de espaço → 455 × 4KB = 1.820KB ≈ 1, 77MB
+
+www.wladmirbrandao.com                                                       10 / 32
+Métodos de Acesso
+
+  o Grupo de operações que podem ser aplicadas a um arquivo
+     randã m Recuperação → localização de registros em arquivo para que valores de
+     B .co campos possam ser lidos e processados, sem que haja alteração nos dados
+     so ao Atualização → alteração de arquivo pela inserção ou exclusão de registros,
+     ardo rand .0 ou pela modiﬁcação de valores de campos de registros
+
+  mir C mirb -ND 4 A frequência da mudança em arquivos determina a frequência de execução de
+  d d C operações de atualização
+
+     Wla .wla Y-N Arquivos Estáticos → operações de atualização são raramente executadas
+     www CC B Arquivos Dinâmicos → mudam com frequência de forma que operações de
+
+           atualização são constantemente executadas
+
+www.wladmirbrandao.com                                                                        11 / 32
+Métodos de Acesso
+
+  o Muitas operações aplicadas a arquivos envolvem pesquisa
+     randã m Especiﬁca critérios que registros devem satisfazer
+     o B o.co Tipicamente, critérios envolvem expressões booleanas
+     os da Expressões podem apresentar diferentes graus de complexidade
+       ir Cardirbran 4.0 Simples → expressões booleanas simples
+          m m -ND Exemplo: (Sexo = ’M’)
+       lad lad -NC Complexas → expressões booleanas complexas
+          Wwww.wCC BY Exemplo: ((Sexo = ’M’) ∧ ((Salario > 3.000) ∨ (¬ TemDependente)))
+
+www.wladmirbrandao.com                                                                   12 / 32
+Métodos de Acesso
+
+  o SGBDs acessam registros utilizando operações representativas, em que
+  dã tipicamente um registro é processado por vez
+
+     Bran .com Open → prepara arquivo para leitura ou escrita
+       so ao Aloca buﬀers para blocos
+       ardo rand .0 Recupera o cabeçalho do arquivo
+       ir C irb 4 Posiciona o ponteiro de arquivo no início do arquivo
+
+     dm dm C-ND Reset → posiciona o ponteiro do arquivo aberto para o início do arquivo
+     Wwlaww.wClaC BY-N Close → libera buﬀers alocados e realiza operações de limpeza de memória
+
+www.wladmirbrandao.com                                                                           13 / 32
+Métodos de Acesso
+
+  o Operações representativas
+     randã m Find (Locate) → procura o primeiro registro que satisfaça uma condição
+       B .co Transfere o bloco que contém o registro para um buﬀer alocado
+       so ao Posiciona o ponteiro de arquivo no registro, tornando-o o registro atual
+     ardo rand 4.0 FindNext → procura o próximo registro que satisfaça uma condição
+       mir C mirb -ND Transfere o bloco que contém o registro para um buﬀer alocado
+       d d C Posiciona o ponteiro de arquivo no registro, tornando-o o registro atual
+     Wla w.wla BY-N Read (Get) → copia o registro do buﬀer para uma variável de programa
+       ww CC Posiciona o ponteiro no próximo registro, tornando-o o registro atual
+
+www.wladmirbrandao.com                                                                    14 / 32
+Métodos de Acesso
+
+  o Operações representativas
+     randã m Delete → remove o registro atual
+       B .co Transfere o buﬀer de volta ao bloco no disco
+     rdoso ndao Modify → modiﬁca valores de campos do registro atual
+       ir Ca irbra 4.0 Transfere o buﬀer de volta ao bloco no disco
+     dm dm C-ND Insert → insere um novo registro no arquivo
+       Wla .wla Y-N Localiza o bloco onde o registro deve ser inserido
+       w B Transfere o bloco para um buﬀer
+       ww CC Escreve o registro no buﬀer
+
+                   Transfere o buﬀer de volta ao bloco no disco
+
+www.wladmirbrandao.com                                                  15 / 32
+Métodos de Acesso
+
+  o Operações representativas
+     randã m Scan → combinação das operações Find, FindNext e Read
+       B .co Se uma condição é especiﬁcada
+          oso dao Se o ponteiro de arquivo estiver posicionado no início do arquivo, reposiciona-o no
+          ard ran .0 primeiro registro que satisfaça a condição
+          ir C irb 4 Se o ponteiro de arquivo estiver posicionado em algum registro, reposiciona-o no
+          D próximo registro que satisfaça a condição
+       ladm ladm C-N Caso contrário
+          W .w Y-N Se o ponteiro de arquivo estiver posicionado no início do arquivo, reposiciona-o no
+          w B primeiro registro
+          ww CC Se o ponteiro de arquivo estiver posicionado em algum registro, reposiciona-o no
+
+                            próximo registro
+
+www.wladmirbrandao.com                                                                                  16 / 32
+Métodos de Acesso
+
+  o Existem operações representativas de nível mais alto que podem ser aplicadas a
+  dã conjuntos de registros
+
+     Bran .com FindAll → procura o conjunto de registros que satisfaça uma condição
+     so ao FindOrdered → procura, em uma ordem especíﬁca, o conjunto de registros
+     ardo rand .0 que satisfaça uma condição
+     ir C irb D 4 FindN → procura os N primeiros registros que satisfaçam uma condição
+     Wwlawdwm.wClaCdBmY-NC-N Reorganize → reorganiza os blocos e registros de um arquivo
+
+www.wladmirbrandao.com                                                                    17 / 32
+Tipos de Arquivo
+
+  o Métodos de acesso operam de maneira diferente dependendo da forma como
+  dã arquivos são organizados, especialmente de como os registros encontram-se
+  ran m dispostos dentro dos arquivos
+
+     so B ao.co Arquivo Heap (Pilha) → registros posicionados sem ordem, com novos
+     rdo nd registros acrescentados ao ﬁnal do arquivo
+     ir Ca irbra 4.0 Arquivo Sequencial → registros posicionados ordenadamente por um ou
+     m m -ND mais campos, denominados campos de ordenação
+     lad lad -NC Arquivo Hash → registros posicionados a partir da aplicação de uma função
+     Wwww.wCC BY hash sobre um ou mais campos, denominados campos hash
+
+www.wladmirbrandao.com                                                                      18 / 32
+Tipos de Arquivo: Heap
+
+o Arquivo organizado de forma que os registros são dispostos desordenadamente
+randã m Bloco 1
+o B o.co 5 A ··· 1 C •  Bloco 2  Bloco n
+
+                        ardosranda .0 Arquivo
+                        2 B ··· 8 D • ··· 4 A ··· 6 E •
+
+dmir CdmirbC-ND 4 Pesquisa → linear, varrendo todos os registros do arquivo no pior casoNovo
+  Wla .wla Y-N Endereço do primeiro bloco do arquivo é recuperado do cabeçalho
+  w B Começando do primeiro, cada bloco é copiado para um buﬀer, onde deve-se
+  ww CC veriﬁcar se cada registro do bloco satisfaz os critérios de pesquisa
+
+Complexidade → O (n), onde n é o número de blocos do arquivo
+
+www.wladmirbrandao.com                                                                    19 / 32
+Tipos de Arquivo: Heap
+
+  o Inserção eﬁciente, mas operações de alteração demandam pesquisa para
+  dã encontrar o registro a ser alterado
+
+     Bran .com Inserção → registro arquivado na ordem em que é inserido
+       oso dao Endereço do último bloco do arquivo é recuperado do cabeçalho
+       ard ran .0 Bloco copiado para um buﬀer, onde o novo registro é acrescentado, e o buﬀer é
+       ir C irb 4 copiado de volta ao bloco
+
+     dm dm C-ND Alteração → pode resultar em exclusão seguida de inclusão, caso o registro
+     la la -N aumente de tamanho
+
+       W w.w BY Endereço do bloco do arquivo é recuperado via pesquisa
+       ww CC Bloco copiado para um buﬀer, onde o registro é modiﬁcado, e o buﬀer é
+
+                   copiado de volta ao bloco
+
+www.wladmirbrandao.com                                                                           20 / 32
+Tipos de Arquivo: Heap
+
+o Operações de exclusão resultam em desperdício de espaço no bloco,
+dã demandando reorganização periódica do arquivo
+                        ran om Bloco 1
+                        so B ao.c 5 A ··· 1 C •Bloco 2Bloco n
+
+                        ardo rand .0 Arquivo
+                        2 B ··· 8 D • ··· 4 A ··· 6 E •
+
+mir C mirb -ND 4 Exclusão → efetuada diretamente ou por marcaçãoRemovidoMarcado
+  lad lad -NC Endereço do bloco do arquivo é recuperado via pesquisa
+  W w.w BY Direta → bloco copiado para um buﬀer, onde o registro é removido, e o buﬀer é
+  w C copiado de volta ao bloco
+  w C Marcação → cada registro possui um byte extra, denominado marcador de
+
+exclusão. Assim, o bloco é copiado para um buﬀer, onde o marcador de
+
+exclusão do registro é modiﬁcado, e o buﬀer é copiado de volta ao bloco
+
+www.wladmirbrandao.com                                                                    21 / 32
+Tipos de Arquivo: Heap
+
+  o Arquivo Direto (Relativo) → arquivo heap com registros de tamanho ﬁxo, não
+  dã espalhados, com blocos em alocação contígua
+
+     Bran .com Acesso simples a qualquer registro pela posição relativa no arquivo
+     so ao Não ajuda na pesquisa baseada em critérios
+     Wwlawdwm.wirClaCCdaBmrYdi-roNbCra-NndD 4.0 Facilita a construção de índices no arquivo
+
+www.wladmirbrandao.com                                                                       22 / 32
+Tipos de Arquivo: Sequencial
+
+o Arquivo organizado de forma que os registros são dispostos ordenadamente
+randã m Bloco 1
+                        o B o.co 1 C ··· 2 B •Bloco 2Bloco n
+
+                        ardosranda .0 Arquivo                      •
+                        4 A ··· 5 A • ··· 6 E
+
+ir C irb D 4 Blocos em cilindros contíguos, minimizando tempo de busca
+dm dm C-N Pesquisa → binária, varrendo pequena quantidade de registros se a pesquisa
+la la -N for feita com operadores < ≤ = > ≥ sobre os campos de ordenação
+
+  W w.w BY Blocos intermediários são recuperados e segmentos são descartados até se
+  ww CC encontrar registros que satisfaçam os critérios de pesquisa
+
+Complexidade → O (log2 n), onde n é o número de blocos do arquivo
+
+www.wladmirbrandao.com                                                                23 / 32
+Tipos de Arquivo: Sequencial
+
+o Operações de alteração são onerosas, pois podem demandar reorganização dos
+dã registros para preservação de ordem
+Bran .com Inserção → registro deve ser inserido na posição correta
+  oso dao Endereço do bloco onde registro deve ser inserido é recuperado via pesquisa
+  ard ran .0 Deslocam-se registros para posições subsequentes, abrindo-se espaço para o
+  ir C irb 4 registro a ser inserido
+  m m -ND Blocos modiﬁcados nos deslocamentos são gravados de volta no disco
+lad lad -NC Bloco 1
+                        Wwww.wCC BY 1 C ··· 2 B •Bloco 2Bloco n
+
+                                 3 F ··· 4 A • ··· 5 A ··· 6 E •
+
+                        Arquivo
+
+www.wladmirbrandao.com                                                                   24 / 32
+Tipos de Arquivo: Sequencial
+
+o Existem alternativas para desonerar a inclusão
+randã m Espaços Vazios → diminui deslocamentos, mas problema reaparece com
+B .co espaços vazios totalmente preenchidos
+                        so ao Bloco 1
+                        ardo rand 4.0 1 C ···Bloco 2Bloco n
+
+                        mir C mirb -ND Arquivo•
+                              3 F ··· 4 A • ··· 5 A ···  •
+
+lad lad -NC Arquivo Temporário (Overflow) → arquivo heap onde novos registros são
+W w.w BY inseridos a um baixo custo
+
+  ww CC Periodicamente arquivo temporário é mesclado ao arquivo principal
+
+Maior complexidade de pesquisa com necessidade de pesquisa linear no
+arquivo temporário caso o registro não seja encontrado no arquivo principal
+
+www.wladmirbrandao.com                                                             25 / 32
+Tipos de Arquivo: Sequencial
+
+  o Alteração no registro pode demandar seu reposicionamento
+     randã m Alteração → dependente da condição de pesquisa e do campo a ser alterado
+       o B o.co Endereço do bloco do arquivo é recuperado via pesquisa
+          os da Pesquisa binária → critério envolver os campos de ordenação
+          ard ran .0 Pesquisa linear → caso contrário
+       mir C mirb -ND 4 Bloco copiado para um buﬀer
+          lad lad C Campo de ordenação não modiﬁcado → modiﬁca-se o registro no buﬀer, copiando
+          -N o buﬀer de volta ao bloco
+          W w.w BY Campo de ordenação modiﬁcado → deslocam-se registros gravando todos os
+          ww CC blocos modiﬁcados
+
+           Exclusão → igualmente dependente da condição de pesquisa
+
+www.wladmirbrandao.com                                                                           26 / 32
+Tipos de Arquivo: Hash
+
+o Arquivo organizado de forma que os registros são distribuídos em blocos de
+dã acordo com uma função hash
+o Brano.com Campo
+ s a 1                         Bloco  Bloco 1           Bloco 2  Bloco n
+ o d 2                            1
+ ard ran .0 4                     2
+ 4 5                              n
+ ir C irb D 6
+ m m -N 8
+                        f (x)         2 B ··· 5 A •     1 C ··· 8 D • ··· 4 A ··· 6 E •
+
+                                               Arquivo
+
+lad lad -NC Pesquisa → tempo constante, localizando diretamente o bloco do registro se
+W w.w BY a pesquisa for feita com operador = sobre o campo hash
+
+  ww CC Função aplicada sobre o campo hash calcula o endereço do bloco do registro
+
+Complexidade → O (1)
+
+www.wladmirbrandao.com                                                                   27 / 32
+Tipos de Arquivo: Hash
+
+  o Operações de alteração de registros eﬁcientes
+     randã m Inclusão → pode gerar colisão e necessidade de expansão de arquivo
+       B .co Aplica-se a função hash sobre o campo hash para calcular o endereço do bloco
+       o o Bloco copiado para um buﬀer, onde o novo registro é acrescentado, e o buﬀer é
+       os da copiado de volta ao bloco
+     ard ran 4.0 Alteração → dependente da condição de pesquisa e do campo alterado
+       ir C irb D Endereço do bloco do arquivo é recuperado via pesquisa em tempo constante
+       m m -N Bloco copiado para um buﬀer
+          lad lad -NC Campo hash não modiﬁcado → modiﬁca-se o registro no buﬀer, copiando o buﬀer
+          W .w Y de volta ao bloco
+          w B Campo hash modiﬁcado → desloca-se o registro para outro bloco gravando os
+          ww CC dois blocos modiﬁcados
+
+           Exclusão → igualmente dependente da condição de pesquisa
+
+www.wladmirbrandao.com                                                                             28 / 32
+Tipos de Arquivo: Hash
+
+  o Funções hash podem ser implementadas de formas diferentes
+     randã m Idealmente devem ser mantidas em memória primária, tornando muito
+     B .co eﬁciente o mapeamento de valores
+     so ao Implementações robustas distribuem valores de maneira uniforme,
+     ardo rand .0 consumindo pouca memória primária
+     ir C irb 4 Existem dois problemas muito comuns em implementações hash
+       m m -ND Colisão → diferentes valores são mapeados para o mesmo endereço, que já
+       lad lad C pode estar ocupado
+       W .w Y-N Expansão → não há mais endereços disponíveis para armazenamento de
+       www CC B registros e o espaço de endereçamento precisa ser expandido
+
+www.wladmirbrandao.com                                                                  29 / 32
+Tipos de Arquivo: Hash
+
+o Hashing Universal → mapeia conjunto de chaves de tamanho variável para
+dã espaço de tamanho m, tal que a probabilidade de colisão é 1/m
+so Braano.com Chave
+ rdo nd 3
+ a ra .0 1
+ 4 7
+ dmir CdmirbC-ND 2
+                        f (x)  Bucket  Colisão → problema frequente quando n ≈ m
+                                  1    ou n ≥ m, onde n é o número de chaves
+                                  2
+                                  3          Endereçamento Aberto
+                                  4          Lista Encadeada
+                                  5          Hash Múltiplo
+
+                                       Fator de Carga → n/m (max 0.75)
+Wla w.wla BY-N Expansão → fundamental para evitar degradação da estrutura, proveniente
+ww CC do grande número de colisões
+Múltiplas soluções, da reconstrução até o uso de múltiplas funções hash
+
+www.wladmirbrandao.com                                                                  30 / 32
+Tipos de Arquivo: Hash
+
+o Hashing Perfeito → mapeia conjunto ﬁxo de chaves para espaço de tamanho
+dã m, tal que não haja colisão
+so Braano.com Chave
+ o d 3
+ ard ran .0 1
+
+   7
+
+ mir C mirb -ND 4 2
+                        f (x)  Bucket  Funções ocupam mais espaço em memória, com
+                                  1    complexidade linear O (n)
+                                  2
+                                  3    Mínimo → n = m, onde n é o número de chaves
+                                  4          Ordem preservada → (n log n)
+                                  5          Ordem não preservada → 1.44n
+
+lad lad -NC Expansão → expandir signiﬁca reconstruir, já que conjunto de chaves é ﬁxo
+  W w.w BY Hashing perfeito dinâmico pode ser a solução, mas complexa e de difícil
+  ww CC implementação
+
+www.wladmirbrandao.com                                                                 31 / 32
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            32 / 32
+

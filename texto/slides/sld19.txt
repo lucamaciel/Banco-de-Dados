@@ -1,0 +1,307 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+processamento de transação
+Transação
+
+  o Conjunto de operações de acesso ao BD, constituindo uma unidade lógica
+     randã m Exemplo → saque de dinheiro em caixa eletrônico
+       B .co Múltiplas operações de recuperação e atualização de dados
+     oso dao Todas as operações são conﬁrmadas ou abortadas como um bloco único
+       ard ran 4.0 Somente Leitura → somente operações de recuperação de dados
+       ir C irb D Leitura-Escrita → contém operações de atualização de dados
+       m m -N Confirmada → operações concluídas e dados registrados permanentemente
+       lad lad -NC Abortada → operações inócuas, sem qualquer efeito
+
+  W w.w BY Tipicamente executada em sistema multiusuário de forma intercalada, em ambi-
+  ww CC ente multiprogramação, ou paralela em hardware com múltiplas CPUs
+
+www.wladmirbrandao.com                                                                   3 / 22
+Transação
+
+  o Processa itens de dados de forma concorrente
+     randã m Item → arquivo, bloco, registro, campo
+     B .co Concorrência → múltiplas transações concorrendo pela CPU
+       so ao Maior Concorrência → mais transações executadas concomitantemente
+       ardo rand .0 Controle de Concorrência → garantia de independência de execução
+     ir C irb D 4 Granularidade → tamanho do item de dados
+       m m -N Baixa (Fina) → tamanho menor, maior concorrência, mais carga sobre o
+       d d C sistema de controle de concorrência
+       Wla .wla Y-N Alta (Grossa) → tamanho maior, menor concorrência, menos carga sobre o
+       www CC B sistema de controle de concorrência
+
+www.wladmirbrandao.com                                                                      4 / 22
+Transação
+
+  o Executa dois tipos básicos de operação sobre itens de dados
+     randã m Leitura r(x) → copia item x do disco para variável de programa
+       B .co Encontrar endereço de bloco de disco que contém x
+       so ao Copiar bloco para buﬀer em memória primária
+       ardo rand .0 Copiar item x do buﬀer para variável de programa x
+     ir C irb 4 Escrita w(x) → copia item x da variável de programa para disco
+       m m -ND Encontrar endereço de bloco de disco que contém x
+       lad lad -NC Copiar bloco para buﬀer em memória primária
+       W .w Y Copiar item x da variável de programa x para buﬀer
+       www CC B Copiar buﬀer de memória para bloco de disco
+
+www.wladmirbrandao.com                                                          5 / 22
+Concorrência
+
+o Execução concorrente de múltiplas transações pode resultar em problemas
+randã m Atualização Perdida → transações intercaladas escrevem o mesmo item, tal
+B .co que a atualização de uma transação sobre o item é perdida por sobrescrição
+o o do mesmo item feita por outra transação
+                        ardosranda .0 T1 → r(x)
+                        ir C irb 4 T2 →r (y )
+                                                x =x+y          w (x )
+
+dm dm C-ND Para as transações T1 e T2, considerando valores iniciais x = 10 e y = 5r (x )r (y )x =x−yw (x )
+  Wla .wla Y-N Execução sequencial → valor ﬁnal de x = 10
+  www CC B Execução concorrente → valor ﬁnal de x = 5
+A operação w(x) de T1 foi sobrescrita por w(x) de T2
+
+www.wladmirbrandao.com                                                               6 / 22
+Concorrência
+
+o Execução concorrente de múltiplas transações pode resultar em problemas
+randã m Leitura Suja → uma transação atualiza um item e falha posteriormente,
+B .co sendo que nesse meio tempo, outra transação lê o item atualizado (sujo)
+                        oso dao T1 → r(x) r(y) x = x + y w(x)
+                        ard ran .0 T2 →a
+
+mir C mirb -ND 4 Para as transações T1 e T2, considerando valores iniciais x = 10 e y = 5:
+  d d C Execução sequencial → valor ﬁnal de x = 5
+  Wla .wla Y-N Execução concorrente → valor ﬁnal de x = 10
+                        r(x) r(y) x = x − y w(x)
+
+www CC B A operação r(x) de T2 fez uma leitura suja de w(x) de T1, que falhou
+
+www.wladmirbrandao.com                                                                      7 / 22
+Concorrência
+
+o Execução concorrente de múltiplas transações pode resultar em problemas
+randã m Leitura Não Repetitiva → a mesma transação lê valores diferentes para o
+B .co mesmo item em momentos diferentes, uma vez que outras transações
+o o alteraram o valor do item nesse meio tempo
+                        ardosranda .0 T1 → r(x)
+                        ir C irb 4 T2 →           r (x )
+
+dm dm C-ND A primeira e a última operação r(x) de T1 leem valores diferentes de x não
+Wla .wla -N escritos por T1, o que pode ocasionar um problema na lógica de
+www CC BY processamento se um teste condicional (x = x) for executado, por exemplo
+                        r(x) r(y) x = x − y w(x)
+
+www.wladmirbrandao.com                                                                 8 / 22
+Concorrência
+
+  o Execução concorrente de múltiplas transações pode resultar em problemas
+     randã m Resumo Incorreto → uma transação calcula uma função de agregação
+     B .co sobre itens que estão sendo atualizados por outras transações, provendo
+     o o valores de resumo incorretos
+
+  ardosranda .0 Técnicas de controle de concorrência resolvem os problemas, garantindo execu-
+  ir C irb 4 ção concorrente e independente de transações
+
+     m m -ND Bloqueio → técnica baseada em bloqueios de leitura e escrita em itens
+       lad lad -NC Restringe a concorrência
+       W w.w BY Transações bloqueiam e desbloqueiam itens quando necessário
+       ww CC Sujeito a problemas de travamento (deadlock) e espera indeﬁnida (starvation)
+
+www.wladmirbrandao.com                                                                         9 / 22
+Falha
+
+  o Execução concorrente de transações está sujeita a diferentes tipos de falhas
+     ndã Sistema → hardware, software ou rede
+     Bra .com Operação → interrupção do usuário, lógica de programação
+     so ao Concorrência → técnica de controle de concorrência
+     ardo rand .0 Condição de Exceção → programada na própria transação
+     ir C irb 4 Disco → blocos de dados perdidos
+     m m -ND Catástrofe → blackout, incêndio, roubo, formatação acidental de disco
+
+  lad lad -NC Sistemas de banco de dados estão preparados para lidar com falhas
+     W w.w BY Logging → registro histórico de transações
+     ww CC Dumping → cópia de segurança do banco de dados
+
+www.wladmirbrandao.com                                                              10 / 22
+Processamento de Transações
+
+o Adicionalmente às operações de leitura e escrita sobre itens de dados, existem
+dã operações necessárias ao processamento de transações
+  Bran .com Begin Transaction (b) → marca o início da transação
+  so ao End Transaction (e) → marca o ﬁm da transação
+  ardo rand .0 Commit (c) → marca o ponto de conﬁrmação de operações
+  ir C irb 4 Abort (a) → ou rollback, marca o ponto de anulação de operações
+m m -ND Uma transação só é considerada terminada quando falhar, ou todas as suas
+lad lad -NC operações tiverem sido executadas e registradas do arquivo de log do sistema
+Wwww.wCC BY Início
+                        Ativo  Parcialmente Conﬁrmado  Conﬁrmado  Terminado
+
+                               Falha
+
+www.wladmirbrandao.com                                                                    11 / 22
+Processamento de Transações
+
+  o Transações possuem propriedades que devem ser mantidas no processamento
+     randã m Atomicidade → unidade atômica, executada integralmente ou não
+     B .co executada de forma alguma
+     so ao Consistência → restrições especiﬁcadas no esquema devem continuar
+     rdo nd sendo respeitadas após processamento
+     a ra 4.0 Isolamento → independência de execução, sem sofrer interferência de
+     ir C irb D transações concorrentes
+       m m -N Nível 0 → sem leitura suja
+       lad lad -NC Nível 1 → sem atualização perdida
+       W w.w BY Nível 2 → níveis 0 + 1
+       ww CC Nível 3 → nível 2, com leitura repetitiva
+
+           Durabilidade → alterações conﬁrmadas devem persistir
+
+www.wladmirbrandao.com                                                             12 / 22
+Processamento de Transações
+
+  o Escalonamento (Schedule) → intercalação de operações de transações distintas
+  dã para execução simultânea
+
+         Bran .com Sa → b1, r1(x), b2, r2(x), r1(y), w2(x), w1(y), c2, e2, a1, e1
+     rdoso ndao Sa → escalonamento a
+     a ra 4.0 oi → operação o ∈ {a,b,c,e,r,w} realizada pela transação i
+     mir C mirb -ND x,y → itens de dados lidos ou escritos pelas transações
+     d d C Tipicamente b e e não são representadas, presumindo que b ocorre logo
+     Wla .wla -N antes da primeira operação da transação, e e logo depois da última
+
+           www CC BY Sa → r1(x),r2(x),r1(y),w2(x),w1(y),c2,a1
+
+www.wladmirbrandao.com                                                               13 / 22
+Escalonamento de Transações
+
+  o Operações em um escalonamento podem estar em situação de conﬂito
+             randã m Sa → r1(x), r2(x), r1(y), w2(x), w1(y), c2, a1
+
+     so B ao.co Pertencem a transações diferentes
+     ardo rand .0 Operam sobre o mesmo item
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 Ao menos uma delas é w
+
+www.wladmirbrandao.com                                                14 / 22
+Escalonamento de Transações
+
+  o Completo → possui todas as operações de cada transação
+     randã m Operações são exatamente as mesmas das transações originais
+     B .co A ordem das operações nas transações originais é preservada
+     so ao Operações em conﬂito precedem ou sucedem umas as outras
+     ardo rand .0 Exemplo → para as transações T1 e T2
+      ir C irb D 4 T1 → r(x),r(y),w(y),a
+      m m -N T2 → r(x),w(x),c
+     Wlad .wlad Y-NC o escalonamento Sa é completo
+      www CC B Sa → r1(x), r2(x), r1(y), w2(x), w1(y), c2, a1
+
+     Improváveis, novas transações são incorporadas a escalonamentos existentes
+
+www.wladmirbrandao.com                                                           15 / 22
+Escalonamento de Transações
+
+  o Recuperável → transação conﬁrmada não será desfeita, garantindo durabilidade
+     randã m Leitura Suja → pode demandar reversão de conﬁrmação
+           o B o.co Sa → r1(x), r2(x), w1(x), r1(y), w2(x), r1(x), c1, c2
+     ardosranda .0 Nenhuma transação T que leia um item escrito por outra transação T pode
+     ir C irb 4 conﬁrmar antes de T
+          Wwlawdwm.wClaCdBmY-NC-ND Sa → r1(x),r2(x),w1(x),r1(y),w2(x),r1(x),c2,c1
+
+www.wladmirbrandao.com                                                                      16 / 22
+Escalonamento de Transações
+
+  o Serial → sem intercalação, com todas as operações de uma transação prece-
+  dã dendo todas as operações de outra
+
+           Bran .com Sa → r1(x),w1(x),r1(y),r1(x),c1,r2(x),w2(x),c2
+     oso dao Isolamento → transação não sofre interferência de outra
+     ard ran 4.0 Concorrência → limitada, gerando ociosidade de CPU
+  mir C mirb -ND Não Serial → operações de transações intercaladas
+
+           lad lad -NC Sa → r1(x),r2(x),w1(x),r1(y),w2(x),r1(x),c2,c1
+     W ww.w C BY Isolamento → não é garantido
+     w C Concorrência → melhor aproveitamento de CPU
+
+www.wladmirbrandao.com                                                         17 / 22
+Escalonamento de Transações
+
+  o Serialização → processo de determinação de escalonamentos não seriais que
+  dã sejam equivalentes a seriais, garantindo isolamento
+
+     Bran .com Multiplicidade → n! escalonamento seriais possíveis para n transações, e
+     o o um número muito maior de escalonamentos não seriais possíveis
+
+       rdos nda Serializável → não serial equivalente a um serial
+       a ra 4.0 Não Serializável → não equivalente a qualquer serial
+     mir C mirb -ND Escalonamentos serializáveis são corretos
+     lad lad C Equivalência → operações são aplicadas a itens na mesma ordem
+       W .w Y-N Conflito → ordem de operações em conﬂito nos escalonamentos é a mesma
+       www CC B Visão → operações r tem a mesma visão de itens nos escalonamentos
+
+www.wladmirbrandao.com                                                                   18 / 22
+Escalonamento de Transações
+
+  o Equivalência por Conflito → mesma ordem de operações em conﬂito
+             randã m Sa → r1(x), w1(x), r1(y), w1(y), r2(x), w2(x)
+             o B o.co Sb → r2(x), w2(x), r1(x), w1(x), r1(y), w1(y)
+             ardosranda .0 Sc → r1(x),r2(x),w1(x),r1(y),w2(x),w1(y)
+             ir C irb D 4 Sd → r1(x),w1(x),r2(x),w2(x),r1(y),w1(y)
+
+     ladm ladm C-N Sd é serializável, enquanto Sc não é
+       W .w Y-N Sc não equivalente a Sa → ordem w1(x) e r2(x) diferente
+       ww C B Sc não equivalente a Sb → ordem w2(x) e r1(x) diferente
+       w C Sd equivalente a Sa → mesma ordem para operações em conﬂito
+
+www.wladmirbrandao.com                                                   19 / 22
+Escalonamento de Transações
+
+o Grafo de Precedência → permite veriﬁcar se escalonamento é serializável sem
+dã precisar checar equivalência por conﬂito com n! escalonamentos seriais
+
+  Bran .com Direcionado → ausência de ciclos indica escalonamento serializável
+  so ao Nós → transações do escalonamento
+  ardo rand .0 Arestas → conﬂitos entre operações de transações
+
+     4 De transação sucedente para precedente, com operações em conﬂito
+          mir C mirb -ND Sc → r1(x),r2(x),w1(x),r1(y),w2(x),w1(y)
+                        Wwlawdw.wClaCdBY-NC T1
+                                                T2
+
+www.wladmirbrandao.com                                                          20 / 22
+Processamento de Transações
+
+  o SGBDs tipicamente permitem conﬁguração de características de processamento
+  dã de transações através do comando set transaction
+
+     ran om Acesso → operações permitidas em transações
+       o B o.c rw → leitura e escrita (modo padrão)
+       os da ro → somente leitura
+
+     ard ran 4.0 Área de Diagnóstico → últimas n instruções SQL executadas
+     ir C irb D Isolamento → nível de isolamento requerido no processamento
+
+       dm dm C-N read uncommited → ¬ atualização perdida
+       la la -N read commited → ¬ (atualização perdida ∨ leitura suja)
+       W w.w BY repeatable read → ¬ (atualização perdida ∨ leitura suja) ∧ leitura repetitiva
+       ww CC serializable → ¬ (atualização perdida ∨ leitura suja ∨ resumo incorreto) ∧
+
+                   leitura repetitiva
+
+www.wladmirbrandao.com                                                                         21 / 22
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            22 / 22
+

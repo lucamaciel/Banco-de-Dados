@@ -1,0 +1,283 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+modelo er estendido
+Modelo ER Estendido (EER)
+
+  o Modelo entidade-relacionamento (ER) aprimorado, incorporando conceitos
+  dã adicionais de modelagem semântica de dados
+
+     Bran .com Acrônimo do inglês para Enhanced Entity-Relationship
+     so ao Apresenta requisitos mais complexos e precisos
+
+       ardo rand .0 Herança
+       ir C irb D 4 Supertipo e subtipo
+       dm dm C-N Restrições complexas
+       Wwlaww.wClaC BY-N Generalização e especialização
+
+www.wladmirbrandao.com                                                      3 / 21
+EER: Supertipos e Subtipos
+
+o Entidades podem possuir subtipos que precisam de representação explícita
+ndã Subtipo ou subclasse são subagrupamentos de uma entidade denominada
+ra om supertipo ou superclasse
+
+  so B ao.c O relacionamento entre essas entidades é denominado relacionamento de
+  ardo rand .0 supertipo/subtipo, superclasse/subclasse ou classe/subclasse
+                        ir C irb D 4 Professor
+                          m m -N Doutor
+                          lad lad -NC Mestre
+
+                        W w.w BY Bacharel
+                          ww CC Mensalista
+                                 Professor (supertipo)
+                                       Doutor (subtipo)
+                                       Mestre (subtipo)
+                                       Bacharel (subtipo)
+                                       Mensalista (subtipo)
+
+                        Horista  Horista (subtipo)
+
+www.wladmirbrandao.com                                                             4 / 21
+EER: Supertipos e Subtipos
+
+randãoom Tese                               Meio
+
+ir CardirobsroanBda4o..0c MestreDoutorPrimeiro           Último
+
+                                  CPF       Nome         Endereço
+
+Wwlawdwm.wClaCdBmY-NC-ND Dissertaçãod       Professor            Data Nascimento
+
+                        Bacharel            Coordenador          gerencia         Departamento
+
+Monograﬁa
+
+www.wladmirbrandao.com                                                                          5 / 21
+EER: Herança de Tipo
+
+  o Ocorre em situações em que a entidade de uma subclasse herda todos os
+  dã atributos e relacionamentos da classe
+
+     Bran .com Uma entidade na subclasse possui atributos especíﬁcos, assim como valores
+     so ao de atributos da classe
+
+       ardo rand .0 Exemplo → subclasse Doutor possui atributo próprio Tese e vários outros
+       Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 atributos herdados da superclasse Professor, como CPF
+
+www.wladmirbrandao.com                                                                         6 / 21
+EER: Especialização
+
+o Deﬁnição de um conjunto de subclasses de uma entidade com base em alguma
+dã característica especíﬁca
+so Braano.com Caso 1 → Titulação
+ardo rand .0 Professor
+
+  ir C irb 4 Doutor
+  m m -ND Mestre
+  Wwlawdw.wClaCdBY-NC Bacharel
+                        Caso 2 → Forma de remuneração
+                        Professor
+
+                              Mensalista
+                              Horista
+
+www.wladmirbrandao.com                                                      7 / 21
+EER: Especialização
+
+randãoom Tese                               Meio
+
+ir CardirobsroanBda4o..0c MestreDoutorPrimeiro           Último
+
+                                  CPF       Nome         Endereço
+
+Wwlawdwm.wClaCdBmY-NC-ND Dissertaçãod       Professor            Data Nascimento
+
+                        Bacharel            Coordenador          gerencia         Departamento
+
+Monograﬁa
+
+www.wladmirbrandao.com                                                                          8 / 21
+EER: Especialização
+
+o Definição por Condição → entidades que serão subclasse são deﬁnidas a partir
+dã de uma condição aplicada a um atributo
+ oso Bdraano.com Tese
+mir Camrdirbra-Nn D 4.0 Mestre              Meio
+Wwlawdw.wClaCdBY-NC Dissertação
+                         Doutor   Primeiro                       Último
+                             d
+                                  CPF       Nome                 Endereço
+                        Bacharel
+                                  Titulação                              Data Nascimento
+                                                   Professor
+
+                                  Titulação                              gerencia         Departamento
+                                                    Coordenador
+
+Monograﬁa
+
+www.wladmirbrandao.com                                                                                  9 / 21
+EER: Generalização
+
+o Deﬁnição de um tipo de entidade geral com base em entidades especíﬁcas
+  randã m Identiﬁca-se características comuns e generaliza-se em uma classe
+                          ardosroanBdao..0co Velocidade
+                        mir C mirb -ND 4 PassageirosPlacaEixosChassi
+                        Carro
+                        Wwlawdw.wClaCdBY-NC Chassi  Caminhão  Preço
+
+                                                              Capacidade
+
+                        Preço                       Placa
+
+                        Carro e Caminhão possuem vários atributos comuns
+
+www.wladmirbrandao.com                                                       10 / 21
+EER: Generalização
+
+o Carro e Caminhão podem ser generalizadas, passando a ser subclasses da
+dã classe generalizada Veículo
+
+                       Bran .com Preço
+                        ardosroanda4o.0 Chassi
+                        ladmirlaCdmi-rNbC-ND VelocidadeVeículoPlaca
+
+Wwww.wCC BY Passageiros                 Eixos
+
+                        Carro  d        Caminhão         Capacidade
+
+www.wladmirbrandao.com                                                    11 / 21
+EER: Restrição
+
+o Característica limitadora da participação de entidades em subclasses
+ndã Disjunção → uma entidade pode ser membro de no máximo uma das subclasses
+
+  Bra .com Uma especialização deﬁnida por um atributo de valor único implica em uma
+  o o restrição de disjunção
+                        ardosranda4.0 CPF
+                        Wwlawdwm.wirClaCCdBmYi-rNbC-ND RegimeProfessorNome
+
+Salário                 Mensalista  d          Horista         Valor Hora
+
+www.wladmirbrandao.com                                                               12 / 21
+EER: Restrição
+
+o Sobreposição → uma entidade pode ser membro de mais de uma subclasse
+                        Brand.cãom CPF
+                        Professorir CardirobsroandDa4o.0 TeseNome
+                        Wwlawdwm.wClaCdBmY-NC-N Doutor
+                                   Dissertação
+
+                        o          Mestre
+
+www.wladmirbrandao.com                                                  13 / 21
+EER: Restrição
+
+o Participação → determina a participação de uma entidade em subclasses
+  randã m Especialização Parcial → entidade não precisa ser membro de subclasses
+  B .co Especialização Total → toda entidade precisa ser membro de pelo menos
+  so ao uma subclasse na especialização
+                        ardo rand 4.0 CPF
+                        Wwlawdwm.wirClaCCdBmYi-rNbC-ND RegimeProfessorNome
+
+Salário                 Mensalista  d          Horista         Valor Hora
+
+www.wladmirbrandao.com                                                            14 / 21
+EER: Reticulado e Herança
+
+  o Uma subclasse pode ser superclasse de outras subclasses, formando um
+  dã reticulado de especializações
+
+     Bran .com Hierarquia Estrita → cada subclasse tem apenas uma superclasse,
+     so ao resultando em uma estrutura de árvore
+     ardo rand .0 Reticulado → cada subclasse pode pertencer a diferentes superclasses,
+     ir C irb 4 resultando em uma estrutura emaranhada complexa
+  dm dm C-ND Subclasses podem herdar atributos e relacionamentos de múltiplas classes
+     Wla w.wla BY-N Herança Simples → herança de uma única classe
+     ww CC Herança Múltipla → herança de múltiplas classes
+
+www.wladmirbrandao.com                                                                   15 / 21
+EER: Especialização x Generalização
+
+  o Especialização → processo de reﬁnamento conceitual de cima para baixo
+  dã (top-down) em que se inicia com uma entidade e depois são deﬁnidas subclasses
+  ran m pela especialização sucessiva
+  o B o.co Generalização → processo de reﬁnamento conceitual de baixo para cima
+  os da (bottom-up) em que pela síntese conceitual é possível se chegar a mesma
+  ard ran .0 hierarquia ou reticulado da alcançada pela outra direção
+  Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 Estruturalmente o resultado de ambos os processos são idênticos
+
+www.wladmirbrandao.com                                                                              16 / 21
+EER: União
+
+  o Subclasse representa uma coleção de entidades, um subconjunto da união de
+  dã entidades distintas
+  Bran .com Exemplo → Proprietário pode ser um Banco, uma Empresa ou uma Pessoa
+  oso ao Proprietário (união)
+
+     ard rand .0 Banco (entidade)
+     ir C irb D 4 Pessoa (entidade)
+     m m -N Empresa (entidade)
+  Wwlawdw.wClaCdBY-NC Proprietário herda atributos e relacionamentos de Banco, Empresa e Pessoa
+
+www.wladmirbrandao.com                                                                           17 / 21
+EER: União
+
+                        ndão Nome
+so Braao.com Endereço                         Endereço
+                                   Banco
+ir Cardirobrand 4.0 CPF                u
+Wwlawdwm.wClaCdBmY-NC-ND CNHPessoa            Empresa   Nome
+                                Proprietário
+                                                        CNPJ
+
+                        Nome                  Endereço
+
+www.wladmirbrandao.com                                        18 / 21
+EER: Projeto Conceitual
+
+  o Em um projeto conceitual há um processo de reﬁnamento iterativo até que o
+  dã projeto mais adequado seja alcançado
+  ran om Existem diretrizes para direcionar escolhas em projetos:
+   oso B ao.c 1. Representar apenas subclasses necessárias para evitar aglomeração do
+
+     ard rand .0 modelo conceitual
+   ir C irb D 4 2. Subclasse com poucos atributos são candidatas à mesclagem com a
+
+     m m -N superclasse
+       lad lad -NC Atributos especíﬁcos da subclasse teriam valores NULL para entidades não
+       W w.w BY membros da subclasse
+       ww CC Atributo de tipo pode especiﬁcar se uma entidade é um membro da subclasse
+
+www.wladmirbrandao.com                                                                       19 / 21
+EER: Projeto Conceitual
+
+   ão 3 União deve ser evitada, a menos que a situação deﬁnitivamente justiﬁque
+     nd esse tipo de construção
+   Bra .com 4 A escolha de restrições de disjunção, sobreposição e totalidade sobre a
+     o o especialização deve ser regida pelas regras do minimundo
+
+       rdos nda Se na especiﬁcação do minimundo não é explicitamente citada nenhuma
+       Wwlawdwm.wirClaCCdaBmYi-rNbCra-ND 4.0 restrição, o padrão menos restritivo de sobreposição parcial deve ser adotado
+
+www.wladmirbrandao.com                                                                                                      20 / 21
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            21 / 21
+

@@ -1,0 +1,174 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+esquema e linguagem
+Esquema de BD
+
+o Descrição do banco de dados (metadados)
+randã m Especiﬁcado no projeto e não muda com frequência
+B .co Existem convenções para se representar esquemas usando diagramas
+oso dao Diagrama de Esquema → representação de um esquema
+
+  ard ran 4.0 Capta aspectos como restrições, tipos de registros e de itens de dados
+                          mir C mirb -ND PROFESSOR
+                        lad lad C CPF Nome Sexo
+Wwww.wCC BY-N Construtor de Esquema → elemento que compõe o esquema, como por
+                        Salario Departamento
+
+exemplo professor
+
+www.wladmirbrandao.com                                                                3 / 15
+Esquema de BD
+
+o O diagrama de esquema apresenta a estrutura de cada tipo de elemento, mas
+dã NÃO apresenta as instâncias dos elementos
+                        Bran .com PROFESSOR
+                               Nomeo o CPF Sexo  Salario Departamento
+                        Roberto Machado      M
+                        ardosranda .0 12345678900F1200.00 1
+                         Manuela Costair C irb 4 12345678901M
+                        Carlos A. Martinsm m -ND 21345678900F2700.003
+                        Ana Maria FreitasWwlawdw.wClaCdBY-NC 32145678900
+                                                 3200.00  1
+
+                                                 7500.00  2
+
+www.wladmirbrandao.com                                                       4 / 15
+Instância de BD
+
+  o Conjunto de dados armazenados em determinado momento
+     randã m Estado Vazio → esquema especiﬁcado, mas nenhum dado armazenado
+     o B o.co Estado Inicial → BD carregado (populado) com dados inicias
+     Wwlawdwm.wirClaCCdaBmrYdi-roNbsCra-NndDa4.0 Estado se altera ao se inserir, remover ou modiﬁcar o valor de um item
+
+www.wladmirbrandao.com                                                                                                   5 / 15
+Arquitetura de Três Esquemas
+
+  o Abordagem que permite visualização do esquema em diferentes níveis
+     randã m Autodescrição → metadados descritivos em diferentes níveis de abstração,
+     B .co de acordo com características estruturais
+     oso dao Suporte a Múltiplas Visões → usuários e aplicações têm acesso restrito a
+     ard ran .0 porções do BD suﬁcientes para atender suas necessidades
+     ir C irb D 4 Independência de Aplicação → estrutura do BD armazenada separadamente
+     m m -N de aplicações, garantindo que alterações na estrutura não necessariamente
+     Wwlawdw.wClaCdBY-NC levem a mudanças em aplicações
+
+www.wladmirbrandao.com                                                                   6 / 15
+Arquitetura de Três Esquemas
+
+          Wwlawdwm.wirClaCCdaBmrYdi-roNbsCroa-NnBdrDaa4no.d.0cãoom
+
+www.wladmirbrandao.com                                              7 / 15
+Arquitetura de Três Esquemas
+
+     ão Nível Externo
+       nd Esquema Externo → visões de usuário
+       ra om Cada visão descreve a parte do BD em que um grupo de usuários está
+       B .c interessado, ocultando o restante
+       so ao Implementado com modelo de dados representativo
+
+     ardo rand .0 Nível Conceitual
+       ir C irb D 4 Esquema Conceitual → estrutura do BD
+       m m -N Descrição de tipos de dados, entidades, relacionamentos, restrições e
+       d d C operações do usuário
+       la la -N Oculta detalhes de armazenamento físico
+
+     W w.w BY Nível Interno
+       ww CC Esquema Físico → estrutura do armazenamento físico do BD
+
+                   Descrição de detalhes de armazenamento de dados e de caminhos de acesso
+
+www.wladmirbrandao.com                                                                      8 / 15
+Arquitetura de Três Esquemas
+
+  o Níveis apresentam descritores para dados que estão efetivamente armazenados
+  dã em meio físico
+
+     Bran .com Mapeamento → transformação de requisições e resultados entre níveis
+     oso ao SGBD transforma uma solicitação especiﬁcada por usuários em uma
+     ard rand .0 solicitação no esquema conceitual e, em seguida, em uma solicitação no
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 esquema interno para que o processamento de dados possa ser realizado
+
+www.wladmirbrandao.com                                                                                       9 / 15
+Independência de Dados
+
+  o Capacidade de se alterar o esquema em um nível sem precisar alterar o esquema
+  dã no nível adjacente superior
+
+     Bran .com Lógica → capacidade de alterar o esquema conceitual sem precisar alterar
+     so ao o esquema externo
+
+       ardo rand .0 Exemplo → ao acrescentar ou remover um tipo de dado somente o
+       ir C irb 4 mapeamento entre os níveis e a deﬁnição da visão são alterados
+     dm dm -ND Física → capacidade de alterar o esquema interno sem precisar alterar o
+     la la -NC esquema conceitual
+       W w.w BY Exemplo → ao organizar arquivos físicos criando estruturas de acesso
+       ww CC adicionais somente o mapeamento entre os níveis é alterado
+
+www.wladmirbrandao.com                                                                   10 / 15
+Independência de Dados
+
+  o A arquitetura de três esquemas facilita a independência de dados
+     randã m Independência lógica é mais difícil de ser alcançada, uma vez que é mais
+     B .co difícil realizar alterações estruturais e de restrição sem afetar as aplicações
+     oso ao Poucos SGBDs comerciais implementam a arquitetura de três esquemas
+     ard rand .0 completamente por haver uma sobrecarga com os mapeamentos, levando a
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 ineﬁciência
+
+www.wladmirbrandao.com                                                                      11 / 15
+Linguagens
+
+  o Abordagem de BD precisa oferecer linguagens e interfaces apropriadas para
+  dã cada tipo de usuário
+
+     Bran .com VDL → linguagem de deﬁnição de visão que especiﬁca o esquema externo,
+     so ao as visões de usuário e seus mapeamentos ao esquema conceitual
+     ardo rand .0 DDL → linguagem de deﬁnição de dados que especiﬁca o esquema
+     ir C irb 4 conceitual
+     m m -ND SDL → linguagem de deﬁnição de armazenamento que especiﬁca o esquema
+     lad lad -NC interno
+     W w.w BY DML → linguagem de manipulação de dados utilizada para especiﬁcação de
+     ww CC operações de inserção, exclusão, modiﬁcação e recuperação de dados
+
+www.wladmirbrandao.com                                                                12 / 15
+Linguagens
+
+  o Se diferenciam quanto à forma como as operações são especiﬁcadas
+     randã m Alto Nível → não procedural
+       o B o.co Especiﬁca operações complexas de forma concisa
+       os da Pode recuperar muitos registros em uma única instrução
+       ard ran .0 Declarativa → especiﬁca quais dados recuperar e não como
+       ir C irb D 4 Denominada linguagem de consulta por ser usada de maneira interativa
+     dm dm C-N Baixo Nível → procedural
+       Wla .wla Y-N Embutida em linguagem de programação de uso geral (linguagem hospedeira),
+       w B sendo assim denominada sublinguagem de dados
+       ww CC Recupera objetos ou registros individuais e os processa separadamente
+
+www.wladmirbrandao.com                                                                         13 / 15
+Linguagens
+
+  o SGBDs tipicamente não consideram as diferentes linguagens como distintas
+     randã m SQL → linguagem de consulta estruturada que combina VDL, DDL, SDL e
+     B .co DML, bem como instruções para especiﬁcação de restrição, evolução de
+     Wwlawdwm.wirClaCCdaBmrYdi-roNbsCroa-NndDa4o.0 esquema e outros recursos
+
+www.wladmirbrandao.com                                                            14 / 15
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            15 / 15
+

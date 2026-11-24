@@ -1,0 +1,78 @@
+                                                        〜      Limitam concorrência,                       s
+                                                           mas todas as + executem
+inspra
+
+                                                                                                                                                                                                                                                                                  Só aplicar essas regras não                                                                                                      Uma vez que ve bloqueia , só pode
+                                                                                                                                                                                                                                                                                                                                                                                                                     desbloquear no final, antes de con
+                                                                                                                                                                                                                                                                                                                                                                                   ent garante serialização . Por
+                                                                                                                                                                                                                                                                                  isso temos                                                                                                   o  protocolo          firmer.
+                                                                                                                                                                                                                                                                                                             ,
+                                                                                                                                                                                                                                                                                                                                                                                                                         Exponsis - > lock , Lock, lock...
+                                                                                                                                                                                                                                                                                                                                                                                   bloqueio .                             Retrasis- > unlock, unlock...
+
+                                                                                                                                                                                                                                                                                  Y Funciona como um semá-
+
+                                                                                                                                                                                                                                                                                  foro , bloqueia de passar quando
+                                                                                                                                                                                                                                                                                       estávermelho
+
+                                                                                                                                                                                                                                                                                                                                                                                                               > - ele querler , mas fica ha espera
+
+                                                                                                                                                                                                                                                                                                                                                                                       {          ⊣                ↓
+
+                                                                                                                                                                                                                                                                                                                                                                                   emite                  the  pthries caiarte
+
+      ~o  que ele gera ou é serial ou é serializável.                                                                                                                                                                                                                                                                                                                                          UnlOCK           lock
+                     ou seja, garante isolamento .
+                                                                                                                                                                                                                                                                                                                         ũ                                                         FB = Leias , Lily)                         acontece
+                     Nesse caso,                                                        { Essoccorre
+           as read locks podem                                                                                                                                                                                                                                               Com um operador bi-                                                                                   (fila de bloqueio]                apenalibero
+            acontecer as mesmo
+                                                                                                                                                                                                                                                                                  nário, temos blo-                                                                                Fe = Lain)                      quandpoela + 2 .
+          tempo, mas se alguém                                                                                                                                                                                                                                                                                                                                                     (fila de esperas
+                                                                                                                                                                                                                                                                             queis e desbloqueio .
+             está lendo vo não pode                                                                                                                                                                                                                                                                                                                                                S = reas , wa(n) , viry) , W , ry) , rains , Wa In
+                                                                                                                                                                                                                                                                             com o ternário te-
+                             escrever                                                                                                                                                                                                                                                                                                                                           ,
+                                                                                                                                                                                                                                                                                 mos recdlock,
+                                                                                                                                                                                                                                                                                write lock a unlock
+
+deldeneck                                                                                                                                                                                                                                                                         03 . - Gravo de espera
+                                                                                                                                                                                                                                                                                  al .
+Situação de impasse em que uma transação                                                                                                                                                                                                                                                                                                                                                                                                     Se der ciclo ,
+
+  está esperando o desbloqueio de outra, que                                                                                                                                                                                                                                                                                                                                                                                                   alguém
+       está esperando o desbloqueio da uma.
+                                                                                                                                                                                                                                                                                                                                                                                                                                        > tem que
+                ⊥ SGBD resolve p                                                                                                                                                                                                                                                                                                                                                                                                                       morrer .
+
+      Existem 4 formas :                                                                                                                                                                                                                                                                                                                                                                                                                      Normalmente,
+
+Al .  - Alterar o IPL estrito, para o conservador                                                          limita a conc.                                                                                                                                                                                                                                                                                                                       é a mais
+                ao invés de emitir a medida que precise ,                                                   masnão tem
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                nova
+                           emite tudo antes                                                                       deadlock
+
+D2 .  > - Instituir a figura de um assassing                                                                guem nasce F
+
+          usar  a                                          d de nas.                    Himestamp) de uma   é quem começa
+                                                                                     .                     a executor i
+
+          transação para definir . A mais nova
+
+                será abortada e executada no
+
+                                                           próx escalonamento
+
+Obs : SGBD não usa uma única técnica                                                                                                                                                                                                                                         per
+
+                                                                                                                                                                                                                                                                          ,
+
+               usa várias.
+  & ploblema do DEADLOCK é um assassino
+
+      Seguidor , que sempre mata o mesmo cara
+
+                  e ele nunca executa - storvation
+
+        A solução é a manutenção do timestamp
+

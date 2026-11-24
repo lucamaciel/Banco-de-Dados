@@ -1,0 +1,312 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+armazenamento em memória
+Armazenamento em Memória
+
+  o BDs são armazenados ﬁsicamente em meios (mídias) de armazenamento
+  dã computacional
+
+     Bran .com Meios de armazenamento formam uma hierarquia, em que dados residem e
+     so ao transitam, sendo que a hierarquia reﬂete a distância do meio à CPU
+
+       ardo rand .0 Memória primária → próxima e operada diretamente pela CPU
+       ir C irb 4 Memória secundária → distante e não operada pela CPU
+       m m -ND Memória terciária → muito distante e não operada pela CPU
+     lad lad -NC Programas residem e são executados em memória primária
+     Wwww.wCC BY BDs são geralmente grandes e persistem em memória secundária
+
+           SGBD transfere partes do BD entre memórias de acordo com a necessidade
+
+www.wladmirbrandao.com                                                               3 / 28
+Armazenamento em Memória
+
+  o Existe uma correlação entre capacidade de armazenamento, velocidade de
+  dã transferência e custo em meios de armazenamento
+
+     Bran .com Capacidade de armazenamento → quantidade de dados (bytes) que podem
+     o o ser armazenados na memória
+     rdos nda Velocidade de transferência → quantidade de dados (bits) que podem ser
+     a ra 4.0 transferidos de ou para a memória por unidade de tempo (segundo)
+     ir C irb D Custo → unidade monetária ($) por quantidade de dados (bytes) que podem
+     dm dm C-N ser armazenados na memória
+  Wla .wla Y-N Correlação:
+     www CC B > capacidade ⇒ < velocidade
+
+           > velocidade ⇒ > custo
+
+www.wladmirbrandao.com                                                                   4 / 28
+Hierarquia de Memória
+
+          Wwlawdwm.wirClaCCdaBmrYdi-roNbsCroa-NnBdrDaa4no.d.0cãoom
+
+www.wladmirbrandao.com                                              5 / 28
+Hierarquia de Memória
+
+          Wwlawdwm.wirClaCCdaBmrYdIRMCPUni-erátaoetNiqlepbrmizsuariCadrnóeod→aaanra-ia→aNnRBdp>aa→ederD≈r5laCagea0c6Ptei4n0reo0xUsôen.Rdt.ncT0tc$ueibãrcç/nopaãaMoasomdsBddoeeirnbstyrtueçsões
+                                                   de programa
+
+www.wladmirbrandao.com                                                                                                                                                                          6 / 28
+Hierarquia de Memória
+
+          Wwlawdwm.wirClaCCdaBmrYdRCMAPVi-ecáráaoeNeqrpbrmlisuaeioCdrróeosa→aanr-niaa→aNnBíLev→e0dxerDLeliae>a1csLCtu4n→ r4≈o1çôaã0.d≈.n6o0cL0ciãcd01ThoRea2boa$emi8pn/LssMM4trBBuções de
+                                                   programa (pré-busca e pipelining)
+
+www.wladmirbrandao.com                                                                                                                                                                     7 / 28
+Hierarquia de Memória
+
+          Wwlawdwm.wirClaCCdaBmrYdMCPRAUi-erátcaoeNiqlepbrmizsuasiCadrsóeod→aaonra-ia→aNnaBp≈la→ederD≈r0laaaea,0dt8tmó4nre5oR0ôarz.dinR.nAGoe0cti$ãnebcMo/rpaaoMissnmBsdtreuçGõBes de
+                                                   programa e dados temporários
+
+www.wladmirbrandao.com                                                                                                                                                                 8 / 28
+Hierarquia de Memória
+
+          Wwlawdwm.wirClaCCdaBmrYdRBURMMi-eráatoeéNilsprbmdizsaiisiCadratóotdaaaera-→in→→aNnBptaeeadrD≈≈rllaeaega05tmFud4nro,n0ôGual.dns.n0rba0ctái0pãTecsvor7sBaeohdmlRa$do/sMdBe ma-
+                                                   neira persistente
+
+www.wladmirbrandao.com                                                                                                                                                                  9 / 28
+Hierarquia de Memória
+
+          Wwlawdwm.wirClaCCdaBmrYdGDUBLMi-eratiroesNinalrbmiczsatnoCaartódodsaare→a-ie→aNnB→pm≈amdrD≈rada1aaale00mgt4nzo,a0n0aeH.dén.r0Mn0cott0Dãaeibtcor2sapoadçsmdRaãe$doo/TsMBdBe ma-
+                                                   neira persistente
+
+www.wladmirbrandao.com                                                                                                                                                                    10 / 28
+Hierarquia de Memória
+
+          Wwlawdwm.wirClaCCdaBmrYdBMmUGALi-eratcroueNinalerbtmiázsatnsCavartsódoedaaore→ ia-si→aNnsB→pee≈amdarDq≈rPca2aauaeB0mgesM4no,snn(0Faabj.dcénu.0id0pcitttk0oaãesieacsor0lobad3dmoaerRxdem)o$msa/noMpevoBiuírvaceopler-
+
+                                                   sistente, como backups
+
+www.wladmirbrandao.com                                                                                                                                                                                                          11 / 28
+Hierarquia de Memória
+
+          Wwlawdwm.wirClaCCdaBmrYdmULBDMGi-eratirouesNinalrbtmicázsatnoCavartódoedsaare→ ia-sió→aNnB→pep≈artddrD≈reiePac2amaÓBo00am4noso,c(0aMpevj.dnu.0sí0tbcvtsk0ãepoeieor1cslobsdmeRaoaq$xdu)o/esMnpcBoiaulcdoe
+
+                                                   maneira persistente, como multimídia
+
+www.wladmirbrandao.com                                                                                                                                                                                              12 / 28
+Hierarquia de Memória
+
+o Comparativo entre diferentes tipos de memória:
+randãom Tipo
+o B o.c CPU             Nome         Velocidade  Capacidade   Custo   Volátil
+os da Primária                           (bps)               (R$/MB)
+ard ran .0 Primária     Registrador       60T          KB               sim
+ir C irb 4 Secundária   Cache              6T          MB       500     sim
+m m -ND Secundária      RAM               80G          GB       100     sim
+d d C Terciária         Flash             5G           TB      0,05    não
+la la -N Terciária      HD               100M          TB     0,0007   não
+                        Óptico           20M           PB     0,0002   não
+                        Fita              2M           PB     0,0001   não
+                                                             0,00003
+Wwww.wCC BY Os valores de velocidade, capacidade e custo são estimativas, a ﬁm de fornecer
+uma ordem de grandeza. Estimativas foram baseadas em memórias disponíveis
+
+atualmente, podendo variar de acordo com a tecnologia e o fabricante
+
+www.wladmirbrandao.com                                                                      13 / 28
+Armazenamento em Memória
+
+  o Em sistemas de banco de dados, os dados são efetivamente armazenados em
+  dã diferentes tipos de memória de acordo com sua natureza
+
+     Bran .com Transientes → persistem em memória por um período limitado de tempo,
+     so ao apenas durante a execução do programa
+     ardo rand .0 Persistentes → permanecem em memória por longos períodos de tempo,
+     4 sendo acessados e processados repetidamente durante esse período
+  mir C mirb -ND SGBDs devem ser capazes de gerenciar eﬁcientemente a transferência de dados
+  lad lad -NC transientes e permanentes entre memórias
+     W ww.w C BY No projeto físico, DBAs e projetistas devem escolher as melhores técnicas
+     w C de organização de dados para garantir equilíbrio entre custo e desempenho,
+
+           atendendo aos requisitos funcionais e operacionais do BD
+
+www.wladmirbrandao.com                                                                        14 / 28
+Armazenamento em Memória
+
+  o Aplicações tipicamente necessitam de apenas uma pequena parte do BD de cada
+  dã vez para processamento, sendo responsabilidade do SGBD garantir que:
+   Bran .com 1. A parte seja transferida da memória secundária para a primária
+   oso ao 2. A CPU processe os dados em memória primária adequadamente
+   Wwlawdwm.wirClaCCdaBmrYdi-rNbCra-NndD 4.0 3. Os dados processados sejam transferidos de volta à memória secundária
+
+www.wladmirbrandao.com                                                                                                 15 / 28
+Armazenamento em Memória
+
+  o Tipicamente BDs são armazenados de maneira permanente em discos
+  dã magnéticos
+
+     Bran .com BDs são muito grandes para caberem inteiramente em memória primária,
+     so ao com capacidade limitada de armazenamento
+     ardo rand .0 Custo de armazenamento em memória primária é muito alto
+     ir C irb D 4 Memórias terciárias tem grande capacidade de armazenamento e baixo
+     m m -N custo, mas são muito lentas e frequentemente demandam intervenção
+     lad lad -NC manual (oﬀ-line)
+     W w.w BY Discos magnéticos apresentam excelente relação custo-benefício, ainda
+     ww CC mais vantajosa que outros tipos de memória secundária
+
+www.wladmirbrandao.com                                                                16 / 28
+Disco Magnético (HD)
+
+                            dão Acesso aleatório
+                            ran om Múltiplas superfícies
+                           so B ao.c Armazenamento em trilhas
+                      ardo rand .0 Trilhas divididas em blocos
+                mir C mirb -ND 4 Tamanho do bloco é ﬁxado na
+              d d Cformatação do HD e não pode ser
+            la la -Ntrocado dinamicamente
+          W ww.w C BY Transferências entre memória
+           w C primária e HD ocorrem em unida-
+
+                                                          des de bloco
+
+www.wladmirbrandao.com                                                  17 / 28
+Disco Magnético (HD)
+
+  o Bloco (página) → unidade mínima de transferência de dados entre disco e
+  dã memória primária
+
+     Bran .com Tamanho ﬁxado na formatação, geralmente entre 512B a 8KB, que não pode
+     so ao ser alterado dinamicamente
+     ardo rand .0 Separados nas trilhas por lacunas de tamanho ﬁxo que incluem dados de
+     ir C irb 4 controle, como ponteiro para o bloco subsequente
+     m m -ND Pode ser acessado aleatoriamente pelo seu endereço de hardware,
+     lad lad -NC denominado endereço de bloco
+     W w.w BY Hardware controladores de disco usam o endereço do bloco para transferir o
+     ww CC bloco do disco para um buﬀer em memória primária
+
+www.wladmirbrandao.com                                                                    18 / 28
+Disco Magnético (HD)
+
+  o Buffer → área reservada contígua em memória primária
+     randã m Memória Primária
+                          B .co ···
+     ir Cardirobsroanda4o.0 Controladores de disco usam o endereço de bloco e de buﬀer para realizar a
+     m m -ND transferência do bloco de disco para a memória primária
+       lad lad -NC Leitura (Input) → bloco é copiado para buﬀer
+       Wwww.wCC BY Escrita (Output) → buﬀer é copiado para bloco
+
+www.wladmirbrandao.com                                                                                  19 / 28
+HD: Leitura e Escrita (I/O)
+
+                            dão 1) Controlador recebe endereços
+                              ran m de bloco e buﬀer
+
+                            o B o.co 2) Controlador comanda aciona-
+                          os da dor a movimentar braço para
+                      ard ran .0 posicionar cabeça na trilha do
+                  ir C irb 4 endereço de bloco
+                m m -ND 3) Discos giram até o ponto de
+            lad lad -NCleitura e escrita
+          W w.w BY 4) Dados são copiados de ou
+           ww CC para buﬀer
+
+www.wladmirbrandao.com                                               20 / 28
+HD: Leitura e Escrita (I/O)
+
+  o Tempo de Transferência → tempo necessário para transferir um bloco entre disco
+  dã e memória primária
+
+     Bran .com Tempo de Busca → tempo necessário para posicionar a cabeça de leitura e
+     o o escrita na trilha do endereço de bloco
+     rdos nda Tempo de Latência → ou atraso rotacional é o tempo necessário para o disco
+     a ra 4.0 girar até o ponto de leitura e escrita
+     mir C mirb -ND Tempo de Transferência de Bloco → tempo necessário para os dados serem
+     d d C copiados de ou para o buﬀer em memória primária
+  Wla .wla Y-N Transferência de Bloco Busca + Latência
+     www CC B Transferir múltiplos blocos consecutivos na mesma trilha ou cilindro elimina
+
+           tempos de busca e latência acumulados, tornando a transferência mais
+           eﬁciente
+
+www.wladmirbrandao.com                                                                      21 / 28
+HD: Leitura e Escrita (I/O)
+
+  o Buffering de Blocos → técnica que reserva vários buﬀers em memória primária
+  dã para agilizar a transferência de blocos do disco
+
+     Bran .com Controladores de disco e CPUs podem operar de forma independente e
+     Wwlawdwm.wirClaCCdaBmrYdi-roNbsCroa-NndDa4o.0 paralela usando buﬀers diferentes
+
+www.wladmirbrandao.com                                                                22 / 28
+HD: Leitura e Escrita (I/O)
+
+  o Duplo Buffering → uso de dois buﬀers para leitura ou gravação em disco
+     randã m Memória Primária
+                          B .co ···
+     ir Cardirobsroanda4o.0 Enquanto o controlador de disco transfere dados de ou para um buﬀer, a
+     m m -ND CPU processa dados no outro buﬀer
+     lad lad -NC Permite leitura ou gravação contínua em blocos consecutivos
+     W w.w BY Elimina tempos de busca e latência para todas as transferências de bloco,
+     ww CC com exceção da primeira
+
+           Dados ﬁcam prontos para processamento mais rapidamente, reduzindo
+           ociosidade da CPU e, consequentemente o tempo de espera das aplicações
+
+www.wladmirbrandao.com                                                                              23 / 28
+HD: Alocação de Blocos
+
+  o A forma como os blocos são alocados em disco impacta o desempenho de I/O
+     randã m Alocação Contígua → blocos consecutivos em disco
+            B .co HD
+                          oso dao ···
+       mir Camrdirbra-Nn D 4.0 Rápido I/O com duplo buﬀering
+       d d C Difícil expansão, podendo resultar em múltiplas realocações em caso de
+       Wwlaww.wClaC BY-N alteração dos dados
+
+www.wladmirbrandao.com                                                               24 / 28
+HD: Alocação de Blocos
+
+o A forma como os blocos são alocados em disco impacta o desempenho de I/O
+randã m Alocação por Ligação → cada bloco contém um ponteiro para o próximo
+                        B .co HD
+                        oso dao •
+mir Camrdirbra-Nn D 4.0 Facilita expansão•• ···•                                  •
+Wwlawdw.wClaCdBY-NC I/O mais lento pela impossibilidade de uso de duplo buﬀering
+
+www.wladmirbrandao.com                                                               25 / 28
+HD: Alocação de Blocos
+
+o A forma como os blocos são alocados em disco impacta o desempenho de I/O
+randã m Alocação por Segmento → agrupa blocos consecutivos em segmentos
+B .co (clusters) e cada segmento contém um ponteiro para o próximo segmento
+so ao HD
+                        ardo rand 4.0 ···
+ladmirlaCdmi-rNbC-ND Combinação de alocação contígua e por ligação•···• ······•
+W w.w BY Torna duplo buﬀering viável em um segmento, agilizando I/O
+ww CC Facilita expansão, reduzindo o número de realocações em caso de alteração
+
+dos dados
+
+www.wladmirbrandao.com                                                           26 / 28
+HD: Alocação de Blocos
+
+o A forma como os blocos são alocados em disco impacta o desempenho de I/O
+randã m Alocação Indexada → blocos especiais de índice são criados contendo
+B .co ponteiros para blocos de dados
+oso dao HD
+ard ran 4.0 • • ··· • ··· • • ··· •
+Wladm.wirlaCdmYi-rNbC-ND Rápido I/O com busca sendo efetuada em blocos de índice, que podem ter···
+www CC B alocação contígua ou por segmento (duplo buﬀering)
+Fácil expansão, com realocações ocorrendo em blocos de índice
+
+www.wladmirbrandao.com                                                                           27 / 28
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            28 / 28
+

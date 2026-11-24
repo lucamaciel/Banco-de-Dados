@@ -1,0 +1,59 @@
+Exercícios para AS01
+
+Exercícios teóricos:
+
+    ●​ Explique o que é um banco de dados e qual é sua principal finalidade.
+    ●​ Qual é a diferença entre um banco de dados e um SGBD?
+    ●​ O que é um modelo de dados? Explique sua importância no desenvolvimento de um
+
+         banco de dados.
+    ●​ Explique as principais etapas de implementação de um banco de dados.
+    ●​ Cite duas vantagens e uma desvantagem da utilização de um SGBD.
+    ●​ Cite dois objetivos da utilização de um banco de dados.
+    ●​ O que é um modelo de dados físico? Explique sua relação com o armazenamento
+
+         dos dados.
+    ●​ Quais são as principais linguagens utilizadas em um banco de dados? Explique a
+
+         finalidade de cada uma.
+    ●​ Quais são os três níveis da arquitetura de três esquemas? Explique a finalidade de
+
+         cada um.
+    ●​ O que é independência de dados? Diferencie independência física de independência
+
+         lógica.
+    ●​ Qual é a diferença entre uma entidade forte e uma entidade fraca?
+
+Diagrama DER
+
+Faça o Diagrama Entidade-Relacionamento (DER) a partir da seguinte descrição de
+minimundo:
+
+Esta é a descrição textual de um minimundo de uma clínica médica CM. A clínica possui
+diversas especialidades médicas, sendo que cada especialidade é identificada por um
+código e possui um nome. Uma especialidade pode possuir vários médicos, enquanto cada
+médico deve pertencer obrigatoriamente a uma única especialidade. Os médicos são
+identificados por seu CRM e possuem nome, telefone e e-mail.
+
+Os pacientes são identificados por seu CPF e possuem nome, data de nascimento,
+endereço e telefones para contato. O endereço de um paciente é composto por logradouro,
+número, complemento, bairro, cidade, estado e CEP. A idade do paciente é derivada de sua
+data de nascimento.
+
+Cada paciente pode realizar várias consultas na clínica, enquanto cada consulta deve estar
+associada obrigatoriamente a um único paciente. Cada consulta também deve ser realizada
+obrigatoriamente por um único médico, enquanto um médico pode realizar várias consultas.
+Para cada consulta devem ser armazenados a data, o horário, o valor e o status, que pode
+ser agendada, realizada ou cancelada.
+A clínica possui diversas salas de atendimento. Cada médico deve possuir obrigatoriamente
+uma única sala fixa para seus atendimentos, enquanto uma sala pode estar vinculada a
+apenas um médico. As salas são identificadas por um número e possuem andar,
+capacidade e localização.
+
+Durante uma consulta, o médico pode registrar uma prescrição sobre o atendimento
+realizado. Uma consulta pode gerar várias prescrições de medicamentos, enquanto cada
+prescrição deve estar associada obrigatoriamente a uma única consulta. As prescrições são
+identificadas por um número sequencial e apenas existem em função do médico que as
+prescreve. Cada prescrição deve informar o nome do medicamento, a dosagem e a
+quantidade prescrita.
+

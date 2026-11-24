@@ -1,0 +1,297 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+sql: definição de dados
+SQL
+
+                 o Structured Query Language
+     randã m Linguagem de consulta estruturada
+     B .co Linguagem declarativa de alto nível
+     oso dao Usuário especiﬁca o que deseja, deixando decisões sobre como executar a
+     ard ran .0 consulta para o SGBD
+     ir C irb D 4 Contém instruções para deﬁnição e manipulação de dados
+     m m -N Padrão em SGBDs relacionais comerciais
+     lad lad -NC Mantém equivalência com o modelo relacional
+
+       W w.w BY Relação → Tabela
+       ww CC Tupla → Linha
+
+           Atributo → Coluna
+
+www.wladmirbrandao.com                                                                3 / 22
+SQL: Recursos
+
+  o SQL oferece múltiplos recursos
+     randã m Deﬁnição de visões sobre dados
+     o B o.co Deﬁnição de restrições sobre os dados
+     ardosranda .0 Especiﬁcação de controles de transações
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 Especiﬁcação de autorizações e segurança
+
+www.wladmirbrandao.com                                                          4 / 22
+SQL: Deﬁnição de Dados
+
+  o Existem diferentes instruções (comandos) para deﬁnição de dados
+     randã m CREATE → cria elementos no catálogo, como esquemas, tabelas e
+     B .co domínios
+     oso dao ALTER → modiﬁca elementos no catálogo
+     Wwlawdwm.wirClaCCdaBmrYdi-rNbCra-Nn D 4.0 DROP → remove elementos do catálogo
+
+www.wladmirbrandao.com                                                              5 / 22
+SQL: Deﬁnição de Dados
+
+  o Esquema → elemento que agrupa outros elementos que pertencem à mesma
+  dã aplicação de BD
+
+     Bran .com Nome → identiﬁcador do esquema
+     so ao Proprietário → usuário com autoridade sobre o esquema
+  ir CardirobrandD 4.0 Exemplo → criar esquema UNIVERSIDADE pertencente ao usuário ’Pedro’
+     Wwlawdwm.wClaCdBmY-NC-N CREATE SCHEMA UNIVERSIDADE AUTHORIZATION ’Pedro’;
+
+www.wladmirbrandao.com                                                                      6 / 22
+SQL: Deﬁnição de Dados
+
+  o Catálogo → coleção nomeada de esquemas
+     randã m Contém o esquema padrão que oferece informação sobre todos os
+     B .co esquemas no catálogo, bem como sobre os descritores dos elementos
+     so ao Esquema padrão → INFORMATION_SCHEMA
+
+  ardo rand 4.0 Tabela Base → declarada por meio da instrução CREATE TABLE
+     mir C mirb -ND Tabela realmente criada e armazenada como um arquivo pelo SGBD
+
+  lad lad -NC Tabela Virtual → declarada por meio da instrução CREATE VIEW
+     Wwww.wCC BY Tabela pode ser criada e armazenada como um arquivo pelo SGBD
+
+           Geralmente não são realmente armazenados em arquivo
+
+www.wladmirbrandao.com                                                              7 / 22
+SQL: Deﬁnição de Dados
+
+  o CREATE TABLE
+     ndã Cria uma nova tabela, dando-lhe um nome e especiﬁcando suas colunas e
+     ra om restrições iniciais
+     o B o.c Restrições de tipo são geralmente especiﬁcadas
+     os da Uma vez que colunas e suas respectivas restrições de tipo são criadas,
+     ard ran .0 podem ser redeﬁnidas a partir da instrução ALTER TABLE
+
+  mir C mirb -ND 4 Exemplo:
+     lad lad -NC CREATE TABLE PROFESSOR;
+
+  Wwww.wCC BY Esquema em que as tabelas são criadas é especiﬁcado implicitamente no
+
+     ambiente em que as instruções CREATE TABLE são executadas
+
+www.wladmirbrandao.com                                                               8 / 22
+SQL: Restrições
+
+  o Restrições podem ser especiﬁcadas em SQL como parte da criação de tabela
+     randã m Tipo → domínio de valores válidos para a coluna
+     B .co Nulidade → possibilidade de valor NULL em coluna
+     oso dao Valor → faixa de valores válidas para uma coluna
+     ard ran .0 Valor Padrão → valor atribuído a uma coluna caso nenhum valor seja
+     ir C irb D 4 especiﬁcado
+     m m -N Chave → coluna(s) identiﬁcadora(s) de uma instância
+     lad lad -NC Unicidade → coluna(s) candidata(s) a identiﬁcadora(s) de uma instância
+     W w.w BY Integridade Referencial → regras para atualização de linhas
+     ww CC correlacionadas em diferentes tabelas
+
+www.wladmirbrandao.com                                                                   9 / 22
+SQL: Restrição de Tipo
+
+  o Numérico → incluem números inteiros de vários tamanhos (INTEGER e SMALLINT)
+  dã e números de ponto ﬂutuante (reais) de várias posições (FLOAT, REAL e DOUBLE
+  ran m PRECISION)
+  so B ao.co Cadeias de Caracteres → incluem cadeias de caracteres de diferentes tipos
+
+     ardo rand 4.0 CHAR(n) → cadeias de tamanho ﬁxo, onde n é a quantidade exata de
+     ir C irb D caracteres a ser armazenada
+     dm dm C-N VARCHAR(n) → cadeias de tamanho variável, onde n é a quantidade máxima
+     la la -N de caracteres armazenados
+     W w.w BY Valor literal da cadeia de caracteres deve ser especiﬁcado entre aspas
+     ww CC simples, com maiúsculas diferenciadas de minúsculas (case sensitive)
+
+www.wladmirbrandao.com                                                                  10 / 22
+SQL: Restrição de Tipo
+
+  o Cadeias de Bits → incluem cadeias binárias de diferentes tipos
+     randã m BIT(n) → cadeias de tamanho ﬁxo, onde n é a quantidade exata de bits a ser
+     B .co armazenada
+     oso ao BIT VARYING(n) → cadeias de tamanho variável, onde n é a quantidade
+     ard rand .0 máxima de bits armazenados
+     ir C irb D 4 O valor literal da cadeia de bits deve ser especiﬁcado entre apóstrofos,
+     m m -N precedidos por um B para distingui-los das cadeias de caracteres
+       lad lad -NC Exemplo → B’10101’
+
+  Wwww.wCC BY Booleano → valores binários verdadeiro (1) e falso (0)
+
+www.wladmirbrandao.com                                                                      11 / 22
+SQL: Restrição de Tipo
+
+  o Date & Time → valores de data e hora
+     randã m Date → dez posições compostas de dia, mês e ano na forma DD-MM-YYYY
+     B .co Time → oito posições compostas de hora, minuto e segundo na forma
+     so ao HH:MM:SS
+
+  ardo rand 4.0 Timestamp → valores temporais de alta precisão
+     mir C mirb -ND Inclui os campos DATE e TIME, mais um mínimo de seis posições para frações
+     d d C decimais de segundos e um qualiﬁcador opcional WITH TIME ZONE
+     Wla .wla Y-N Valores literais representados por cadeias entre apóstrofos precedidos pela
+     w B palavra-chave TIMESTAMP na forma TIMESTAMP ’27-09-2008
+     ww CC 09:12:47.648302’
+
+www.wladmirbrandao.com                                                                          12 / 22
+SQL: Restrição de Nulidade
+
+  o Pode ser especiﬁcada se valor NULL não for permitido para determinada coluna
+     randã m Implícito para colunas que fazem parte da chave primária
+
+  o B o.co Exemplo:
+     ardosranda .0 CREATE TABLE PROFESSOR (
+        ir C irb 4 CPF CHAR(11) NOT NULL,
+        m m -ND Nome VARCHAR(80) NOT NULL,
+        d d C Departamento INT
+     Wwlaww.wClaC BY-N );
+
+www.wladmirbrandao.com                                                            13 / 22
+SQL: Restrição de Valor Padrão
+
+  o Deﬁne valor padrão para uma coluna
+     randã m Valor padrão será incluído em qualquer nova linha se um valor explícito não
+     B .co for fornecido para essa coluna
+     oso dao Se essa restrição não for especiﬁcada valor padrão será NULL para colunas
+     ard ran .0 que não possuem a restrição NOT NUL.
+
+  mir C mirb -ND 4 Exemplo:
+     lad lad -NC CREATE TABLE PROFESSOR (
+        W w.w BY CPF CHAR(11) NOT NULL,
+        w C Nome VARCHAR(80) NOT NULL,
+        w C Departamento INT DEFAULT 1
+
+           );
+
+www.wladmirbrandao.com                                                                    14 / 22
+SQL: Restrição de Valor
+
+  o Limita valores possíveis para coluna
+  randã m Exemplo → supondo que números de departamento sejam restritos a inteiros
+  B .co entre 1 e 20, podemos modiﬁcar a tabela professor, adicionando uma restrição
+  o o para a coluna Departamento:
+
+     ardosranda .0 ALTER TABLE PROFESSOR ADD CHECK
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 (Departamento > 0 AND Departamento < 21);
+
+www.wladmirbrandao.com                                                                15 / 22
+SQL: Restrição de Chave
+
+  o Especiﬁca uma ou mais colunas que compõem a chave primária de uma tabela
+     randã m Se a chave primária for composta por apenas uma coluna, a cláusula
+     B .co PRIMARY KEY pode acompanhar a coluna diretamente
+
+  rdoso ndao Exemplo:
+     ir Ca irbra D 4.0 CREATE TABLE PROFESSOR (
+        m m -N CPF CHAR(11) NOT NULL,
+        lad lad C Nome VARCHAR(80) NOT NULL,
+        W .w Y-N Departamento INT,
+        w B PRIMARY KEY (CPF)
+     ww CC );
+
+www.wladmirbrandao.com                                                           16 / 22
+SQL: Restrição de Unicidade
+
+  o Especiﬁca chaves secundárias alternativas
+     randã m Pode ser especiﬁcada diretamente para chave secundária em coluna única
+
+  so B ao.co Exemplo:
+     ardo rand .0 CREATE TABLE PROFESSOR (
+        ir C irb D 4 CPF CHAR(11) NOT NULL,
+        m m -N Nome VARCHAR(80) NOT NULL,
+        lad lad C Departamento INT,
+        W .w Y-N PRIMARY KEY (CPF),
+        w B UNIQUE (Nome)
+     ww CC );
+
+www.wladmirbrandao.com                                                               17 / 22
+SQL: Restrição de Integridade Referencial
+
+  o Estabelece regras para restrição de atualização de linhas correlacionadas em
+  dã diferentes tabelas através de referência à chave primária por chave estrangeira
+  ran om Exemplo:
+
+     so B ao.c CREATE TABLE PROFESSOR (
+        ardo rand .0 CPF CHAR(11) NOT NULL,
+        4 Nome VARCHAR(80) NOT NULL,
+        ir C irb D Departamento INT,
+        dm dm C-N PRIMARY KEY (CPF),
+        la la -N FOREIGN KEY (Departamento)
+        W w.w BY REFERENCES DEPARTAMENTO(Numero)
+
+     ww CC );
+
+www.wladmirbrandao.com                                                                18 / 22
+SQL: Restrição de Integridade Referencial
+
+     ão A integridade referencial entre tabelas pode ser violada quando linhas são
+     nd manipuladas ou o valor de uma chave primária é modiﬁcado
+     Bra .com Ação de disparo referencial especiﬁca uma ação alternativa para os casos
+     so ao de violação de integridade:
+
+       ardo rand .0 RESTRICT → a linha da chave primária não pode ser modiﬁcada se houver
+       ir C irb 4 linhas contendo chaves estrangeiras associadas a ela
+       m m -ND CASCADE → a linha da chave primária, bem como as linhas contendo chaves
+       d d C estrangeiras são modiﬁcadas
+       Wla .wla Y-N SET NULL → a linha da chave primária é modiﬁcada, desde que se consiga
+       w B atualizar para NULL as chaves estrangeiras associadas a ela
+       ww CC SET DEFAULT → a linha da chave primária é modiﬁcada, desde que as chaves
+
+                   estrangeiras associadas a ela possuam valor padrão que possa ser usado
+
+www.wladmirbrandao.com                                                                      19 / 22
+SQL: Restrição de Integridade Referencial
+
+  o Ações de disparo devem ser escolhidas em caso de remoção (ON DELETE) ou
+  dã atualização (ON UPDATE)
+  Bran .com Exemplo:
+
+     oso ao CREATE TABLE PROFESSOR (
+        ard rand .0 CPF CHAR(11) NOT NULL,
+        ir C irb 4 Nome VARCHAR(80) NOT NULL,
+        m m -ND Departamento INT DEFAULT 1,
+        d d C PRIMARY KEY (CPF),
+        la la -N FOREIGN KEY (Departamento)
+        W w.w BY REFERENCES DEPARTAMENTO(Numero)
+        ww CC ON DELETE SET DEFAULT ON UPDATE CASCADE
+
+           );
+
+www.wladmirbrandao.com                                                       20 / 22
+SQL: Restrições Nomeadas
+
+  o Restrição pode ser rotulada utilizando o descritor CONSTRAINT
+     randã m Nomes de todas as restrições de um esquema precisam ser exclusivos
+
+  so B ao.co Exemplos:
+     ardo rand .0 CONSTRAINT PK_PROFESSOR PRIMARY KEY (CPF);
+     mir C mirb -ND 4 CONSTRAINT FK_DEPARTAMENTO_PROFESSOR
+        lad lad C FOREIGN KEY (Departamento)
+        W .w Y-N REFERENCES DEPARTAMENTO(Numero)
+        www CC B ON DELETE SET DEFAULT ON UPDATE CASCADE;
+
+www.wladmirbrandao.com                                                           21 / 22
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            22 / 22
+

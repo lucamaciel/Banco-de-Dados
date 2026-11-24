@@ -243,3 +243,7 @@ TSWLatexianTemp*
 
 # generated if using elsarticle.cls
 *.spl
+
+# clones originais (conteúdo já copiado para aulas/ e material-camila/)
+BancoDeDados/
+DBSystems/

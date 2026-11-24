@@ -1,0 +1,137 @@
+                                                                                                                                                                                                                                 Problemas de concorrência
+
+deprimina                                                                                                                                                                                                                           Atualização perdida - sobrescrever itens
+                                                                                                                                                                                                                                    Leitura suja - transação aborta e item é inválido
+Conjunto de operações que Ou São TODAS                                                                                                                                                                                              Leitura não repetitiva > - le valores diferentes
+
+confirmadas ou são Todas abertadas                                                                                            Q0288
+
+⊥ conjunto de selects executados                                                                                              se pessoa A quer mexer                                                                                Resumo incorreto +                          combinação                das  3  acima
+                                                                                                                              na coluna sexo de CLIENTE e                                                                                                                                                                                               ,
+
+  / Dor um SGBD .                                                              depende da                                                                                                                                               se fizermos uma agregação Pode ser incorreto
+
+⊥ ela processa itens de dados : pode ser     granularidade                                                                          pessoa is quer mexer                                                                                ー
+
+                                              rtam do item)                                                                   β     no salário , se tivermos
+
+um arquivo , um registro, uma coluna,                                          do SGBD                                                granularidade de colunas
+
+           um blocp ...                                                                                                                                                                                                                 esses são os problemas que por
+                                                                                                                                                                                                                                            dem existir caso tenhamos
+Maior concorrência - executar + transações em                                  quanto fina                                             pode ser ao mesmo                                                                                             uma execução paralela
+     uma opu compartilhada.                                                                                                            tempo. Se for em                                                                                                 ↓ concorrência
+                                                                                 a granularidade,                                                                                                                                                            ↓ performance
+  Controle de concorrência - uma interação de um                                                                                              blocos não
+       Usuário não pode interferir na outra isolado                              maior a                                                                                                                                   ,
+
+                                                                                       concorrência,
+
+                                                                                Dorém titens
+                                                                                     prcontrolar
+
+Motivos de abortar
+
+Falhas de sistema -  hardware software ou rede                                                                         Todo SGBD tem Mecanismos
+                                                                            ,
+                                                                                                                                                                                                                              sistema
+                                                                                                                                                                                                                                  cain
+Operação - Lógica de programação errada                                        }                                          } para lidar com falhas                                                                                                                               Vireisdirevenet a
+                                                                                                                          logging - histórico de transações
+concorrência - controle por ler itens sujos
+                                                                                                                                                                                                      dentro do
+condição de exceção - if saldo negativo por ex                                                                          Dumping -      cópia  de  segurança                            do BD-                                           corrom -
+                                                                                                                                                                                                                                           Dev
+                                                                                                                                                                                                              comp.
+
+Disco - blocos perdidos                                                                                                   Backup > -   externo do comp.                                - > servidor morrer ,
+
+catástrofe -  formatar disco blackout, ,  incêndio, roubo                                                                                                                                          ex : queima
+
+maramamento - fatorial de n in !)
+
+Intercalação das operações a serem feitas                                                                                                                                                                                           wrys rrys T1 -                                               a          "
+                                                                                                                                    }  completo - possui todas                                                                          ras                                  ,
+                                                                                                                                         as operações de cada                                                                 }                                           ,                   ,           U
+                                                                                                                                              transação APENAS
+a - abort                                                                                                                                                                                                                            Ta-ria) , wins , a
+                                                                                                                                           e ordem é preservada
+c - commit       ↓ begin      ↓              write                             commi- eno                                                                                                                                            S > - rix) , ra), Krys , Wis, Wry) , Ca a
+b = begin
+ e- > end     escalo-       read
+
+ r = read       nomen-                                                                                                 about                                                                                                            todos estão presentes v
+                                                                                                                                                                                                                                         estão em ordem v
+                   to
+w- write                                                                                                                                                                                                                                conflito estão em ordem V
+
+                     Begin e end são óbvios , normalmente                                                                              Incomplets - >
+
+                         não colocamos ao escrever o escalo-                                                                           Se for :
+                                                                                                                                                                                                    ӝ
+                                                           nemento
+
+                                                                                                                                       wrys rrys Tn -                                                                         ,a
+                                                                                                                                                  rras                                 ,                                                ^
+                                                                                                                                                                                    ,
+
+                                                                                                                                       Ta-riys , wins , a                                                                                                                       conflito em outra
+
+Completo garante atomicidade e consistência                                                                                            S- ) , ry), Krys , was, wry) , Ca , an                                                                                                         Orden não e
+                                                                                                                                                                                                                                                                                   y completo
+
+Recuperável garante durabilidade
+
+recuperan
+
+                                                                                                                        /  Falha p      transação que                                                                         ceitura- escalona ae
+                                                                                                                                                                                                                                                              mento não
+                                                                                                                                 '     está lendo confirma →                                                                                      é recuperável
+
+                                                                                                                       V                 antes da que escreveu
+
+                                                                                                                                                  conflitos
+                                                                                                                                                   > - operam sob mesmo item
+                                                                                                                                                   > - pelo menos uma é Write
+                                                                                                                                                   > - são transações diferentes
+
+      idoamento e comessencia                                                                                                                 Queremos um escalonamen                                                                                                           seriáveis
+
+न→                                                                                                                                                to                                   que tenha concorrência determinar                                                                            esc não seriais
+ ݈→                                                                                                                                                                                                                                                                                                                                                                   .
+
+х                                                                                                                                                 mas garenta quehos inter-                                                                                                  que se comportan como
+
+        Se vir Ciclo Não E Serializável                                                                                                                              fira                                                                                                                               seriaiss
+                                                                                                                    ,
+                                                  Ү                                                                                                                                                                                     grapfen die ^                                         Tπ
+                                não garante isolamento
+                                                                                                                                                                                                                                                 Ariecedeemicia
+
+                                                                                                                                                                                                                              ↓
+
+                                                                                                                                                                                                                                          r , (y) , Wary)
+
+                                                                                                                                                                                               π                                        T2- > To
+
+                                                                                                                                                                                          >
+
+                                                                                                                                                                                                                                                                                                    ^
+
+                                                                                                                                                                                                                                 √                                                                     √
+
+                                                                                                                                                                                                                                                                                V
+
+                                                                                                                                                                                       な                                         T3                                             〜                      T3
+
+                                                                                                                                                                                                  โ                                                                                        โ
+
+                                                                                                                                                         Completo pois não                                                                                                       Incompleto pois
+
+                                                                                                                                                         há ciclos entre das                                                                                                    há ciclos entre das
+
+                                                                                                                                                      transações                                                                                                                       transações
+
+                                                                                                                                                      Não serializável pois há ciclo                                                                                              Serializável pois não há
+                                                                                                                                                             de forma geral                                                                                                         ciclo de forma geral
+

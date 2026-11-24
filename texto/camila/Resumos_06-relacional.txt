@@ -1,0 +1,176 @@
+·poneentantie                                                         Você deve modelar o sistema de matrícula da PUC. Nele, alunos se matriculam
+                                                                      em disciplinas. Cada aluno é reconhecido pelo seu número de matrícula e
+O diagrama de entidade relacio.                                       possui nome e endereço.
+namento é um projeto conceitual
+
+e não está preocupado com como
+
+será implementado .
+
+Ele simplifica e explica a descri
+
+são do      minimundo .  Nem  MAIS                                    Cada disciplina é identiﬁcada por seu nome e semestre e possui carga horária.
+                                                                   ,
+
+nem MENOS.
+
+Se está com dívida ou se acha, , é                                    Um mesmo aluno pode se matricular em várias disciplinas, sendo que em uma
+                                                                      disciplina podem se matricular vários alunos.
+melhor perguntar ao usuário .
+
+                                                                              Título ou resumo           Possíveis atributos
+                                                                                Possíveis entidades
+                                                                                                         verbos - relacionamentos
+
+                                                                      PER - Sistema de matrícula da Pro
+
+                                                                               Nome                   Matrícula
+                                                                      Enderego
+                                                                                     Alung
+
+                                                                                         \
+
+                                                                                     Matricular
+
+                                                                        Carga        Disciplina             Nome
+                                                                      Horária                         semestre
+
+MeDe die elemente
+
+Rótulo      Entidode                                                  Rötulo         Atributy         ร· )                Disjunção
+
+Rótulo      Entidade                                                  Rötulo          Atributo        ←           ∞  >             or um ou outro
+                                                                      Rötulo                chare
+                   fraca                                              Rötulo                                              Sobreposi y
+                                                                                      Atributo                               pode ser + de um
+Rotuls      Relacionamento
+                                                                                     chare parcial                           união y
+                                                                                                                  "       das subclasses
+                                                                                       Multivalo-
+                                                                                            rado                        formam uma superclasse
+
+Rotuls      Relacionamento
+
+         -            fraco
+
+                                                                      Rótulo
+
+                                                                                     Rótulo composts
+
+Rötulo      Atributo                                                  Rotub
+                     derivodo
+O SAM (Sistema Acadêmico de Matrículas) gerencia a matrícula de alunos em cursos em instituições de ensino. Em particular, os
+cursos da instituição de ensino são categorizados por áreas de conhecimento, sendo que um curso obrigatoriamente pertence a
+uma área e uma área pode possuir vários cursos. Além disso, uma área pode ser integrada por outras áreas, sendo que uma área só
+pode ser integrante de uma única área. As áreas são identiﬁcadas por sua sigla e possuem um nome. Os cursos são identiﬁcados
+por sua sigla e possuem nome, custo e professores, compostos por CPF e nome. Alunos são identiﬁcados pelo seu CPF e possuem
+nome, composto de primeiro nome e sobrenome, sexo e data de nascimento. Cada aluno pode se matricular em diversos cursos,
+sendo que em cada curso podemos ter diversos alunos matriculados, mas devemos conhecer a data e se o aluno pagou ou não a
+matrícula no curso. Cada curso é composto por módulos, sendo que um módulo compõe apenas um curso e não existem módulos
+sem vínculo a algum curso. Cada módulo é identiﬁcado por sua sigla e possui um nome. Cada módulo é composto por tópicos,
+sendo que cada tópico só existe em função de um módulo. Um tópico potencialmente pode ser identiﬁcado por sua sigla e possui
+nome e horas (carga horária do tópico). As horas do curso são derivadas da totalização das horas dos tópicos que compõem os
+módulos dos cursos.
+
+Título ou resumo                                                                                       Possíveis atributos
+  Possíveis entidades
+                                                                                                       verbos - relacionamentos
+
+                         DER-Sistema de gerenciamento de matrículas
+
+                                                                                                                                                              Pagamento                     CPf
+
+                         Nome                                                                                   custo                      Duantidode                                 sexa
+
+                                                                                                                                           De Horas              Data
+
+     Professores
+
+                                                                                                                                           N                     N      Aluno
+
+                                                                                                       Curso                                   Matricular
+
+Cpf                                                                                                    \        Ƙ                                          \
+                                                                                                         Sigla
+     Nome                                                                                                                                      N                                            Nome
+
+                                                                                                                                                                    Data De
+                                                                                                                                                                      Nascimento
+
+                                                                                                                                                                                                         Sobrenome
+
+                                                                                                                                                                                            Primeiro
+
+                                                                                                                                    2          Pertencer
+
+                                                                                                                                               \              I
+
+                                                                                                                compor
+
+                                                                                                                \                      N                            Área De                         N
+
+                                                                                                                                                                    connecimento            Integrar
+
+                                                                                                                                 ↓                                                                    2
+                                                                                                       compor
+
+                         N                                                                                                             Mödulo
+
+                                                                                  \
+
+                                                                                                                                                                 SiglC
+
+     Tspica                                                                                                                                                             Nome
+
+                                                                                                                                    Sigla
+
+                                                                                                                                               Nome
+
+Nome                     sigla
+                carga                                                                               .
+                Horária
+                                                        DER-Sistema de controle de empréstimo de livros
+
+                                                                    Ender ego                            Codigs
+
+                                                                                                         Identificador
+
+                                                                                                                                                                   Editora
+
+                                                                                                         Biblioteca     2                 N    Livro
+
+                                                                                                                              Possvin               Titulo
+
+                                                                                    2                                                                              And De
+                                                                                                                                                                   Publicação
+                                                                 Possuir
+                                                        N                                1                                                                   FSBN
+
+                                           Funcionário                                 codastrar         Nome                                  N
+                                                                                                                        N
+
+                                        ũ                                                             N       Pegar                          Escrever
+                                                                                              Leitor
+, vargo                                                                                CPF               N                                                U
+
+               Cpf                         Nome                                                 Nome
+
+                                                          Data                                                                   Data Da
+                                                        De
+                                                                                                                              Devolução
+                                                        Nascimento                                        Data Do
+                                                                                                         Empréstimo
+                                                                                                                                               Autor
+
+                                                                                                                                          CPf
+
+                                                                                                                                                             Nacionalidade
+
+                                                                                                                                               Nome
+
+                                                                                                                           N
+
+                                                 Se usa o Dr estendido apenas se seu minimundo
+                                                 Te indicar que existem subtipos e supertipos .
+                                                  EER tem que ser algo simples
+

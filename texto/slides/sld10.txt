@@ -1,0 +1,553 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+sql: manipulação de dados
+SQL
+
+                 o Structured Query Language
+     randã m Linguagem de consulta estruturada
+     B .co Linguagem declarativa de alto nível
+     oso dao Usuário especiﬁca o que deseja, deixando decisões sobre como executar a
+     ard ran .0 consulta para o SGBD
+     ir C irb D 4 Contém instruções para deﬁnição e manipulação de dados
+     m m -N Padrão em SGBDs relacionais comerciais
+     lad lad -NC Mantém equivalência com o modelo relacional
+
+       W w.w BY Relação → Tabela
+       ww CC Tupla → Linha
+
+           Atributo → Coluna
+
+www.wladmirbrandao.com                                                                3 / 35
+SQL: Manipulação de Dados
+
+  o Existem diferentes instruções (comandos) para manipulação de dados
+     randã m INSERT → inserir linhas em tabelas
+     o B o.co DELETE → remover linhas de tabelas
+     os da UPDATE → atualizar valores de colunas em linhas de tabelas
+     Wwlawdwm.wirClaCCdaBmrYdi-rNbCra-Nn D 4.0 SELECT → recuperar dados em tabelas
+
+www.wladmirbrandao.com                                                              4 / 35
+Instrução INSERT
+
+o Acrescenta uma linha em uma tabela
+randã m Necessário especiﬁcar o nome da tabela e uma lista de valores para a linha
+o B o.co Valores devem ser listados na mesma ordem em que as colunas
+os a correspondentes foram deﬁnidas na tabela
+                        ard rand 4.0 PROFESSOR
+                        ir C irb D CPF Nome Sexo
+ladm ladm -NC-N INSERT INTO PROFESSOR VALUES
+Wwww.wCC BY (’12345678900’, ’Ricardo Marini’, ’M’, 3000.00, 1);
+                        Salario Departamento
+
+www.wladmirbrandao.com                                                              5 / 35
+Instrução INSERT
+
+o É possível especiﬁcar nomes de colunas correspondentes a valores fornecidos
+                        randã m PROFESSOR
+                        B .co CPF Nome Sexo
+ardosroandao.0 INSERT INTO PROFESSOR (CPF, Sexo, Nome, Departamento)
+4 VALUES (’12345678900’, ’M’, ’Ricardo Marini’, 1);
+                        Salario Departamento
+
+ladmirlaCdmi-rNbC-ND Coluna não especiﬁcada tem seu valor deﬁnido como DEFAULT ou NULL, sendo
+Wwww.wCC BY que valores e colunas devem ser listadas na mesma ordem
+
+www.wladmirbrandao.com                                                                         6 / 35
+Instrução INSERT
+
+o Se alguma restrição for violada a operação é rejeitada
+                        ndã PROFESSOR
+                          ra om CPFNome    Sexo  Salario Departamento
+                        Roberto Machado      M
+                        B .c 12345678900     F   1200.00  1
+                        so ao 12345678901Manuela CostaM
+                        ardo rand .0 21345678900Carlos A. MartinsF2700.003
+                        ir C irb 4 32145678900Ana Maria Freitas
+                                                 3200.00  1
+
+dm dm C-ND INSERT INTO PROFESSOR (CPF, Nome, Sexo, Departamento)7500.002
+Wla .wla Y-N VALUES (’68345618900’, ’Amanda Ramirez’, ’F’, 4);
+www CC B Caso não exista tupla na tabela departamento com chave primária Numero = 4
+para manter integridade referencial com a coluna Departamento da tabela
+
+professor a operação será rejeitada
+
+www.wladmirbrandao.com                                                               7 / 35
+Instrução INSERT
+
+o Se alguma restrição for violada a operação é rejeitada
+                        randã m PROFESSOR
+                          o CPF
+
+                        o B o.c 12345678900
+                        os da 12345678901
+                        ard ran .0 21345678900
+                        ir C irb 4 32145678900
+                               Nome        Sexo  Salario Departamento
+                        Roberto Machado      M
+                                             F   1200.00  1
+                         Manuela Costa       M
+                        Carlos A. Martins    F   2700.00  3
+                        Ana Maria Freitas
+                                                 3200.00  1
+ladm ladm -NC-ND INSERT INTO PROFESSOR (Nome, Sexo, Departamento)
+W .w Y VALUES (’Amanda Ramirez’, ’F’, 1);        7500.00  2
+www CC B Valor da chave primária CPF não foi fornecido, o que viola a restrição de chave,
+
+logo a operação será rejeitada
+
+www.wladmirbrandao.com                                                                     8 / 35
+Instrução INSERT
+
+  o É possível inserir múltiplas linhas na tabela usando a instrução INSERT
+  dã combinada com a instrução SELECT
+  Bran .com INSERT INTO PROFESSOR (CPF, Nome, Sexo, Departamento)
+  so ao SELECT CPF, Nome, Sexo, 1
+  rdo nd FROM ALUNO;
+  mir Camirbra-ND 4.0 Nesse caso, todas as linhas da tabela aluno serão inseridas na tabela professor,
+  Wwlawdw.wClaCdBY-NC sendo que para todas as linhas inseridas a coluna Departamento terá valor 1
+
+www.wladmirbrandao.com                                                                                  9 / 35
+Instrução DELETE
+
+  o Remove linhas de uma tabela
+     randã m Linhas são excluídas de apenas uma tabela
+       o B o.co Exceção → exclusão pode se propagar para linhas em outras tabelas, de
+       os da acordo com restrições de integridade referencial
+     ir Cardirbran 4.0 Condição (cláusula WHERE) inexistente especiﬁca que todas as linhas na
+     m m -ND tabela serão excluídas
+       Wwlawdw.wClaCdBY-NC Tabela permanece no BD como uma tabela vazia
+
+www.wladmirbrandao.com                                                                         10 / 35
+Instrução DELETE
+
+ir CardirobsroanBdraa4no.d.0cãoom Exemplo:PROFESSORNome   Sexo  Salario Departamento
+                                 CPF   Roberto Machado      M
+                                                            F   1200.00  1
+                          12345678900   Manuela Costa       M
+                          12345678901  Carlos A. Martins    F   2700.00  3
+                          21345678900  Ana Maria Freitas
+                          32145678900                           3200.00  1
+
+dm dm C-ND DELETE FROM PROFESSOR                                7500.00  2
+Wla .wla Y-N WHERE Salario < 1000,00;
+www CC B Instrução não removerá nenhuma linha da tabela
+
+www.wladmirbrandao.com                                                                11 / 35
+Instrução DELETE
+
+ir CardirobsroanBdraa4no.d.0cãoom Exemplo:PROFESSORNome   Sexo  Salario Departamento
+                                 CPF   Roberto Machado      M
+                                                            F   1200.00  1
+                          12345678900   Manuela Costa       M
+                          12345678901  Carlos A. Martins    F   2700.00  3
+                          21345678900  Ana Maria Freitas
+                          32145678900                           3200.00  1
+
+dm dm C-ND DELETE FROM PROFESSOR                                7500.00  2
+Wla .wla Y-N WHERE Sexo = ’M’;
+www CC B Instrução removerá duas linha da tabela
+
+www.wladmirbrandao.com                                                                12 / 35
+Instrução DELETE
+
+ir CardirobsroanBdraa4no.d.0cãoom Exemplo:PROFESSORNome   Sexo  Salario Departamento
+                                 CPF   Roberto Machado      M
+                                                            F   1200.00  1
+                          12345678900   Manuela Costa       M
+                          12345678901  Carlos A. Martins    F   2700.00  3
+                          21345678900  Ana Maria Freitas
+                          32145678900                           3200.00  1
+
+dm dm C-ND DELETE FROM PROFESSOR;                               7500.00  2
+Wwlaww.wClaC BY-N Instrução removerá todas as linha da tabela
+
+www.wladmirbrandao.com                                                                13 / 35
+Instrução UPDATE
+
+  o Modiﬁca valores em colunas de uma ou mais linhas
+     randã m Cada instrução afeta apenas uma tabela
+       o B o.co Exceção → atualização de uma chave primária pode ser propagada para os
+       os da valores de chave estrangeira das linhas em outras tabelas de acordo com
+       ard ran .0 restrições de integridade referencial
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 Cláusula SET especiﬁca colunas a serem modiﬁcadas e seus novos valores
+
+www.wladmirbrandao.com                                                                                        14 / 35
+Instrução UPDATE
+
+o Exemplos:
+randã m UPDATE PROFESSOR
+B .co SET Salario = 2500,00, Departamento = 2
+so ao WHERE CPF = ’12345678900’;
+ardo rand .0 Altera o salário e o número do departamento do professor de determinado CPF
+mir C mirb -ND 4 UPDATE PROFESSOR
+lad lad -NC SET
+Wwww.wCC BY Aumenta em 10% o salário de todos os professores
+Salario = Salario * 1.1;
+
+www.wladmirbrandao.com                                                                    15 / 35
+Instrução SELECT
+
+  o Recupera linhas em múltiplas tabelas
+     ndã Mapeamento → forma básica da instrução SELECT, também chamado de
+     ra om bloco select-from-where
+       o B o.c SELECT <lista de colunas>
+       os da FROM <lista de tabelas>
+       ard ran .0 WHERE <condição>;
+     mir C mirb -ND 4 <lista de colunas> → lista de nomes de colunas que valores devem ser
+     d d C recuperados pela consulta
+     Wla .wla Y-N <lista de tabelas> → lista dos nomes de tabelas necessárias para
+     w B processar a consulta
+     ww CC <condição> → expressão condicional que identiﬁca linhas que devem ser
+
+           recuperadas pela consulta
+
+www.wladmirbrandao.com                                                                      16 / 35
+Instrução SELECT
+
+o Exemplo → recuperar o nome e o salário de todos os professores do sexo
+dã masculino do departamento de número 1
+                        ran om PROFESSOR
+                          B .c CPF
+
+                        so ao 12345678900
+                        ardo rand .0 12345678901
+                        ir C irb 4 21345678900
+                        m m -ND 32145678900
+                               Nome        Sexo  Salario Departamento
+                        Roberto Machado      M
+                                             F   1200.00  1
+                         Manuela Costa       M
+                        Carlos A. Martins    F   2700.00  3
+                        Ana Maria Freitas
+                                                 3200.00  1
+
+Wlad .wlad Y-NC SELECT Nome, Salario             7500.00  2
+ w B FROM PROFESSOR
+ww CC WHERE Departamento = 1
+
+AND Sexo = ’M’;
+
+www.wladmirbrandao.com                                                    17 / 35
+Instrução SELECT
+
+o Exemplo → recuperar o CPF e o nome dos professores do sexo masculino que
+dã também são alunos
+Bran .com SELECT
+ so ao FROM
+rdo nd WHERE
+  a ra 4.0 AND
+A.CPF, A.Nome
+PROFESSOR A, ALUNO B
+A.CPF = B.CPF
+A.Sexo = ’M’;
+Wwlawdwm.wirClaCCdBmYi-rNbC-ND Resultado:
+                               CPF          Nome
+                        12345678900  Roberto Machado
+                        21345678900  Carlos A. Martins
+
+www.wladmirbrandao.com                                                      18 / 35
+Instrução SELECT
+
+o Exemplo → recuperar o nome do departamento e do professor para todos os
+dã professores que são alunos e que trabalham no departamento de nome Pesquisa
+Bran .com SELECT
+ so ao FROM
+rdo nd WHERE
+  a ra 4.0 AND
+  ir C irb D AND
+A.Nome AS Departamento, B.Nome AS Professor
+DEPARTAMENTO A, PROFESSOR B, ALUNO C
+A.Numero = B.Departamento
+B.CPF = C.CPF
+A.Nome = ’Pesquisa’;
+Wwlawdwm.wClaCdBmY-NC-N Resultado:
+                        Departamento       Professor
+                           Pesquisa   Roberto Machado
+
+                        Pesquisa      Carlos A. Martins
+
+www.wladmirbrandao.com                                                          19 / 35
+Instrução SELECT
+
+o Junções podem ser especiﬁcadas tanto na cláusula WHERE quanto na cláusula
+dã FROM com o uso do operador JOIN
+Bran .com SELECT
+ so ao FROM
+rdo nd WHERE
+  a ra 4.0 AND
+A.CPF, A.Nome
+PROFESSOR A, ALUNO B
+A.CPF = B.CPF
+A.Sexo = ’M’;
+mir C mirb -ND SELECT A.CPF, A.Nome
+ lad lad -NC FROM PROFESSOR A JOIN ALUNO B ON A.CPF = B.CPF
+W .w Y WHERE A.Sexo = ’M’;
+www CC B Variações do operador de junção podem ser especiﬁcados, como INNER JOIN,
+
+LEFT OUTER JOIN e FULL JOIN
+
+www.wladmirbrandao.com                                                             20 / 35
+Ambiguidade
+
+o Mesmo nome pode ser usado em mais de uma coluna, desde que as colunas
+dã pertençam a tabelas diferentes e estejam devidamente preﬁxadas para evitar
+ran m ambiguidade
+so B ao.co SELECT
+ rdo nd FROM
+a ra 4.0 WHERE
+  ir C irb D AND
+PROFESSOR.Nome, ALUNO.Nome
+PROFESSOR, ALUNO
+PROFESSOR.CPF = ALUNO.CPF
+PROFESSOR.Sexo = ’M’;
+ladm ladm-NC-N SELECT
+ W .w Y FROM
+w B WHERE
+  ww CC AND
+A.Nome, B.Nome
+PROFESSOR A, ALUNO B
+A.CPF = B.CPF
+A.Sexo = ’M’;
+
+www.wladmirbrandao.com                                                         21 / 35
+Ausência de Cláusula WHERE
+
+  o Inexistência de condições para seleção e junção de linhas traz impactos
+  dã diferentes no resultado das consultas
+
+     Bran .com Tabela Única → todas as linhas da única tabela especiﬁcada na cláusula
+     so ao FROM são retornadas
+     ardo rand .0 SELECT CPF
+      ir C irb 4 FROM PROFESSOR;
+     dm dm C-ND Múltiplas Tabelas → todas as combinações possíveis entre linhas das
+     la la -N tabelas especiﬁcadas na cláusula FROM são retornadas, equivalendo à
+     W w.w BY operação Produto Cartesiano da álgebra relacional
+     ww CC SELECT A.CPF
+
+              FROM PROFESSOR A, DEPARTAMENTO B;
+
+www.wladmirbrandao.com                                                                 22 / 35
+Duplicatas
+
+o Uma tabela constitui um multiconjunto e linhas duplicadas podem aparecer no
+dã resultado de uma consulta
+Bran .com DISTINCT → elimina linhas duplicadas no resultado
+ardosroandao.0 SELECT Departamento
+ 4 FROM PROFESSOR                             Departamento
+mir C mirb -ND WHERE Salario < 5000.00;               1
+Wladw.wladBY-NC SELECT DISTINCT Departamento          3
+ ww CC FROM PROFESSOR                                 1
+
+                                              Departamento
+                                                      1
+
+WHERE Salario < 5000.00;                      3
+
+www.wladmirbrandao.com                                                         23 / 35
+Operadores Especiais
+
+  o Asterisco (*) → recupera todas as colunas das linhas selecionadas sem a
+  dã necessidade de listar seus nomes explicitamente
+  Bran .com SELECT *
+   so ao FROM PROFESSOR
+   rdo nd WHERE Departamento = 1
+  mir Camirbra-ND 4.0 Nesse caso, recupera todas as colunas de professores que trabalham no
+  Wwlawdw.wClaCdBY-NC departamento de número 1
+
+www.wladmirbrandao.com                                                                       24 / 35
+Operadores Especiais
+
+  o LIKE → comparação sobre subcadeias de caracteres
+     randã m Subcadeias são especiﬁcadas usando dois caracteres especiais
+       B .co % substitui zero ou mais caracteres
+       o o _ substitui um único caracter
+
+  ardosranda4.0 SELECT CPF, Nome
+   ir C irb D FROM PROFESSOR
+   m m -N WHERE Endereco LIKE ’%Belo Horizonte%’;
+  Wladw.wladBY-NC Recupera o CPF e nome de todos os professores em que seu endereço contenha a
+  ww CC subcadeia de caracteres Belo Horizonte
+
+www.wladmirbrandao.com                                                                          25 / 35
+Operadores Especiais
+
+  o BETWEEN → comparação com intervalos
+     randã m Valores para colunas comparadas devem estar entre um intervalo de valores
+
+  oso Bdao.co SELECT *
+   ard ran .0 FROM PROFESSOR
+   4 WHERE Salario BETWEEN 2000,00 AND 5000,00;
+  Wwlawdwm.wirClaCCdBmYi-rNbC-ND Recupera todas as colunas de professores com salários entre 2 e 5 mil
+
+www.wladmirbrandao.com                                                                                  26 / 35
+Ordenação de Resultados
+
+o ORDER BY → ordena linhas do resultado de uma consulta
+  randã m ASC → operador padrão para ordenação crescente
+  B .co DESC → operador para ordenação decrescente
+ardosroandao.0 SELECT
+ ir C irb 4 FROM
+m m -ND WHERE
+d d C ORDER BY
+                        A.Nome, B.Nome
+                        DEPARTAMENTO A, PROFESSOR B
+                        A.Numero = B.Departamento
+                        B.Nome, A.nome DESC;
+Wla w.wla BY-N Recupera o nome do departamento e do professor para todos os professores que
+ww CC trabalham em um departamento, ordenando o resultado de maneira crescente
+pelo nome do professor e decrescente pelo nome do departamento
+
+www.wladmirbrandao.com                                                                       27 / 35
+Valores NULL
+
+o IS NULL (IS NOT NULL) → veriﬁca se valor de coluna é NULL
+  randã m NULL tem semântica imprecisa
+     o B o.co Valor desconhecido?
+     os da Valor indisponível?
+     ard ran .0 Valor não aplicável?
+mir C mirb -ND 4 SELECT
+ lad lad -NC FROM
+Wwww.wCC BY WHERE
+                        CPF, Nome
+                        PROFESSOR
+                        Departamento IS NULL;
+
+Recupera o CPF e o nome dos professores que não trabalham em algum
+
+departamento
+
+www.wladmirbrandao.com                                              28 / 35
+Consulta Aninhada
+
+o Bloco SELECT completo na cláusula WHERE de outra consulta, denominada
+dã consulta externa
+Bran .com IN (NOT IN) → veriﬁca se um conjunto de valores pertence a um
+so ao multiconjunto de valores
+ardo rand .0 SELECT
+ ir C irb 4 FROM
+Wladwm.wladBmY-NC-ND WHERE
+                        A.Nome, A.Salario
+                        PROFESSOR A
+                        (A.CPF, A.Nome) IN
+                        (SELECT B.CPF, B.Nome
+
+                            FROM ALUNO B
+                           WHERE A.Sexo = B.Sexo);
+ww CC Recupera nome e salário dos professores que possuem mesmo CPF e nome
+
+de algum aluno, desde que tenham o mesmo sexo
+
+www.wladmirbrandao.com                                                      29 / 35
+Consulta Aninhada
+
+o Bloco SELECT completo na cláusula WHERE de outra consulta, denominada
+dã consulta externa
+Bran .com EXISTS (NOT EXISTS) → veriﬁca se o resultado da consulta interna é
+so ao conjunto vazio
+ardo rand .0 SELECT
+ ir C irb 4 FROM
+Wwlawdwm.wClaCdBmY-NC-ND WHERE
+                        A.CPF, A.Nome
+                        PROFESSOR A
+                        NOT EXISTS
+                        (SELECT *
+
+                            FROM DEPARTAMENTO B
+                           WHERE A.Departamento = B.Numero
+
+                              AND B.Nome = ’Pesquisa’);
+
+Retorna CPF e nome dos professores que não trabalham no departamento de
+
+nome Pesquisa
+
+www.wladmirbrandao.com                                                        30 / 35
+Agregação
+
+  o GROUP BY → agrupa múltiplas linhas em uma utilizando função de agregação
+     randã m COUNT → conta o número de linhas agrupadas
+     o B o.co SUM → soma o valor na coluna de linhas agrupadas
+     os da MAX → retorna o valor máximo na coluna de linhas agrupadas
+     ard ran 4.0 MIN → retorna o valor mínimo na coluna de linhas agrupadas
+     mir C mirb -ND AVG → retorna a média dos valores na coluna de linhas agrupadas
+
+  Wlad .wlad Y-NC Funções de agregação não têm efeito em linhas com colunas participantes da
+  www CC B função com valor NULL
+
+www.wladmirbrandao.com                                                                        31 / 35
+Agregação
+
+o Exemplos:
+randãom SELECT COUNT(*), SUM(Salario)
+ B .c FROM PROFESSOR
+so ao WHERE Sexo = ’F’;
+ardo rand .0 Retorna o número de professores do sexo feminino e o salário pago a elas
+mir C mirb -ND 4 SELECT
+ lad lad -NC FROM
+W w.w BY GROUP BY
+                        Departamento, COUNT(*), SUM(Salario),
+                        MAX(Salario), MIN(Salario), AVG(Salario)
+                        PROFESSOR
+                        Departamento;
+ww CC Para cada departamento retorna seu número, a quantidade de professores, a
+
+soma de salários, o salário máximo e mínimo e a média salarial
+
+www.wladmirbrandao.com                                                                 32 / 35
+Agregação
+
+o HAVING → remove linhas do resultado agregado de acordo com condição
+dã imposta sobre as funções de agregação
+Bran .com SELECT
+ so ao FROM
+rdo nd GROUP BY
+a ra 4.0 HAVING
+                        Departamento, COUNT(*), SUM(Salario)
+                        PROFESSOR
+                        Departamento
+                        AVG(Salario) > 8000.00;
+mir C mirb -ND Para cada departamento retorna seu número, a quantidade de professores e a
+d d C soma de salários, desde que a média salarial do departamento seja maior que
+Wwlaww.wClaC BY-N 8000,00
+
+www.wladmirbrandao.com                                                                     33 / 35
+Resumo de Instruções
+
+  ão INSERT INTO <tabela>
+  nd [(<lista de atributos>)]
+  ra om VALUES (<lista de valores>);
+  o B o.c UPDATE <tabela>
+  os a SET <lista de atribuicoes>
+  ard rand .0 [WHERE <condicao>];
+  ir C irb 4 DELETE FROM <tabela>
+  m m -ND [WHERE <condicao>];
+  lad lad C SELECT
+  W .w Y-N FROM
+  w B [WHERE <condicao>]
+  ww CC [GROUP BY <atributos de agrupamento>]
+
+      [HAVING <condicao de grupo>]
+      [ORDER BY <lista de atributos>];
+
+www.wladmirbrandao.com                         34 / 35
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            35 / 35
+

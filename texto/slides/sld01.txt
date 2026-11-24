@@ -1,0 +1,200 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+introdução
+Sistemas de Banco de Dados (SBD)
+
+  dão "Sistemas de banco de dados referem-se ao conjunto de dados relacionados e sua
+  ran m respectiva forma de acesso e organização... São compostos por uma coleção de
+  B .co dados organizados, uma estrutura lógica determinando a forma como os dados
+  so ao são armazenados, organizados e manipulados, e um software que provê acesso
+  rdo nd aos dados a usuários e aplicações."
+
+                  ir Ca irbra D 4.0Elmasri & Navathe, 2016
+     ladm ladm -NC-N Coleção de Dados → banco de dados
+     W w.w BY Estrutura Lógica → modelo de dados
+     ww CC Software → sistema gerenciador de banco de dados
+
+www.wladmirbrandao.com                                                                3 / 17
+Sistemas de Banco de Dados (SBD)
+
+  ão Usuários e aplicações intera-
+  rand m gem com o sistema subme-
+  B .co tendo consultas
+  so ao consultas são interpretadas
+  ardo rand .0 pelo sistema, que realiza
+  4 otimizações necessárias para
+  ir C irb D sua correta execução
+  dm dm C-N O próprio sistema decide
+  la la -N quais dados são necessários
+  W w.w BY para responder uma consulta
+  ww CC e se encarrega de recuperá-
+
+     los a partir dos repositórios
+     sob seu controle
+
+www.wladmirbrandao.com                    4 / 17
+Banco de Dados (BD)
+
+  o Coleção de dados organizados
+     randã m Dados → símbolos, sinais, códigos
+     o B o.co Atende necessidades especíﬁcas de usuários
+     os da Presente em diferentes ambientes de negócio
+       ir Cardirbran 4.0 Reserva de hotel
+       m m -ND Reserva de livros em biblioteca
+       lad lad -NC Visualização de catálogos de ﬁlmes
+       W w.w BY Compra de produtos em supermercado
+       ww CC Saque e depósito de dinheiro em caixa bancário
+
+www.wladmirbrandao.com                                       5 / 17
+                        WwlawBdilwhmõ.weisrCldaCCedapBmrroYddi-uroNtbosCrsoae-mNnBdrcDaaat4ánol.od.0cgãooom
+
+                         Dezenas de milhões de transações diárias
+                        Atualização frequente de estoque e pedidos
+
+www.wladmirbrandao.com                                                                                       6 / 17
+BD: Propriedades
+
+  o BDs possuem características que os diferenciam de outros tipos de coleções
+     randã m Finalidade → construídos com um propósito especíﬁco
+     o B o.co Realidade → representam o "mundo real"
+       rdos da Mundo Real → minimundo, universo de discurso
+     ir Ca irbran 4.0 Coerência → mantêm a coerência lógica da coleção
+     Wwlawdwm.wClaCdBmY-NC-ND Compartilhamento → provêm compartilhamento de dados
+
+www.wladmirbrandao.com                                                             7 / 17
+BD: Taxonomia
+
+  o BDs podem ser categorizados quanto à forma de utilização
+     randã m Manual → criado e mantido sem o uso de computadores
+       o B o.co Exemplo → lista telefônica (páginas amarelas)
+     ardosranda .0 Computadorizado → criado e mantido com o uso de computadores
+       Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 Exemplo → The Human Genome Database (GDB)
+
+www.wladmirbrandao.com                                                             8 / 17
+BD: Taxonomia
+
+  o BDs também podem ser categorizados quanto à sua aplicação
+     randã m Tradicional → texto, incluindo números e registros temporais
+     o B o.co Multimídia → imagens, áudios e vídeos
+     os da Geográfico → mapas, imagens de satélite e registros climáticos
+     ard ran 4.0 Data Warehouse → armazém de dados utilizado no processamento analítico
+     ir C irb D online (OLAP) para auxílio à tomada de decisão
+     ladm ladm C-N Ativo (Tempo Real) → utilizado em aplicações com rigorosos requisito de
+     Wwww.wCC BY-N desempenho, como em processos industriais de manufatura
+
+www.wladmirbrandao.com                                                                      9 / 17
+BD: Abordagens
+
+  o Diferentes abordagens de implementação
+     randã m Processamento em Arquivo
+       B .co Usuário deﬁne arquivos necessários para uma aplicação especíﬁca como parte
+       o o da programação da aplicação
+     ardosranda .0 Sistema Gerenciador de Banco de Dados (SGBD)
+       ir C irb 4 Repositório único
+       m m -ND Abstração de dados
+       d d C Natureza autodescritiva
+       Wla .wla Y-N Compartilhamento de dados
+       w B Isolamento entre programas e dados
+       ww CC Suporte a múltiplas visões sobre dados
+
+                   Processamento de transação multiusuário
+
+www.wladmirbrandao.com                                                                   10 / 17
+BD: Projeto
+
+  o Construção de modelos para implementação
+     randã m Modelo → representação de entes e eventos reais
+     o B o.co Etapas de implementação
+      ardosranda .0 1. Especificação → descrição do minimundo
+      4 2. Análise de Requisitos → restrições de operação
+      mir C mirb -ND 3. Projeto Conceitual → estruturas e restrições conceituais
+      d d C 4. Projeto Lógico → estruturas e restrições lógicas
+      la la -N 5. Projeto Físico → estruturas e restrições físicas
+     Wwww.wCC BY Revisado continuamente para que o BD reﬂita o estado do minimundo
+
+www.wladmirbrandao.com                                                              11 / 17
+BD: Atores
+
+  o Ator → papel desempenhado pelos que interagem com o BD
+     randã m Administrador (DBA) → responsável pela operação e pelo cumprimento dos
+     B .co requisitos, atuando em todas as etapas da implementação
+     so ao Projetista → responsável pelo projeto, atuando em todas as etapas da
+     ardo rand .0 implementação
+     ir C irb 4 Analista → mais presente nas etapas de projeto conceitual e lógico
+     m m -ND Programador → atua preponderantemente no projeto lógico
+     lad lad -NC Usuário → demandante, conhecedor do minimundo e mais presente na
+     Wwww.wCC BY especiﬁcação e análise de requisitos
+
+www.wladmirbrandao.com                                                               12 / 17
+Modelo de Dados
+
+  o Estrutura lógica que determina a forma como os dados são armazenados, orga-
+  dã nizados e manipulados
+
+     Bran .com Coleção de conceitos que descrevem a estrutura do BD
+     oso ao Incorpora operações para especiﬁcar atualização e recuperação de dados
+
+       ard rand 4.0 Exemplo → inserir, remover, modiﬁcar ou recuperar
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND Deﬁne o comportamento de uma determinada aplicação
+
+www.wladmirbrandao.com                                                                  13 / 17
+Sistema Gerenciador de Banco de Dados (SGBD)
+
+  o Coleção de programas (software) que permitem aos usuários criar e manter BDs
+     randã m Definir → especiﬁcar tipos, estruturas e restrições armazenadas sob forma
+     B .co de metadados no catálogo (dicionário) do sistema
+     oso dao Construir → armazenar dados em meio controlado pelo SGBD
+     ard ran 4.0 Manipular → inserir, remover, modiﬁcar e recuperar dados
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND Compartilhar → prover acesso simultâneo a múltiplos usuários
+
+www.wladmirbrandao.com                                                                            14 / 17
+SGBD: Propriedades
+
+Wwlawdwm.wirClaCCdaBmrYdi-roNbsCroa-NnBdrDaa4no.d.0cãoom Controle de RedundânciaFlexibilidade
+                                                                                Múltiplas interfaces
+                                                                                Economia de escala
+                                                                                Garantia de padrões
+                                                                                Restrições de acesso
+                                                                                Backup e recuperação
+                                                                                Disponibilidade elevada
+                                                                                Restrições de integridade
+                                                                                Tempo de desenvolvimento
+                                                                                Relacionamentos complexos
+
+www.wladmirbrandao.com                                                                                     15 / 17
+SGBD: Limitações
+
+  o Uso de SGBDs pode ser inadequado em algumas situações
+     randã m Monousuário → acesso por múltiplos usuários não requerido
+     B .co Baixa complexidade → aplicações muito simples e bem deﬁnidas
+     oso dao Requisitos rigorosos → aplicações de tempo real, de alta escalabilidade e
+     ard ran .0 sistemas embarcados com capacidade de armazenamento limitada
+     ir C irb D 4 Alta especialização → aplicações que demandam recursos que a
+     m m -N generalidade oferecida pelo SGBD para deﬁnição e processamento de dados
+     d d C não suporta
+       Wla w.wla BY-N Exemplo → funções de segurança soﬁsticadas
+     ww CC Custo proibitivo → impossibilidade de investimento inicial signiﬁcativo em
+
+           hardware, software e treinamento
+
+www.wladmirbrandao.com                                                                  16 / 17
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            17 / 17
+

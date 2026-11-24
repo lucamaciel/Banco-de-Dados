@@ -1,0 +1,85 @@
+02/07/2026, 13:04                                                    HO15: Controle de Concorrência
+
+HO15: Controle de Concorrência
+
+    Vencimento 30 jun por 23:59
+    Pontos Nenhum
+    Disponível 9 jun em 0:00 - 30 jun em 23:59
+
+Esta tarefa foi travada 30 jun em 23:59.
+
+Hands-On
+
+Esta é a tarefa HO15: Controle de Concorrência, uma atividade prática que estimula o aluno
+a absorver e fixar conceitos e técnicas relacionadas ao processo de controle de
+concorrência em processamento de transações em bancos de dados relacionais.
+
+Problema
+
+Responder as seguintes questões:
+
+1. Considerando a técnica de controle de concorrência por bloqueio exclusivo
+   (binário) com protocolo 2PL estrito e confirmação (commit) implícita (commit da
+   transação ocorre logo após a última operação da transação no escalonamento), o
+   escalonamento Sa possui deadlock? Entre quais transações? Qual o
+   escalonamento que efetivamente será executado, considerando a técnica de
+   resolução de deadlock que identifique o deadlock e mate a transação mais recente
+   (aquela em que sua primeira operação se inicie depois da primeira operação das
+   outras).
+
+2. Considerando a técnica de controle de concorrência por bloqueio compartilhado
+   (ternário) com protocolo 2PL estrito e confirmação (commit) implícita (commit da
+   transação ocorre logo após a última operação da transação no escalonamento), o
+   escalonamento Sa possui deadlock? Entre quais transações? Qual o
+   escalonamento que efetivamente será executado, considerando a técnica de
+   resolução de deadlock que identifique o deadlock e mate a transação mais recente
+   (aquela em que sua primeira operação se inicie depois da primeira operação das
+   outras)?
+
+3. Considerando a técnica de controle de concorrência por ordenação de registros de
+   timestamp, qual o escalonamento que efetivamente será executado?
+
+Considere que o escalonamento Sa apresentado abaixo foi constituído a partir das transações
+T1, T2 e T3 também apresentadas abaixo. Ressalta-se que, em um SGBDR diversas
+transações devem ser escalonadas para executarem simultaneamente, aumentando assim a
+
+https://pucminas.instructure.com/courses/260154/assignments/1288133                                  1/2
+02/07/2026, 13:04                                                    HO15: Controle de Concorrência
+
+concorrência e, consequentemente, diminuindo o tempo de processamento. No entanto, tal
+
+concorrência demanda a utilização de técnicas de controle de concorrência para garantir as
+
+propriedades de Atomicidade, Consistência, Isolamento e Durabilidade (ACID).
+
+T1 = r(x), r(y), w(x), r(z)
+T2 = r(z), r(x), r(y), w(z)
+T3 = r(y), r(z), w(y), r(x)
+Sa = r3(y), r2(z), r1(x), r2(x), r3(z), r2(y), w3(y), r1(y), w2(z), w1(x), r3(x), r1(z)
+
+Produto
+
+O aluno deve entregar um texto contendo a solução para o problema descrito anteriormente.
+
+Recursos
+
+Para a execução da tarefa o aluno deve consultar as referências bibliográficas especificadas
+no Programa do Curso (https://pucminas.instructure.com/courses/260154/pages/programa) . A
+seguir encontram-se indicados alguns recursos e materiais de apoio para a execução da
+tarefa. Outras referências bibliográficas podem ser utilizadas, desde que devidamente citadas
+no produto.
+
+Livro (Elmasri & Navathe, 2016):
+
+Capítulo 21: Técnicas de Controle de Concorrência
+
+Slides e Videos:
+
+Tópico             #20:           Controle                           de                              Concorrência
+
+(https://pucminas.instructure.com/courses/260154/pages/topico-number-20-controle-de-
+
+concorrencia)
+
+https://pucminas.instructure.com/courses/260154/assignments/1288133                                                2/2
+

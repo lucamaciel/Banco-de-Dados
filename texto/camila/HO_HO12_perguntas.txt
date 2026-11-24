@@ -1,0 +1,125 @@
+02/07/2026, 12:58  HO12: Processamento e Otimização de Consulta
+
+HO12: Processamento e Otimização de Consulta
+
+    Vencimento 28 mai por 10:30
+    Pontos Nenhum
+    Disponível 25 mai em 0:00 - 28 mai em 10:30
+
+Esta tarefa foi travada 28 mai em 10:30.
+
+Hands-On
+
+Esta é a tarefa HO12: Processamento e Otimização de Consulta, uma atividade prática que
+estimula o aluno a absorver e fixar conceitos e técnicas relacionadas ao processamento e
+otimização de consultas em bancos de dados relacionais.
+
+Problema
+
+Apresentar a árvore de consulta inicial (não otimizada) com o parsing da consulta em ordem
+natural (da esquerda para a direita), a árvore de consulta inicial (não otimizada) com o parsing
+da consulta em ordem reversa (da direita para a esquerda), a árvore de consulta otimizada,
+a consulta reescrita de acordo com a árvore de consulta otimizada com o parsing da consulta
+em ordem natural (da esquerda para a direita), a consulta reescrita de acordo com a árvore de
+consulta otimizada com o parsing da consulta em ordem reversa (da direita para a esquerda) e
+o plano de execução da consulta otimizada para cada uma das consultas SQL apresentadas
+abaixo:
+
+       SELECT A.CPF, A.Nome, B.Nome
+       FROM Funcionarios A, Clientes B, Aluguel C, Funcionarios D
+       WHERE A.CPF=B.CPF
+       AND B.CPF=C.CPF_Cliente
+       AND B.Sexo="M"
+       AND C.ValorPagar>50
+       AND A.CPF=D.CPF_Supervisor
+
+SELECT A.Nome, C.Nome
+FROM Filmes A, AtoresEmFilmes B, Atores C, Midias D
+WHERE A.Codigo=B.CodFilme
+AND B.CodAtor=C.Codigo
+
+https://pucminas.instructure.com/courses/260154/assignments/1288130                               1/4
+02/07/2026, 12:58                    HO12: Processamento e Otimização de Consulta
+
+            AND A.Genero="Aventura"
+            AND A.Codigo=D.CodFilme
+            AND D.PrecoDiaria>10
+
+       SELECT A.CPF, A.Nome, B.Nome
+       FROM Funcionarios A, Clientes B, Aluguel C, Pagamentos D
+       WHERE A.CPF=B.CPF
+       AND C.ValorPagar>100
+       AND B.CPF=C.CPF_Cliente
+       AND D.Valor<50
+       AND A.CPF_Supervisor IS NULL
+       AND A.CPF=C.CPF_Funcionario
+
+Considere o modelo relacional apresentado abaixo, e que todos os arquivos são ISAM com
+índices secundários em suas chaves estrangeiras.
+
+Considere também que o ponteiro para blocos de disco tem 16B, que o tamanho de bloco de
+disco é de 2KB, que os arquivos possuem registros de tamanho fixo, não espalhados e que
+eles têm a seguinte configuração de número de registros e tamanhos de campos:
+
+Atores (10.000 registros) → Codigo (16B), Nome (160B)
+Clientes (100.000 registros) → CPF (11B), Nome (160B), Endereco (200B),
+Telefone (16B), DataNascimento (12B), Sexo (1B)
+
+https://pucminas.instructure.com/courses/260154/assignments/1288130                      2/4
+02/07/2026, 12:58                 HO12: Processamento e Otimização de Consulta
+
+Filmes (2.000.000 registros) → Codigo (16B), Nome (160B), Genero (80B)
+
+Funcionarios (3.500 registros) → CPF (11B), Nome (160B)
+
+Midias (10.000.000 registros) → Identificador (24B), Tipo (8B), PrecoDiaria (24B)
+
+Aluguel (20.000.000 registros) → DataLocacao (12B), DataDevolucao (10B),
+
+ValorPagar (24B)
+
+Pagamentos (50.000.000 registros) → Codigo (48B), Data (12B), Valor (24B)
+
+AtoresEmFilmes (1.000.000 registros)
+
+Observem a existência de chaves estrangeiras que obviamente devem ser consideradas como
+campos integrantes dos arquivos.
+
+Produto
+
+O aluno deve entregar um documento exclusivamente em formato PDF contendo a solução
+para o problema descrito anteriormente.
+
+Recursos
+
+Para a execução da tarefa o aluno deve consultar as referências bibliográficas especificadas
+no Programa do Curso (https://pucminas.instructure.com/courses/260154/pages/programa) . A
+seguir encontram-se indicados alguns recursos e materiais de apoio para a execução da
+tarefa. Outras referências bibliográficas podem ser utilizadas, desde que devidamente citadas
+no produto.
+
+Livro (Elmasri & Navathe, 2016):
+
+Capítulo 18: Estratégias para Processamento de Consulta
+
+Capítulo 19: Otimização de Consulta
+
+Slides e Videos:
+
+Tópico             #16:           Processamento                                  de  Consulta
+
+(https://pucminas.instructure.com/courses/260154/pages/topico-number-16-
+
+processamento-de-consulta)
+
+Tópico             #17:                                              Otimização  de  Consulta
+
+(https://pucminas.instructure.com/courses/260154/pages/topico-number-17-otimizacao-de-
+
+consulta)
+
+https://pucminas.instructure.com/courses/260154/assignments/1288130                            3/4
+02/07/2026, 12:58  HO12: Processamento e Otimização de Consulta
+
+https://pucminas.instructure.com/courses/260154/assignments/1288130  4/4
+

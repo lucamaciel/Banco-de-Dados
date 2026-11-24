@@ -1,0 +1,412 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+modelo entidade-relacionamento
+Modelo Entidade-Relacionamento (ER)
+
+o Modelo conceitual elaborado a partir da especiﬁcação do minimundo
+  randã m Minimundo → tipicamente especiﬁcado de forma textual, estabelecendo os
+  B .co requisitos de dados
+  oso dao Diagrama Entidade-Relacionamento → representação gráﬁca de entidades,
+  ard ran .0 atributos, relacionamentos e restrições do modelo ER
+                        Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 Nome
+                          Rua    Cidade                      Número  Saldo
+                        Cliente                               Conta
+                                 1       Possui  N
+
+www.wladmirbrandao.com                                                            3 / 29
+ER: Entidade
+
+o Ente com existência real no minimundo especiﬁcado
+  randã m Seja E = {e1,e2,··· ,ek } um conjunto de k entidades de mesmo tipo
+     o B o.co Tipo de Entidade (E) → conjunto de instâncias de entidades do mesmo tipo
+     rdos nda Instância de Entidade (ei ) → ente especíﬁco de um tipo de entidade E, tal que
+     a ra 4.0 ei ∈ E
+                        mir C mirb -ND E
+                        Wwlawdw.wClaCdBY-NC e1 e2
+                        ek
+
+www.wladmirbrandao.com                                                                        4 / 29
+ER: Entidade
+
+o No diagrama ER representa-se um tipo de entidade, ou simplesmente entidade,
+dã como um retângulo rotulado
+                             Bran .com Sobrenome
+                        oso dao Primeiro
+
+                               ard ran .0 CPF
+                           ir C irb 4 Nome
+                        dm dm C-ND Data Nascimento     Sexo
+
+                        Wwlaww.wClaC BY-N DependentesFuncionárioSalário
+
+                                                       Idade
+
+www.wladmirbrandao.com                                                         5 / 29
+ER: Entidade
+
+o Entidade Fraca → entidade que existência depende da existência de outra
+                        o Branod.cãom Nome
+                        Sexo                  Nome                     Parentesco
+                                                                       Dependente
+                                     Salário
+                        Wwlawdwm.wirClaCCdaBmrYdi-roNbsCra-NndDa4.0 CPF
+                        Funcionário  1 possui N
+
+www.wladmirbrandao.com                                                             6 / 29
+ER: Atributo
+
+o Propriedade que descreve uma característica especíﬁca de uma entidade
+ndã Representa-se como uma elipse rotulada e ligada à entidade que ele caracteriza
+                             o Bra o.com Sobrenome
+                        os da Primeiro                        Sexo
+
+                               ard ran .0 CPF
+                           ir C irb D 4 Nome
+                        ladm ladm -NC-N Data Nascimento
+                        Wwww.wCC BY Dependentes  Funcionário  Salário
+
+                                                              Idade
+
+www.wladmirbrandao.com                                                              7 / 29
+ER: Atributo
+
+o Simples → indivisível, representado por uma elipse simples rotulada
+                             randã m Sobrenome
+                        o B o.co Primeiro                Sexo
+
+                                    s a CPF
+                              ardo rand .0 Nome
+                        mir C mirb -ND 4 Data Nascimento
+                        Wwlawdw.wClaCdBY-NC DependentesFuncionárioSalário
+
+                                                         Idade
+
+www.wladmirbrandao.com                                                 8 / 29
+ER: Atributo
+
+o Composto → desmembra-se em outros atributos, representado por uma elipse
+dã simples rotulada com outros atributos ligados a ele
+                             Bran .com Sobrenome
+                        oso dao Primeiro
+
+                               ard ran .0 CPF
+                           ir C irb 4 Nome
+                        dm dm C-ND Data Nascimento     Sexo
+
+                        Wwlaww.wClaC BY-N DependentesFuncionárioSalário
+
+                                                       Idade
+
+www.wladmirbrandao.com                                                      9 / 29
+ER: Atributo
+
+o Multivalorado → conteúdo formado por mais de um valor, representado por
+dã uma elipse rotulada com borda dupla
+                             Bran .com Sobrenome
+                        oso dao Primeiro
+
+                               ard ran .0 CPF
+                           ir C irb 4 Nome
+                        dm dm C-ND Data Nascimento     Sexo
+
+                        Wwlaww.wClaC BY-N DependentesFuncionárioSalário
+
+                                                       Idade
+
+www.wladmirbrandao.com                                                     10 / 29
+ER: Atributo
+
+o Derivado → valor obtido a partir de valores de outros atributos ou
+dã relacionamentos, representado por uma elipse rotulada com borda tracejada
+                             Bran .com Sobrenome
+                        oso dao Primeiro
+
+                               ard ran .0 CPF
+                           ir C irb 4 Nome
+                        dm dm C-ND Data Nascimento     Sexo
+
+                        Wwlaww.wClaC BY-N DependentesFuncionárioSalário
+
+                                                       Idade
+
+www.wladmirbrandao.com                                                        11 / 29
+ER: Atributo
+
+o Chave → atributo ou conjunto de atributos que juntos identiﬁcam cada instância
+dã de entidade de maneira exclusiva, representado por uma elipse simples rotulada
+ran m com rótulo sublinhado
+                             so B ao.co Sobrenome
+                        ardo rand .0 Primeiro
+
+                                     4 CPF
+                           ir C irb D Nome
+                        ladm ladm -NC-N Data Nascimento       Sexo
+
+                        Wwww.wCC BY Dependentes  Funcionário  Salário
+
+                                                              Idade
+
+www.wladmirbrandao.com                                                             12 / 29
+ER: Atributo
+
+o Chave Parcial → ou discriminador, atributo ou conjunto de atributos que juntos
+dã potencialmente identiﬁcam cada instância de entidade fraca de maneira
+ran m exclusiva, representado por uma elipse simples rotulada com rótulo sublinhado
+B .co de maneira tracejada
+                        ardosroandao.0 Nome
+                        ParentescoWwlawdwm.wirClaCCdBmYi-rNbC-ND 4 Dependente
+
+www.wladmirbrandao.com                                                               13 / 29
+ER: Relacionamento
+
+o Associação entre entidades
+randã m Seja R = {r1, r2, · · · , rk } um conjunto de k associações entre entidades
+o B o.co Tipo de Relacionamento (R) → conjunto de instâncias de associações do
+s a mesmo tipo
+ardo rand .0 Instância de Relacionamento (ri ) → associação especíﬁca entre instâncias de
+ir C irb 4 entidades, tal que ri ∈ R
+                        m m -ND E
+                        lad lad C e1R  E
+                        W w.w BY-N e2
+                                  r1   e1
+
+                        ww CC e3  r2   e2
+
+                                  r3   e3
+
+                        e4        r4   e4
+
+www.wladmirbrandao.com                                                                     14 / 29
+ER: Relacionamento
+
+o No diagrama ER representa-se um tipo de relacionamento, ou simplesmente
+dã relacionamento, como um losango rotulado
+                            Bran .com Sobrenome
+                        so ao Primeiro                                 Locais
+
+                                   o d CPF
+                             ard ran .0 Nome
+                        mir C mirb -ND 4 Data NascimentoSexo     Nome
+
+                        Funcionário                      possui        Departamento
+                        Wwlawdw.wClaCdBY-NC Dependentes
+                                     Idade                             Qtd. Func.
+
+                        Salário
+
+www.wladmirbrandao.com                                                               15 / 29
+ER: Relacionamento
+
+o Relacionamento Fraco → ou de dependência, associação envolvendo ao menos
+dã uma entidade fraca, representado por um losango rotulado com borda dupla
+                        oso Bdraano.com Nome
+                        Sexo                                         Parentesco
+
+                                     Salário          Nome
+                        Wwlawdwm.wirClaCCdaBmrYdi-rNbCra-Nn D 4.0 CPF
+                        Funcionário           possui                 Dependente
+
+www.wladmirbrandao.com                                                           16 / 29
+ER: Relacionamento
+
+ão Cada relacionamento ri ∈ R é uma associação entre entidades que inclui
+d exatamente uma única instância de cada entidade participante
+                        Bran .com Funcionário
+                        possuio o f1Departamento
+                           r1ardosranda .0 f2d1
+                          ir C irb 4 f3
+                           r2           d2
+
+                           r3           d3
+Wladm.wladmY-NC-ND Grau do Relacionamento → # entidades participantes no relacionamento
+  www CC B Binário → grau 2
+Ternário → grau 3
+
+www.wladmirbrandao.com                                                                   17 / 29
+ER: Relacionamento
+
+o Nome de Função → rotula o relacionamento e representa a função que uma
+dã entidade desempenha em cada relacionamento
+
+  Bran .com Enriquece a semântica do relacionamento
+                             oso dao CPF
+                        ard ran .0 Nome             Nome  Locais
+
+                                     Sexo
+                        ir C irb D 4 Data Nascimento
+                        ladm ladm-NC-N SalárioFuncionáriopossuiDepartamento
+
+                                     Idade
+Wwww.wCC BY No relacionamento possui, Funcionário desempenha a função possuído,
+enquanto Departamento desempenha a função possuidor
+
+www.wladmirbrandao.com                                                           18 / 29
+ER: Relacionamento
+
+o Relacionamento Recursivo → a mesma entidade participa mais de uma vez, com
+dã funções diferentes, em um relacionamento
+                        o Brano.com CPF
+                        ardosranda .0 Nome
+                        mir C mirb -ND 4 SexoFuncionáriosupervisiona
+
+Wladw.wladBY-NC No exemplo, Funcionário participa com as funções de supervisor e
+ww CC supervisionado no relacionamento supervisiona
+
+www.wladmirbrandao.com                                                            19 / 29
+ER: Restrição
+
+o Característica limitadora da possibilidade de associação entre entidades nos
+dã relacionamentos
+
+  Bran .com Razão de Participação → especiﬁca se a participação de uma entidade no
+  so ao relacionamento é parcial ou total
+  ardo rand .0 Razão de Cardinalidade → especiﬁca o número máximo de relacionamentos
+  ir C irb 4 em que uma entidade pode participar, opcionalmente indica limites mínimos
+                          ladm ladm C-ND CPF
+                        W .w Y-N NomeNome      Locais
+
+                        Sexowww CC B Funcionário
+
+                        (0, N) N possui 1 (1, 1) Departamento
+
+www.wladmirbrandao.com                                                                  20 / 29
+ER: Restrição
+
+o Participação Total → todas as instâncias da entidade devem obrigatoriamente
+dã participar de relacionamentos
+                        Bran .com Funcionário
+                          o o f1     possui  Departamento
+                          ardosranda .0 f2r1         d1
+                          ir C irb 4 f3
+                                        r2           d2
+
+                                        r3           d3
+Wwlawdwm.wClaCdBmY-NC-ND Representa-se por uma linha dupla entre a entidade e o relacionamento
+                        Funcionário  possui  Departamento
+
+www.wladmirbrandao.com                                                                          21 / 29
+ER: Restrição
+
+o Cardinalidade 1:1 → uma instância de cada entidade só pode participar de um
+dã único relacionamento
+                        Bran .com Funcionário
+                          o o f1              possui    Departamento
+                          rdos nda f2            r1             d1
+                          ir Ca irbra 4.0 f3
+                                                 r2             d2
+
+                                                 r3             d3
+Wladm.wladmY-NC-ND Representa-se por rótulos 1 nas duas extremidades do relacionamento
+                        www CC B Funcionário
+                                            1 possui 1  Departamento
+
+www.wladmirbrandao.com                                                                  22 / 29
+ER: Restrição
+
+o Cardinalidade 1:N → uma instância de uma entidade só pode participar de um
+dã relacionamento, enquanto uma instância da outra pode participar de múltiplos
+                        Bran .com Funcionário
+                          o o f1     possui     Departamento
+                          ardosranda .0 f2r1            d1
+                          ir C irb 4 f3
+                                        r2              d2
+
+                                        r3              d3
+Wladm.wladmY-NC-ND Representa-se por rótulos 1 em uma extremidade e N na outra
+                        www CC BN
+                        Funcionário  possui  1  Departamento
+
+www.wladmirbrandao.com                                                           23 / 29
+ER: Restrição
+
+o Cardinalidade N:N → uma instância de qualquer entidade pode participar de
+dã múltiplos relacionamentos
+                        Bran .com Funcionário
+                          o o f1     possui     Departamento
+                          ardosranda .0 f2r1            d1
+                          ir C irb 4 f3
+                                        r2              d2
+
+                                        r3              d3
+Wladm.wladmY-NC-ND Representa-se por rótulos N nas duas extremidades do relacionamento
+                        www CC BN
+                        Funcionário  possui  N  Departamento
+
+www.wladmirbrandao.com                                                                  24 / 29
+ER: Restrição
+
+o Mínimos e Máximos → opcionalmente pode-se deﬁnir limites mínimos e máximos
+dã de cardinalidade para os relacionamentos
+ran om Representa-se por rótulos (min, max) nas duas extremidades do relacionamento
+                        Wwlawdwm.wirClaCCdaBmrYdi-roNbsCroa-NnBdDa4o..0c Funcionário
+                        (0, 20)  possui  (0, 1)
+
+                                                 Departamento
+
+www.wladmirbrandao.com                                                                25 / 29
+ER: Convenção de Nomes
+
+  o Elementos do modelo ER referenciam elementos textuais em uma especiﬁcação
+  dã textual de minimundo
+
+     Bran .com Substantivo → pode indicar entidade ou atributo
+     oso dao Verbo → pode indicar relacionamento
+  ard ran 4.0 Para a construção do diagrama ER deve-se adotar uma convenção, por exemplo:
+     dmir CdmirbC-ND Entidade → nome no singular com letra inicial em maiúscula
+     Wla .wla Y-N Relacionamento → nome no singular com todas as letras minúsculas
+     ww C B Atributo → nome com as letras iniciais em maiúscula e atributo
+     w C multivalorado com nome no plural
+
+www.wladmirbrandao.com                                                                     26 / 29
+ER: Resumo de Elementos
+
+                        dão ENTIDADE (FORTE)
+Rótulo                  so Braano.com RELACIONAMENTO
+                         Rótulo ENTIDADE FRACA
+rótulo
+Rótulo                  ir CardirobrandD 4.0 ATRIBUTOrótulo
+Rótulo                                                 RELACIONAMENTO FRACO
+Rótulo
+                        ladm ladm -NC-N CHAVE PARCIALRótulo
+                                                       ATRIBUTO CHAVE
+
+                         Rótulo                        ATRIBUTO MULTIVALORADO
+                        Wwww.wCC BY ATRIBUTO DERIVADO
+                         Rótulo                        ATRIBUTO COMPOSTO
+
+                                                       Rótulo
+
+                         Rótulo
+
+www.wladmirbrandao.com                                                         27 / 29
+ER: Resumo de Elementos
+
+                        dão R PARTICIPAÇÃO PARCIAL DE E1 EM R
+E1                      oso Braano.com R PARTICIPAÇÃO TOTAL DE E1 EM R
+E1                      ir CardirbrandD 4.0 1 N
+E1                       m m -N R
+E1                      Wwlawdw.wClaCdBY-NC (0, 5)E2CARDINALIDADE 1:N DE E1 PARA E2
+
+                        R LIMITES DE CARDINALIDADE DE E1 EM R
+
+www.wladmirbrandao.com                                                  28 / 29
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            29 / 29
+

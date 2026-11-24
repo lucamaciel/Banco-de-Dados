@@ -1,0 +1,444 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+álgebra relacional i
+Álgebra Relacional
+
+  o Conjunto de operações para manipulação de BD relacionais
+     randã m Linguagem formal para o modelo relacional
+     B .co Consulta → solicitação de recuperação de dados especiﬁcada por uma
+     so ao sequência de operações algébricas
+       rdo nd Resultado de uma consulta é uma nova relação
+     ir Ca irbra 4.0 SQL incorpora seus principais conceitos
+       m m -ND SQL → linguagem de consulta prática para BD relacionais
+     lad lad -NC Multiplicidade de operações:
+       W w.w BY Unárias → aplicadas sobre uma relação
+       w C Binárias → aplicadas sobre duas relações
+       w C Agregação → resumem dados de relações
+
+www.wladmirbrandao.com                                                         3 / 28
+Operação SELEÇÃO
+
+                      ndão condicional (R )
+     o Bra o.com Operador → selecionar ( sigma)
+     ardosranda .0 Função → ﬁltrar tuplas de uma relação R que satisfaçam a uma condição
+     ir C irb 4 Tuplas que não satisfazem a condição são descartadas do resultado
+     m m -ND Relação resultante tem os mesmos atributos de R
+     lad lad -NC Número de tuplas na relação resultante é menor ou igual ao número de
+     Wwww.wCC BY tuplas em R
+
+www.wladmirbrandao.com                                                                    4 / 28
+Operação SELEÇÃO
+
+  o Condição de seleção é uma expressão booleana
+    randã m <atributo> <operador> <valor> | <atributo> <operador> <atributo>
+     so B o.co <atributo> → nome de um atributo de R
+     ardo randa .0 <operador> → operador de comparação
+                mir C mirb -ND 4 < ≤ = ≥ >
+     Wlad .wlad Y-NC <valor> → constante do domínio do atributo
+
+  www CC B Conectada por operadores booleanos (∧ ∨ ¬) formam um único bloco condicional
+
+www.wladmirbrandao.com                                                                   5 / 28
+Operação SELEÇÃO
+
+o Exemplo → selecionar tuplas de professores do sexo feminino
+                        randã m Sexo = F (PROFESSOR)
+                          o B o.co PROFESSOR
+                             os da CPFNome Sexo  Salario Departamento
+                        Roberto Machado      M
+                           ard ran .0 12345678900F1200.00 1
+                           ir C irb 4 12345678901Manuela CostaM
+                           m m -ND 21345678900Carlos A. MartinsF2700.003
+                        Wwlawdw.wClaCdBY-NC 32145678900Ana Maria Freitas
+                                                 3200.00  1
+
+                                                 7500.00  2
+
+www.wladmirbrandao.com                                                 6 / 28
+Operação SELEÇÃO
+
+o Exemplo → selecionar tuplas de professores do sexo masculino que recebem
+dã salário maior que 3000,00
+                        Bran .com (Sexo = M ∧ Salario > 3000.00) (PROFESSOR )
+                          oso dao PROFESSOR
+                             ard ran .0 CPFNomeSexoSalario Departamento
+                        Roberto Machado      M
+                           ir C irb 4 12345678900F1200.00 1
+                           m m -ND 12345678901Manuela CostaM
+                           d d C 21345678900Carlos A. MartinsF2700.003
+                        Wwlaww.wClaC BY-N 32145678900Ana Maria Freitas
+                                                 3200.00  1
+
+                                                 7500.00  2
+
+www.wladmirbrandao.com                                                         7 / 28
+Operação SELEÇÃO
+
+     ão Condições de seleção são aplicadas a cada tupla individualmente e não se
+     nd aplicam a mais de uma tupla
+     o Bra o.com Operação unária e comutativa
+
+             ardosranda4.0 cond1( cond2(R )) = cond2( cond1(R ))
+     mir C mirb -ND Pode-se combinar uma sequência de operações em uma única operação com
+     lad lad -NC operadores conjuntivos
+   Wwww.wCC BY cond1( cond2(... ( condn (R ))...)) = cond1 ∧ cond2 ∧ ... ∧ condn (R )
+
+www.wladmirbrandao.com                                                                     8 / 28
+Operação PROJEÇÃO
+
+                       ndão atributos(R )
+     o Bra o.com Operador → projetar ( pi)
+     ardosranda .0 Função → ﬁltrar atributos de uma relação R
+     ir C irb 4 Atributos não especiﬁcados são descartados do resultado
+     m m -ND Relação resultante possui um subconjunto de atributos de R explicitamente
+     lad lad -NC especiﬁcados e na mesma ordem
+     W w.w BY Número de tuplas na relação resultante é menor ou igual ao número de
+     ww CC tuplas em R
+
+                   Menor se houverem tuplas duplicadas, pois duplicatas são eliminadas
+
+www.wladmirbrandao.com                                                                  9 / 28
+Operação PROJEÇÃO
+
+o Exemplo → projetar nome e salário de professores
+                        randãom Nome, Salario (PROFESSOR)
+                          o B o.c PROFESSOR
+                             os da CPFNome Sexo  Salario Departamento
+                        Roberto Machado      M
+                           ard ran .0 12345678900F1200.00 1
+                           ir C irb 4 12345678901Manuela CostaM
+                           m m -ND 21345678900Carlos A. MartinsF2700.003
+                        Wwlawdw.wClaCdBY-NC 32145678900Ana Maria Freitas
+                                                 3200.00  1
+
+                                                 7500.00  2
+
+www.wladmirbrandao.com                                                 10 / 28
+Operação PROJEÇÃO
+
+o Exemplo → projetar número do departamento e sexo de professores
+                        randã m Departamento, Sexo (PROFESSOR )
+                        o B o.co PROFESSOR
+                          s a CPF
+
+                        ardo rand .0 12345678900
+                        ir C irb 4 12345678901
+                        m m -ND 21345678900
+                        d d C 32145678900
+                               Nome        Sexo  Salario Departamento
+                        Roberto Machado      M
+                                             F   1200.00  1
+                         Manuela Costa       M
+                        Carlos A. Martins    F   2700.00  3
+                        Ana Maria Freitas
+                                                 3200.00  1
+
+Wwlaww.wClaC BY-N Duas tuplas repetidas (< 1, M >) no resultado, uma delas será eliminada7500.002
+
+www.wladmirbrandao.com                                                                     11 / 28
+Operação PROJEÇÃO
+
+     ão Se a lista de atributos para projeção inclui a chave da relação R , a relação
+     nd resultante terá o mesmo número de tuplas de R
+     so Bra o.com Operação unária, mas não comutativa
+
+                ir Cardirobranda4.0 atr1( atr2(R)) atr2( atr1(R))
+     ladm ladm -NC-ND Aninhamento de sequência de operações válidas equivale à operação
+     W .w Y externa do aninhamento
+
+           www CC B atr1( atr2(R )) = atr1(R )
+
+www.wladmirbrandao.com                                                                   12 / 28
+Sequência de Operações
+
+  o Consultas combinam sequências de operações algébricas
+     randã m Expressão em Linha → aninha-se múltiplas operações, gerando uma única
+     B .co expressão algébrica
+        ardosroandao.0 CPF, Nome, Salario ( Sexo = F (PROFESSOR) )
+     mir C mirb -ND 4 Relacões Intermediárias → aplica-se uma operação de cada vez, criando
+     d d C relações com resultados intermediários reutilizáveis
+       Wla w.wla BY-N A ←− Sexo = F (PROFESSOR)
+       ww CC B ←− CPF, Nome, Salario (A )
+
+www.wladmirbrandao.com                                                                       13 / 28
+Operação RENOMEAR
+
+                      ndão S(atributos)(R )
+     o Bra o.com Operador → renomear ( rho)
+     ardosranda .0 Função → renomear relações e atributos
+     ir C irb 4 S → nome da relação resultante
+     m m -ND atributos → lista dos novos nomes dos atributos de R na relação resultante,
+     lad lad -NC ordem na lista deve ser compatível com ordem dos atributos de R
+     W w.w BY Variações:
+
+        ww CC atributos(R ) → renomeia apenas atributos
+
+                 S (R ) → renomeia apenas relação
+
+www.wladmirbrandao.com                                                                    14 / 28
+Operação RENOMEAR
+
+o Exemplo → renomear a relação professor e seus respectivos atributos
+                        randãom TEACHER(CPF,Name,Gender,Salary,DNum)(PROFESSOR )
+                          o B o.c TEACHER
+                             os da CPFName Gender Salary  DNum
+                                                             1
+                           ard ran .0 12345678900Roberto MachadoM 1200.003
+                           ir C irb 4 12345678901            1
+                           m m -ND 21345678900Manuela CostaF 2700.002
+                        Wwlawdw.wClaCdBY-NC 32145678900
+                        Carlos A. Martins  M 3200.00
+
+                        Ana Maria Freitas  F 7500.00
+
+www.wladmirbrandao.com                                                            15 / 28
+Operação RENOMEAR
+
+  o Alternativamente, pode-se renomear relações e atributos utilizando relações
+  dã intermediárias
+
+   Bran .com TEACHER(CPF, Name, Gender, Salary, DNum) ←− PROFESSOR
+   ardosroanda4o.0 TEACHER(Name, Salary) ←− Nome, Salario (PROFESSOR)
+   ladmirlaCdmirbC-ND MAN(CPF, Nom, Sex, Sal, DNum) ←− Sexo = M (PROFESSOR)
+  Wwww.wCC BY-N Pode-se renomear qualquer subconjunto de atributos de R
+
+www.wladmirbrandao.com                                                           16 / 28
+Operação PRODUTO
+
+                        ndão R1 × R2
+     o Bra o.com Operador → multiplicar (×)
+     ardosranda .0 Função → combinar tuplas de duas relações
+     ir C irb 4 Relação resultante possui os atributos de R1 e R2, incluindo como tuplas
+     m m -ND todas as combinações possíveis entre as tuplas de R1 e R2
+     lad lad -NC Número de tuplas da relação resultante é o produto cartesiano entre o
+     Wwww.wCC BY número de tuplas de R1 e R2
+
+www.wladmirbrandao.com                                                                    17 / 28
+Operação PRODUTO
+
+o Exemplo → PROFESSOR × DEPARTAMENTO
+                        ndã PROFESSOR
+                          ra m CPF                                         DEPARTAMENTO
+
+                        B .co 12345678900                                  Numero
+                        oso dao 12345678901
+                                      Nome    Sexo  Salario Departamento                 Nome
+                                     Roberto    M
+                                     Manuela    F   1200.00  1                1    Administrativo
+
+                                                    2700.00  3                2    Comercial
+Wwlawdwm.wirClaCCdaBmrYdi-rNbCra-Nn D 4.0 Resultado:
+                                                                              3    Tecnologia
+
+                               CPF    Nome    Sexo  Salario  Departamento  Numero       Nome
+                        12345678900  Roberto    M   1200.00          1         1   Administrativo
+                        12345678900  Roberto    M   1200.00          1         2
+                        12345678900  Roberto    M   1200.00          1         3      Comercial
+                        12345678901  Manuela    F   2700.00          3         1     Tecnologia
+                                                                                   Administrativo
+
+                        12345678901 Manuela   F 2700.00      3             2       Comercial
+
+                        12345678901 Manuela   F 2700.00      3             3       Tecnologia
+
+www.wladmirbrandao.com                                                                             18 / 28
+Operação PRODUTO
+
+o Associada à SELEÇÃO opera como uma JUNÇÃO
+                        randãom Departamento = Numero (PROFESSOR × DEPARTAMENTO )
+                        o B o.c PROFESSOR
+                          os da CPF                                       DEPARTAMENTO
+
+                         Nomeard ran .0 12345678900SexoSalarioDepartamentoNumero        Nome
+                        Robertomir C mirb -ND 4 12345678901M1200.00 1
+                        Manuela                F   2700.00          3        1    Administrativo
+
+                                                                             2    Comercial
+
+Wlad .wlad Y-NC Resultado:                                                   3    Tecnologia
+         www CC B CPF
+                        Nome                 Sexo Salario Departamento Numero     Nome
+
+                        12345678900 Roberto  M 1200.00      1             1       Administrativo
+
+                        12345678901 Manuela  F 2700.00      3             3       Tecnologia
+
+www.wladmirbrandao.com                                                                            19 / 28
+Operação JUNÇÃO
+
+                    ndão R1 condicional R2
+     o Bra o.com Operador → juntar ( )
+     ardosranda .0 Função → combinar tuplas de duas relações a partir de uma condição
+     ir C irb 4 Relação resultante possui atributos de R1 e R2, incluindo como tuplas todas
+     m m -ND as combinações entre as tuplas de R 1 e R 2 que respeitam condição
+     lad lad -NC Tuplas que não respeitam condição de junção ou que valores dos atributos
+     Wwww.wCC BY usados na condição sejam NULL são descartadas do resultado
+
+www.wladmirbrandao.com                                                                       20 / 28
+Operação JUNÇÃO
+
+ão Exemplo → PROFESSOR Departamento = Numero DEPARTAMENTO
+                        nd PROFESSOR
+                          ra om CPF                           DEPARTAMENTO
+
+                         Nomeo B o.c 12345678900SexoSalarioDepartamentoNumeroNome
+                        Robertoardosranda .0 12345678901M1200.001
+                        Manuela    F   2700.00          3     1       Administrativo
+
+                                                              2       Comercial
+
+mir C mirb -ND 4 Resultado:                                   3       Tecnologia
+
+                         Nomelad lad C CPFSexoSalario DepartamentoNumero   Nome
+                        RobertoW .w Y-N 12345678900M              1   Administrativo
+                        Manuelawww CC B 12345678901F1200.001      3
+                                                                        Tecnologia
+                                       2700.00  3
+
+www.wladmirbrandao.com                                                                21 / 28
+Operação JUNÇÃO
+
+o Equijunção → condicionais com operadores de igualdade
+        randã m PROFESSOR Departamento = Numero DEPARTAMENTO
+
+so B ao.co Junção Natural → equijunção automática (natural) com atributos que possuem
+o d o mesmo nome nas duas relações removendo-se duplicatas
+
+               ir Cardirbran 4.0 PROFESSOR ∗ DEPARTAMENTO
+                        dm dm C-ND PROFESSOR
+                          la la -N CPF                        DEPARTAMENTO
+
+                        W w.w BY 12345678900                  Numero
+                        ww CC 12345678901
+                         Nome    Sexo  Salario  Departamento                Nome
+                        Roberto    M   1200.00          1
+                        Manuela    F   2700.00          3     1       Administrativo
+
+                                                              2       Comercial
+
+                                                              3       Tecnologia
+
+www.wladmirbrandao.com                                                                 22 / 28
+Operação JUNÇÃO
+
+o Frequentemente relações diferentes possuem atributos com mesmo nome
+  randã m Operação RENOMEAR deve ser utilizada antes da junção para evitar
+  B .co problemas de ambiguidade
+
+so ao Exemplo:
+ir Cardirobrand 4.0 A(Numero, DNome) ←− Numero, Nome (DEPARTAMENTO)
+m m -ND RESULTADO ←− PROFESSOR Departamento = Numero A
+                        lad lad -NC RESULTADO
+                        W w.w BY CPF
+                        ww CC 12345678900
+                         Nome                Sexo  Salario Departamento  Numero      DNome
+                        Roberto                M                             1   Administrativo
+                                                   1200.00  1
+
+                        12345678901 Manuela  F 2700.00      3            3       Tecnologia
+
+www.wladmirbrandao.com                                                                           23 / 28
+Operação AGREGAÇÃO
+
+                  ndão atributos funcoes(R )
+     o Bra o.com Operador → agregar ( gamma)
+     ardosranda .0 Função → agregar tuplas de uma relação a partir de uma lista de atributos
+     4 (atributos de agregação), aplicando funções de agregação em atributos
+     ir C irb D remanescentes
+     dm dm C-N Múltiplas notações → F , G
+     Wla .wla Y-N Relação resultante possui atributos de agregação e um atributo para cada
+     www CC B função de agregação
+
+           Tuplas com valores NULL nos atributos usados na função de agregação são
+           descartadas da agregação
+
+www.wladmirbrandao.com                                                                        24 / 28
+Operação AGREGAÇÃO
+
+  o Função de Agregação → função matemática aplicada em tuplas agrupadas
+     randã m COUNT → conta o número de tuplas agrupadas
+     o B o.co SUM → soma valores do atributo utilizado na função
+     os da AVG → calcula média dos valores do atributo utilizado na função
+     ard ran 4.0 MIN → captura valor mínimo dentre valores do atributo utilizado na função
+     mir C mirb -ND MAX → captura valor máximo dentre valores do atributo utilizado na função
+
+  Wlad .wlad Y-NC Se função de agregação não for renomeada, nome do atributo resultante será
+  www CC B concatenação do nome da função e do nome do atributo usado por ela
+
+www.wladmirbrandao.com                                                                         25 / 28
+Operação AGREGAÇÃO
+
+o Exemplo → apresentar o número de professores e o total em salários
+                        ndã PROFESSOR
+                          ra m CPF
+
+                        B .co 12345678900
+                        so ao 12345678901
+                        rdo nd 21345678900
+                        a ra 4.0 32145678900
+                               Nome        Sexo  Salario Departamento
+                        Roberto Machado      M
+                                             F   1200.00  1
+                         Manuela Costa       M
+                        Carlos A. Martins    F   2700.00  3
+                        Ana Maria Freitas
+                                                 3200.00  1
+
+Wwlawdwm.wirClaCCdBmYi-rNbC-ND Resultado:        7500.00  2
+
+                        COUNT (CPF ), SUM (Salario) (PROFESSOR )
+
+                                              COUNT_CPF SUM_SALARIO
+
+                        4                  14600.00
+
+www.wladmirbrandao.com                                                 26 / 28
+Operação AGREGAÇÃO
+
+o Exemplo → apresentar o total e a média salarial por sexo
+                        ndã PROFESSOR
+                          ra m CPF
+
+                        B .co 12345678900
+                        so ao 12345678901
+                        rdo nd 21345678900
+                        a ra 4.0 32145678900
+                                     Nome        Sexo  Salario Departamento
+                              Roberto Machado      M
+                                                   F   1200.00      1
+                               Manuela Costa       M
+                              Carlos A. Martins    F   2700.00      3
+                              Ana Maria Freitas
+                                                       3200.00      1
+
+Wwlawdwm.wirClaCCdBmYi-rNbC-ND Resultado:              7500.00      2
+
+                        Sexo SUM (Salario), AVG (Salario) (PROFESSOR )
+
+                        Sexo  SUM_SALARIO              AVG_SALARIO
+
+                        F     10200.00                 5100.00
+
+                        M     4400.00                  2200.00
+
+www.wladmirbrandao.com                                                       27 / 28
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            28 / 28
+

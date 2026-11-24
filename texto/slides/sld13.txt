@@ -1,0 +1,152 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+tecnologias de armazenamento
+Tecnologias de Armazenamento de Dados
+
+  o Desempenho e conﬁabilidade em sistemas de banco de dados estão intimamente
+  dã relacionados à organização dos dados nos meios de armazenamento e à
+  ran m tecnologia de armazenamento de dados empregada
+
+     o B o.co Minimizar o número de transferências de blocos e buﬀers
+     rdos nda Agilizar o tempo de cada transferência
+  ir Ca irbra D 4.0 Organização adequada de dados ajuda a minimizar número de transferências
+     dm dm C-N Tipo de arquivo empregado pode tornar a busca linear, logarítmica ou em
+     la la -N tempo constante
+  Wwww.wCC BY Tecnologia de armazenamento adequada ajuda a reduzir custo de transferência
+
+           Tipo de memória secundária empregada, bem como sua conﬁguração,
+           podem acelerar o acesso aos dados em ordens de magnitute
+
+www.wladmirbrandao.com                                                                        3 / 15
+Hardware de Armazenamento
+
+  o Padrão de interligação de periféricos determina a forma como dispositivos,
+  dã como memórias secundárias, são interligados ao hardware computacional
+
+     Bran .com ATA (Advanced Technology Attachment) → ou IDE (Integrated Drive
+     o o Eletronics) é um padrão que oferece baixos custo e desempenho, suportando
+     os da velocidade de transferência até ≈ 0,15Gbps
+     ard ran 4.0 SATA (Serial ATA) → padrão ﬂexível, oferecendo uma gama de opções com
+     ir C irb D custos variados, suportando velocidade de transferência até ≈ 6Gbps
+     dm dm C-N SCSI (Small Computer System Interface) → custo e desempenho elevados,
+     la la -N suportando velocidade de transferência até ≈ 6Gbps
+  W w.w BY Padrões diferem entre si não só quanto à velocidade de transferência, mas
+  ww CC também quanto aos recursos suportados, em especial a possibilidade de criação
+
+     de conjuntos de discos magnéticos (RAID) com hot-swap
+
+www.wladmirbrandao.com                                                                  4 / 15
+Hardware de Armazenamento
+
+         AWTAwlawdwm.wirClaCCdaBmrYdi-roSNbAsTCrAoa-NnBdrDaa4no.d.0cãoom SCSI
+
+www.wladmirbrandao.com                                                         5 / 15
+Conjuntos de Discos
+
+  o RAID (Redundant Array of Independent Disks) é uma tecnologia de
+  dã virtualização de armazenamento que combina discos em uma unidade lógica
+
+     Bran .com Desempenho → possibilidade de ampliação da capacidade de
+     o o armazenamento e da velocidade de transferência de dados
+
+       ardosranda .0 Distribuição de dados em vários discos, com balanceamento de carga
+       ir C irb 4 I/O paralelo, provendo alta taxa de transferência
+     m m -ND Redundância → possibilidade de ampliação da disponibilidade e da
+     lad lad -NC conﬁabilidade por ser tolerante a falhas
+       W w.w BY Distribuição de cópias de dados em vários discos
+  ww CC Suporta diferentes esquemas de conﬁguração, provendo diferentes níveis de
+
+     desempenho e redundância
+
+www.wladmirbrandao.com                                                                   6 / 15
+Conjuntos de Discos
+
+          Wwlawdwm.wirClaCCdaBmrYdAVNRCDi-leeriaãotsNolqbpootsurdacCrtieiocbiosadsiu-iledateNniBmoaçdraãdpder→Deneoaan→tR→shne4nooeA∝a>,m.d.≡c0Icf1oDnãacmnodlóoh0imptsaaicasxoasde falha
+                                                   maior que em discos sem RAID
+
+www.wladmirbrandao.com                                                                                                                                                                     7 / 15
+Conjuntos de Discos
+
+          Wwlawdwm.wirClaCCdaBmrYdCTDVREi-oeeseraoNspllqbpeoeseuamrcCrlaiochispadni-aiedattNnnBmoaedhddeero→Daenaea→fRtq→na4noouAl∝i>h.sdv.≡0aaeIc1D1ãlmse1odno1tdimseicsaotrdsiibscuoiçsãsoem
+                                                   RAID, mas com taxa de falha menor
+
+www.wladmirbrandao.com                                                                                                                                                                          8 / 15
+Conjuntos de Discos
+
+          Wwlawdwm.wirClaCCdaBmrYdVTDaCDRi-ooeeeriaosNsllqbRpeotesuAramrcCriIaiocbDispadniu-ied0attNnníBoa,dedhcdodero→Daoeamcea→fR→ona4ncotmaAla∝>h.dpx.≡0aIaacc2Dnãcsódnoiddpoe5−aimisfadac1elohpasrómxeimnoors
+
+                                                   que discos sem RAID
+
+www.wladmirbrandao.com                                                                                                                                                                                             9 / 15
+Conjuntos de Discos
+
+          Wwlawdwm.wirClaCCdaBmrYdEVCRmCTi-ooeserao)NmpllqbpeeoseubarcCr0liaiocnhi,sadnai-saidatçutNnBdoaãedpoododer→DarecRaRta→afoA→na4nAnImoDld∝∝h.dIo.≡10Ddacmnmãi(ssneo/ú1tosm∧/lrmptm0iiebnplluha>oisçmtfãaaomlhaans,ho
+
+                                                   enquanto houver cópia espelhada
+
+www.wladmirbrandao.com                                                                                                                                                                                                        10 / 15
+Abordagens de Armazenamento
+
+  o DAS (Direct-Attached Storage) → discos magnéticos contendo os arquivos dos
+  dã bancos de dados integrados ao hardware do sistema de banco de dados
+
+     Wladwm.wirlaCdaBmrYdi-roNbsCroa-NnBdrDaa4no..0com Integração por meio de padrões de interligação, como ATA, SATA e SCSI
+     ww CC Discos acessíveis diretamente apenas pelo hardware do sistema
+
+           Abordagem simples e barata, mas menos robusta e escalável
+
+www.wladmirbrandao.com                                                                                                        11 / 15
+Abordagens de Armazenamento
+
+  o NAS (Network-Attached Storage) → arquivos de bancos de dados parcial ou
+  dã totalmente contidos em hardware especializado de compartilhamento de arquivo
+
+     Wladwm.wirlaCdaBmrYdi-roNbsCroa-NnBdrDaa4no..0com Integração por protocolos de compartilhamento, como NFS, SMB e AFP
+     ww CC Hardware de sistema de banco de dados "enxerga" hardware especialista
+
+           como servidor de arquivo
+
+www.wladmirbrandao.com                                                                                                     12 / 15
+Abordagens de Armazenamento
+
+  o SAN (Storage Area Network) → rede dedicada, geralmente em ﬁbra óptica, de
+  dã hardwares de armazenamento e de sistemas de banco de dados
+
+     Wlawdwm.wirlaCCdaBmrYdi-roNbsCroa-NnBdrDaa4no..0com Suporta hardware dedicado de armazenamento interligado ao hardware de
+     w C sistema através da rede
+
+           Hardware de sistema "enxerga" hardware dedicado como disco
+
+www.wladmirbrandao.com                                                                                                          13 / 15
+Abordagens de Armazenamento
+
+  o iSCSI (Internet SCSI) → arquivos de bancos de dados parcial ou totalmente
+  dã contidos em discos espalhados e acessíveis diretamente pela rede
+
+     Wladwm.wirlaCdaBmrYdi-roNbsCroa-NnBdrDaa4no..0com Integração por protocolos de camada de transporte TCP/IP
+     ww CC Hardware de sistema "enxerga" e acessa diretamente discos distribuídos
+
+           pela rede como se estivessem ﬁsicamente conectados
+           Abordagem ﬂexível, barata e escalável
+
+www.wladmirbrandao.com                                                                                           14 / 15
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            15 / 15
+

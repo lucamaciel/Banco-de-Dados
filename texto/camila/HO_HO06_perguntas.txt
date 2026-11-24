@@ -1,0 +1,64 @@
+02/07/2026, 12:46                                                    HO06: SQL (DDL)
+
+HO06: SQL (DDL)
+
+     Vencimento 9 abr por 8:30
+     Pontos Nenhum
+     Disponível 8 abr em 0:00 - 14 abr em 8:30
+ Esta tarefa foi travada 14 abr em 8:30.
+
+  Hands-On
+
+Esta é a tarefa HO06: SQL (DDL), uma atividade prática que estimula o aluno a especificar e
+interpretar consultas em bancos de dados relacionais usando a linguagem de consulta
+estruturada SQL (Structured Query Language).
+
+Problema
+
+Construir um diagrama de implementação do banco de dados SAM a partir do modelo
+relacional abaixo e especificar consultas em SQL para criar o esquema, as tabelas e restrições
+(domínio, nulidade, unicidade, valor, valor padrão, chave e integridade referencial) do banco de
+dados SAM.
+
+Produto
+
+https://pucminas.instructure.com/courses/260154/assignments/1288124                               1/2
+02/07/2026, 12:46                                                    HO06: SQL (DDL)
+
+O aluno deve entregar um documento exclusivamente em formato PDF contendo a solução
+para o problema descrito anteriormente. O documento deve conter:
+ 1. Diagrama de implementação do banco de dados SAM em notação Pé de Galinha (Crow's
+
+    Foot)
+    (https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model#Crow's_foot_notation) .
+    Para construção do diagrama, siga os exemplos apresentados nos seguintes videos:
+
+         https://youtu.be/DWWIREUkxOI (https://youtu.be/DWWIREUkxOI)
+
+(https://youtu.be/DWWIREUkxOI)
+
+https://youtu.be/1129NtIpTAI (https://youtu.be/1129NtIpTAI)
+
+          (https://youtu.be/1129NtIpTAI)
+
+ 2. Consultas SQL para criar o esquema, as tabelas e restrições (domínio, nulidade, unicidade,
+    valor, valor padrão, chave e integridade referencial) do banco de dados SAM.
+
+Recursos
+
+Para a execução da tarefa o aluno deve consultar as referências bibliográficas especificadas
+no Programa do Curso (https://pucminas.instructure.com/courses/260154/pages/programa) . A
+seguir encontram-se indicados alguns recursos e materiais de apoio para a execução da
+tarefa. Outras referências bibliográficas podem ser utilizadas, desde que devidamente citadas
+no produto.
+
+    Livro (Elmasri & Navathe, 2016):
+         Capítulo 6: SQL Básica
+
+    Slides e Videos:
+         Tópico #09: SQL (DDL) (https://pucminas.instructure.com/courses/260154/pages/topico-
+
+          number-09-sql-ddl)
+
+https://pucminas.instructure.com/courses/260154/assignments/1288124                             2/2
+

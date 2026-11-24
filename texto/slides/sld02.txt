@@ -1,0 +1,163 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+modelo de dados
+Estrutura de BD
+
+  o Composta por tipos, relacionamentos e restrições aplicados aos dados
+     randã m Abstração de Dados
+       o B o.co Estrutura do BD percebida de maneira diferente por usuários de acordo com
+       os da diferentes níveis de detalhamento
+       ard ran .0 Abordagem de BD deve ocultar detalhes de organização e armazenamento dos
+       ir C irb D 4 dados
+       m m -N Fornece recursos essenciais para a compreensão dos dados e de seus
+       lad lad -NC relacionamentos
+     Wwww.wCC BY Modelo de Dados → oferece meios necessários para se alcançar a abstração
+
+www.wladmirbrandao.com                                                                      3 / 11
+Modelo de Dados
+
+  o Estrutura lógica que determina a forma como os dados são armazenados,
+  dã organizados e manipulados
+
+     Bran .com Coleção de conceitos que descrevem a estrutura do BD
+     oso ao Incorpora operações para especiﬁcar atualização e recuperação de dados
+
+       ard rand 4.0 Exemplo → inserir, remover, modiﬁcar ou recuperar
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND Deﬁne o comportamento de uma determinada aplicação
+
+www.wladmirbrandao.com                                                                  4 / 11
+Modelo de Dados
+
+  o Oferece diferentes níveis de abstração:
+     randã m Conceitual → alto nível de abstração
+       B .co Representa a estrutura como os usuários a percebem
+       o o Conceitos → entidade, atributo e relacionamento
+     ardosranda .0 Representativo → nível intermediário de abstração
+       4 Também conhecido como modelo de implementação
+       ir C irb D Representa a estrutura detalhando aspectos de implementação
+       m m -N Oculta detalhes de armazenamento físico
+       lad lad -NC Conceitos → objeto, relação, tupla e coluna
+     W w.w BY Físico → baixo nível de abstração
+       ww CC Representa a estrutura detalhando aspectos de armazenamento físico
+
+                   Conceitos → arquivo, registro, campo, índice
+
+www.wladmirbrandao.com                                                           5 / 11
+Modelo de Dados: Conceitual
+
+o Entidade → ente (objeto) do universo de discurso
+                        randãom Nome
+                                                         Número
+                        oso Bdao.c CPFSexo
+
+                                        Salário                              Nome
+
+mir Camrdirbra-Nn D 4.0 Atributo → propriedade que caracteriza uma entidadeProfessorpossuiDepartamento
+
+                        Wwlawdw.wClaCdBY-NC NomeSexo     Número
+
+                                        Salário                              Nome
+
+                        CPF  Professor           possui  Departamento
+
+www.wladmirbrandao.com                                                             6 / 11
+Modelo de Dados: Conceitual
+
+o Relacionamento → associação entre duas ou mais entidades
+                        randãom Nome
+                        Sexoso B ao.c CPF           Número
+
+                                   Salário                        Nome
+
+                        mir Camrdirobra-NndD 4.0 NomeProfessorpossuiDepartamento
+
+                        Sexo                        Número
+
+                        Wwlawdw.wClaCdBY-NC CPFSalário            Nome
+
+                        Professor           possui  Departamento
+
+                        Nome       Campus           Cidade
+
+www.wladmirbrandao.com                                                  7 / 11
+Modelo de Dados: Representativo
+
+  o Existem diferentes modelos representativos
+     randã m Hierárquico
+       B .co BD → coleção de árvores formando uma ﬂoresta
+       o o Registro → nó da árvore
+       os da Associação entre registros → aresta da árvore
+       ard ran .0 Um nó ﬁlho só pode ter um pai (1:N)
+     ir C irb D 4 Rede
+       m m -N Extensão do modelo hierárquico
+       d d C Permite associações N:N
+     Wla .wla Y-N Objeto
+       w B BD → coleção de objetos
+       ww CC Registro → objeto
+
+                   Associação entre registros → ligação
+                   Próximo ao modelo de dados conceitual
+
+www.wladmirbrandao.com                                      8 / 11
+Modelo de Dados: Representativo
+
+o Existem diferentes modelos representativos
+  randã m Relacional
+     o B o.co BD → coleção de relações (elementos tabulares)
+     os da Registro → tupla (linha)
+     ard ran .0 Associação entre registros → relacionamentos
+     ir C irb D 4 Embasamento em lógica de predicados e na teoria dos conjuntos
+     m m -N Amplamente adotado em SGBDs comerciais baseados em transações
+     lad lad -NC Consolidado, com alto desempenho na execução de operações básicas
+                        W ww.w C BY PROFESSOR
+                         w C CPF Nome Sexo     DEPARTAMENTO
+                        Salario Departamento     Numero Nome
+
+www.wladmirbrandao.com                                                              9 / 11
+Modelo de Dados: Físico
+
+o Descreve detalhes de armazenamento de dados em memória
+  ndã Formatos e ordenação de registros em arquivos
+  ra om Organização dos dados em arquivos em memória secundária
+  o B o.c Caminhos de acesso alternativos para recuperação rápida de registros
+ardosranda .0 PROFESSOR
+  4 CPF                             Nome        Sexo  Salario Departamento #  ÍNDICE
+                             Roberto Machado      M                             Ponteiro Departamento
+ir C irb D 12345678900       Carlos A. Martins    M
+m m -N 21345678900           Ana Maria Freitas    F   1200.00  1    00        #00  1
+lad lad C 32145678900                             F
+W .w Y-N 12345678901          Manuela Costa       M   3200.00  1    10        #20  2
+w B 52345678902               Luiz A. Barbosa     F
+ww CC 97345671200            Rebeca Lins Rêgo         7500.00  2    20        #30  3
+
+                                                      2700.00  3    30        ···  ···
+
+                                                      5300.00  3    40        #FF  N
+
+                                                      6800.00  3    50
+
+                        ···  ···                ···   ···      ···  ···
+
+68345618900                  Amanda Ramirez     F 1700.00      N    FF
+
+www.wladmirbrandao.com                                                                                 10 / 11
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            11 / 11
+

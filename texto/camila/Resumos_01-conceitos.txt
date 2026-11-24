@@ -1,0 +1,231 @@
+obmnchcomenatta                                                                                        As interações são chamadas de                   consultas.  manual
+                                                                                                       Uma lista telefônica é um banco                 de dados
+ Sistemas de banco de dados são
+ conjuntos de dados relacionados e                                                                     Podem ser categorizados por aplicações                                        Ativo
+ organizados em uma estruturaLógica.                                                                                                                                            Htempo real)
+ SGBD+ Sistema gerenciador de banco de dados                                                           Tradicional    Multimidia                       Geográfico         Data
+                                                                                                                                                                   Warehouse    processam dodos
+          〜                                                                                                                                                                      em tempo real
+                                                                                                       texto e        imgs áudios                      mapas,      processa-
+                 conjunto de softwares                                                                     números                                  ,    satélite     mento
+            de compilação, otimização                                                                                   e vídeos
+                                                                                                                                                         e clima   analítico
+          e acesso do repositório
+                                                                                                                                                                   online
+
+etapas de implementação                                                                                               Apesar dos SGBDs                             terem qualidades como
+                                                                                                                      flexibilidade, backup
+                                                                                                                                                                   e restrições de acesso e
+
+     Especificação + descrição do minimun                           do                                                integridade, ele também tem partes negativas,
+     Análise de Requisitos - restrições de
+                                                                     operação
+
+                                                                                        conceituais
+restrições Ol.                                                                                                        ComDi
+
+02.                                                                                                                           · Não podem múltiplos usuários
+     Projeto   Conceitual -> estruturas e                                                                                    · Baixa complexidade
+83.  Projeto                                                        N                                  Lógicas
+04.   Projeto
+05.            lógico -                                 estruturas  e restrigoes                       fisicas
+                                                                                                    N
+
+               físico - estruturas e restrigoes                                                                                  Alta especialização
+
+                                                                                                                              ·
+
+musnechetro d didra                                                                                             Todo  banco de dados                   deve ter    uma        finalidade                                                                   represen
+                                                                                                                                                                                                                                                        ,
+ Abstração de dados
+ Esconder detalhes complexos de amazenamento                                                                    tam o mundo real (minimundo) , ele é lógico e coerente ,
+  e manipulação e mostrar para o usuário apenas o
+  necessário                                                                                                    Serve para ser compartilhado .
+
+                                                                                                                Ele pode ser manual ou computadorizado , lida com coisas
+
+                                                                                                                dieerentes .
+
+Modelo de dados
+
+Meios necessários para alcançar a ABSTRAÇÃO ,
+estrutura lógica que determina como os dados
+ são organizados
+
+            V  Ƙ                                                                                                    \
+     enceitunad
+                                                              represientantipos                                              Breien
+
+                                                                Existem 3 tipos                                     Descreve como os dodos
+                                                                                                                     são realmente armaze-
+Entidade - professor,                                         Hierárquico - dedos em
+             deportemento                                                                                                 nodos no disco
+                                                                  árvore
+                                                                                                                                  como são real-
+Atributo > - propriedade da                                   Rede -> organiza registros                                     mente armazencoos
+                                                                     em grafos
+entidade  como    nome                                  sexo
+                                                     ,        Objeto - organiza Obj com
+                                                                  dedos e métodos
+Relacionamento -> associação ,
+     como "possui"                                                        como é no banco
+
+                mundo real
+aronetcguéed dici amtimla  wly sQl                                                         Sites de pesquisa                                      Não podemos confundir
+                                                                                           Association for
+↓ Banco de dados                                                                           Computing machine                                                                                 data         information       knowledge       wisdom
+                                                                                           Machinery
+Recuperação de dados                                                                                                                              universo                                                dor significa-    correlação,     Aplicação,
+                                                                                            Computing
+Base de Informação           google                                                         Classification                                        simbólico,                                              do ao dodo ,      uma lei         ação e ética,
+                                                                                            System
+  Sistema de recuperação   de informação                                                                                                          dos sen-                                                formar            si estabele-      usar o ser
+
+                                                                                                                                                                                             Tidos        um conceito        cida a partir   connecimento
+
+{ Base de conhecimento                                                     unolfram                                                                 não preciso                                           uma ideia         de experi
+                                                                                                                                                                                                          em que o
+Descoberta de conhecimento                                                                                                                             dar Sig-                                                             ência (obser
+                                                                                                                                                      nificado                                              Significado
+Em uma máquina de busca, ela busca o objeto e te                                                                                                                                                            importa         vação do mes-
+                                                                                                                                                  conjunto de                                                               mo fensme-
+traz conceitos, informações. Um banco de dados te doria a                                                                                         símbolos sinais                                          pode lider ou
+                                                                                                                                                                                                          não com dados     no várias
+ penas espaços que tem a string procurada                                                                                                                                                              ,
+                                                                                                                                                                                                               concretos ,  vezes
+                                                                                                                                                    e códigos em
+                                                                                                                                                  que sig não                                                como a ma-                ௏
+
+                                                                                                                                                           interessa
+
+Estamos evoluindo para sistemas quehos do cone-                                                                                                                                                           temática          meu cachorro
+
+cimento como as ILMs.                                                                                                                                                                                                         entende que se fi-
+                                                                        ,
+                                                                                                                                                                                                                          Zer vixi certo, genna
+
+                                                                                                                                                                                                                            biscoito                  し
+
+                                                                                                                                                                                                                                            em uma briga , você
+
+Todo sistema de banco de dados tem:                                                                     São compostos por a características                                                                                 pode ganhar o argumento
+ Banco de dados                                                                                                                                                                                                              e ser inteligente , ou
+ Modelo de dodos                                                                                 >
+                                                                                                                                                                                                                              ficar calado e ser
+                                                                                                      Definir - especificagio
+                                                                                                                                                                                                                                              Sábio
+
+Sistema                                                                                          construir - > armazenar dados
+
+                                                                                                       Manipular                             - >  insert                                     remove ...
+                                                                                                                                                                                          ,
+SGBDS
+                                                                                                 compartilhar - acesso simultanes
+Sistema gerenciador de banco de dodos
+ Programas e softwares que permi
+
+  tem ao usuário criar e manter BDs
+
+                                                                                                       umil
+
+                                                                           arapentinanich                                                                                                                                                                        ·
+
+                                                                           Flexibilidade    - escalas e
+
+                                                                                           uso de padrões
+
+    Dendrive ho                                                            Interfaces              pode
+é um backup 8                                                                                    restringir
+                           meca- múltiplas
+Backup é ser           ร                                                                            acesso
+                           hismos
+
+atualizado e               de backup                                                 Roda em
+       incrementado,
+                           e recover vários servidores
+dando para
+               volter                                                         Restringe    Relacionamentos
+                                                                                                 complexes
+                                                                           refs linkadas
+                                                                                 a outras
+
+                                                                                           enceitunad                                             representantipo                                                                drsinen
+
+                                                                                                                                                    Existem 3 tipos                                                     Descreve como os dodos
+                                                                                                                                                                                                                         são realmente armaze-
+                                                                           Entidade - professor,                                             Hierárquico - dedos em
+                                                                                        deportemento                                                                                                                          nodos no disco
+                                                                                                                                                 árvore
+                                                                                                                                                                                                                                      como são real-
+niveis de                                                                  Atributo > - propriedade da                                            Rede -> organiza registros                                                     mente armazencoos
+   representação                                                                                                                                         em grafos
+                                                                           entidade        como  nome                                  sexo
+                                                                                                                                    ,             Objeto - organiza Obj com
+                                                                                                                                                      dedos e métodos
+                                                                           Relacionamento -> associação ,
+                                                                                como "possui"                                                                 como é no banco
+
+                                                                                           mundo real
+                       Descrição de um                                                 ~ ex : Tabela funcio -              umetancande são dades que
+                                                                                         nários não muda sempre                 falam e trazem informa-
+                        banco de dodos . Seu
+                       esquema não muda                                                resquemas , mas todo                  sões sobre eles mesmos
+                       mas as instâncias                                               dia podemos adicionar
+
+                            sempre mudam                                                 ou remover instâncias
+
+α desesque_ mas aengansitenx                                                                                               }  É muito importante por ser
+                             ·
+                                                          nivel conceitual                            nivel interno              independente.
+                                                                                                                               Indep . de dodos - alterar um ni-
+ nivel externo                                            enxergar tabelas, co-                       estrutura do arma -      vel de esquema sem precisor alterar
+define a visão com                                                                                    zenamento físico         O nivel superior .
+                                                          Lunas e Linhas
+                                                                                                                                  ex : Add uma coluna em uma Tabela
+
+colunas Linhas e Tabelas                                  relacionamentos ,                                                   Sem preciso mudar código
+                                                    ,
+
+que cada usuário vai                                      restrições
+
+envergar
+
+Na prático SGBDs não implementam os 3 esquemas, e Sim,
+
+um ou dois .     Os 3  serio  ideais                        mas    prejudicam a        performance.
+
+                                                          ,
+
+                                                       ↑                                                                                              .
+
+Linguagens qu o Usuário                                                                                                                                     sal combina
+utiliza para se comunicar
+                                                                                                                                                         }   isso em
+Linguagens de alto nivel                               ↑                                                                                                    um único
+
+ Linguagens decorativas                                                                                                                                        pacote
+
+para fazer consultas
+
+Mae Linguagens de baixo nivel
+
+Linguagem hospedeira,
+
+      embutida na
+
+            programagüo
+
+         minediew                                          > entidades
+                                                          > relacionamentos
+Entidade-relacionamento
+
+                                    ~ atributos
+                       ~ restrições
+
+BD - conjunto de dados organizados em uma estrutura Lógica.                                                          }         conscilógica Dimpiled
+
+SGBD - Software que gerencia o banco de dados                                                         aplicações              BD - Livros
+                                                                                                                              SOBD- > biblisteccrio
+SBD- Sistema           completo,                       que inclui  BD            SGBD  , usuários  e
+                                                                              ,                                               SBD + biblioteca
+

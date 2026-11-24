@@ -1,0 +1,219 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+controle de concorrência
+Controle de Concorrência
+
+  o Emprego de técnicas para garantia de isolamento entre transações
+     randã m Protocolos → garantem a serialização de escalonamentos
+       B .co Bloqueio → aplica regras para bloqueio e desbloqueio de itens
+       oso dao Timestamp → ordena transações usando seus rótulos de tempo (timestamp)
+       ard ran 4.0 Multiversão → armazena múltiplas versões de um item, escolhendo a mais
+       ir C irb D apropriada para ser usada por cada transação em execução
+       m m -N Validação → checa a posteriori se execução ocorreu de forma isolada
+       lad lad -NC Granularidade Múltipla → variação do bloqueio com ajuste de granularidade
+
+  W ww.w C BY Técnicas baseadas em protocolos de bloqueio são tipicamente adotadas por
+  w C SGBDs comerciais
+
+www.wladmirbrandao.com                                                                        3 / 17
+Protocolo de Bloqueio
+
+  o Serialização por aplicação de regras para bloqueio e desbloqueio de itens
+     ndã Binário → duas operações de bloqueio
+       ra om Lock l(x) → altera estado do item para bloqueado pela transação, com outras
+       o B o.c transações sendo forçadas a esperar pelo desbloqueio
+       os da Unlock u(x) → altera estado do item para livre, desbloqueando-o
+       ard ran .0 Exclusividade → transações não acessam o mesmo item simultaneamente
+     ir C irb D 4 Ternário → três operações de bloqueio
+       m m -N Read Lock rl(x) → altera estado para bloqueado para leitura, outras
+       lad lad -NC transações que demandarem escrita são forçadas a esperar desbloqueio
+       W .w Y Write Lock wl(x) → altera estado para bloqueado para escrita, outras
+       w B transações são forçadas a esperar desbloqueio
+       ww CC Unlock u(x) → altera estado do item para livre
+
+                   Compartilhamento → transações podem realizar leitura simultaneamente
+
+www.wladmirbrandao.com                                                                    4 / 17
+Protocolo de Bloqueio
+
+  o Tabela de bloqueio registra emissão de solicitação de bloqueios para itens
+     randã m Regras → impostas pelo gerenciador de bloqueio
+       B .co Transação precisa emitir bloqueio antes de operar sobre item
+       o o Transação precisa emitir desbloqueio após completar operações sobre o item
+       os da Transação não emite bloqueio se já tiver bloqueio sobre item
+          ard ran 4.0 Promoção (upgrade) → bloqueio rl(x) convertido para wl(x)
+          ir C irb D Descenso (downgrade) → bloqueio wl(x) convertido para rl(x)
+       m m -N Transação não emite desbloqueio se não tiver bloqueio sobre item
+       lad lad -NC Solicitação de bloqueio não atendida entra em ﬁla de espera por desbloqueio
+
+  Wwww.wCC BY Aplicação de regras de bloqueio e desbloqueio não garante serialização
+
+     Regras adicionais para bloqueios e desbloqueios em fases são necessárias
+
+www.wladmirbrandao.com                                                                          5 / 17
+Protocolo de Bloqueio
+
+  o 2PL → protocolo de bloqueio em duas fases (2 Phase Locking)
+     randã m Todas as solicitações de bloqueio de uma transação precedem sua primeira
+     B .co solicitação de desbloqueio
+       so ao Espansão → bloqueios adquiridos, nenhuma liberação
+          rdo d Possibilidade de promoção de bloqueios
+       a ran 4.0 Retração → bloqueios liberados, nenhum bloqueio adquirido
+          ir C irb D Possibilidade de descenso de bloqueios
+     dm dm C-N Pode limitar concorrência
+     Wwlaww.wClaC BY-N Escalonamentos 2PL garantidamente serializáveis (ou seriais)
+
+www.wladmirbrandao.com                                                                 6 / 17
+Protocolo de Bloqueio
+
+o Considere o escalonamento não serializável
+          randã m Sa → r1(x), r2(x), w1(x), r1(y), w2(x), w1(y)
+                        ardosroanBdao..0co T1
+                        T2
+dmir CdmirbC-ND 4 Aplicação do protocolo 2PL
+  Wla w.wla BY-N Sa → l1(x),r1(x),l2(x),r2(x),w1(x),l1(y),r1(y),w2(x),u2(x),w1(y),
+      ww CC u1(x),u1(y)
+
+www.wladmirbrandao.com                                                              7 / 17
+Protocolo de Bloqueio
+
+ão Escalonamento Sa efetivamente executado a partir da aplicação 2PL sobre Sa
+          rand m Sa → r1(x), w1(x), r1(y), w1(y), r2(x), w2(x)
+                        ardosroanBdao..0co T1
+                        T2
+mir C mirb -ND 4 Note que T2 parou sua execução ao tentar bloquear x, já bloqueado por T1
+  Wlad .wlad Y-NC Sa → l1(x),r1(x),l2(x),r2(x),w1(x),l1(y),r1(y),w2(x),u2(x),w1(y),
+      www CC B u1(x),u1(y)
+
+www.wladmirbrandao.com                                                                     8 / 17
+Protocolo de Bloqueio
+
+  o Deadlock → situação de travamento, impasse
+             randã m Sa → r1(x), r2(x), w1(x), r1(y), w2(x), w1(y)
+
+  o B o.co Aplicação do protocolo 2PL com bloqueios ternários
+    ardosranda .0 Sa → rl1(x),r1(x),rl2(x),r2(x),wl1(x),w1(x),rl1(y),r1(y),wl2(x),w2(x),
+        ir C irb 4 u2(x),wl1(y),w1(y),u1(x),u1(y)
+
+  m m -ND Escalonamento Sa efetivamente executado com deadlock
+          Wlad .wlad Y-NC Sa → r1(x),r2(x),w1(x),w2(x)
+
+  www CC B Note que T1 paralisa ao tentar wl1(x), aguardando T2 liberar o rl2(x), e T2 para-
+
+     lisa ao tentar wl2(x), aguardando T1 liberar o rl1(x)
+
+www.wladmirbrandao.com                                                                        9 / 17
+Protocolo de Bloqueio
+
+  o Resolução de deadlock envolve prevenção, detecção ou presunção
+     ndã Prevenção → 2PL conservador ou estático
+       ra om Transação emite solicitação de bloqueios que necessita antes de iniciar
+             oso B ao.c Sa → r1(x),r2(x),w1(x),r1(y),w2(x),w1(y)
+      ard rand 4.0 Aplicação de protocolo 2PL estático com bloqueios ternários
+         mir C mirb -ND Sa → wl1(x),wl1(y),r1(x),wl2(x),r2(x),w1(x),r1(y),w2(x),
+            lad lad C u2(x),w1(y),u1(x),u1(y)
+      W w.w BY-N Escalonamento Sa efetivamente executado
+           ww CC Sa → r1(x), w1(x), r1(y), w1(y), r2(x), w2(x)
+
+www.wladmirbrandao.com                                                                10 / 17
+Protocolo de Bloqueio
+
+  o Resolução de deadlock envolve prevenção, detecção ou presunção
+     ndã Prevenção → reescalonamento por timestamp (TS )
+       ra om Transação mais nova, bloqueando item necessário para outra mais antiga,
+       o B o.c aborta e é reescalonada
+       os da Se Ti inicia antes de Tj , então TS (Ti ) < TS (Tj )
+             ir Cardirbran 4.0 Sa → r1(x),r2(x),w1(x),r1(y),w2(x),w1(y)
+                m m -ND TS(T1) < TS(T2)
+      Wlad .wlad Y-NC T1 não consegue wl1(x) por rl2(x) de T2, T2 aborta e é reescalonada
+           www CC B Sa → r1(x),w1(x),r1(y),w1(y)
+
+www.wladmirbrandao.com                                                                     11 / 17
+Protocolo de Bloqueio
+
+o Resolução de deadlock envolve prevenção, detecção ou presunção
+  ndã Detecção → transações em impasse, mais nova aborta e é reescalonada
+     ra om Transação mais nova, provavelmente com menos operações executadas
+     o B o.c Grafo de Espera → nós são transações, arestas direcionadas são bloqueios em
+     os da espera, ciclo indica impasse
+                        mir Camrdirbra-Nn D 4.0 T1
+                        T2
+                        Wwlawdw.wClaCdBY-NC Sa → r1(x),r2(x),w1(x),r1(y),w2(x),w1(y)
+
+Ciclo entre T1 e T2, T2 aborta e é reescalonada por ser a mais nova
+
+www.wladmirbrandao.com                                                                    12 / 17
+Protocolo de Bloqueio
+
+  o Resolução de deadlock envolve prevenção, detecção ou presunção
+     randã m Presunção → transação demorada aborta e é reescalonada
+       B .co Tempo Limite (timeout) → registro de tempo
+       oso dao Presume-se impasse na transação se seu tempo de execução exceder timeout
+       Wwlawdwm.wirClaCCdaBmrYdi-rNbCra-Nn D 4.0 Simples, evita sobrecarga
+
+www.wladmirbrandao.com                                                                   13 / 17
+Protocolo de Bloqueio
+
+  o Starvation → situação de espera indeﬁnida, inanição
+     randã m Transação constantemente abortada e reescalonada
+     B .co No pior caso, nunca executada
+     oso dao Solução
+       ard ran .0 Priorização proporcional ao tempo de espera
+       Wwlawdwm.wirClaCCdBmYi-rNbC-ND 4 Manutenção de timestamp original, pré-reescalonamento
+
+www.wladmirbrandao.com                                                                         14 / 17
+Protocolo de Timestamp
+
+  o Baseando-se no princípio da equivalência por conﬂito, ordem de acesso a um
+  dã item em operações em conﬂito não pode violar ordem de timestamp
+
+     Bran .com Dois registros de timestamp para cada item
+       o o Leitura rTS (x) → timestamp da transação mais nova a ler x
+       os da Escrita wTS (x) → timestamp da transação mais nova a escrever x
+
+     ard ran 4.0 Regras → garantem ordenação por timestamp
+       ir C irb D T emite solicitação r(x)
+          m m -N Se wTS(x) > TS(T), rejeite r(x), aborte e reverta T
+          lad lad C Senão, aceite r(x), rTS(x) = max(rTS(x),TS(T))
+       W .w Y-N T emite solicitação w(x)
+          w B Se (rTS (x) > TS (T ) ∨ wTS (x) > TS (T )), rejeite w(x), aborte e reverta T
+          ww CC Senão, aceite w(x), wTS(x) = TS(T)
+
+     Não gera deadlock, mas tipicamente implica em menor concorrência
+
+www.wladmirbrandao.com                                                                      15 / 17
+Protocolo de Timestamp
+
+  o Não pode haver conﬂito entre operação corrente de transação mais antiga e
+  dã operação anterior de transação mais nova
+
+             Bran .com Sa → r1(x),r2(x),w1(x),r1(y),w2(x),w1(y)
+                  oso dao TS(T1) = 1 < TS(T2) = 2
+
+  ard ran 4.0 Aplicando-se o protocolo de timestamp
+    mir C mirb -ND rTS(x) → 0 1 2 wTS(x) → 0 2 rTS(y) → 0 wTS(y) → 0
+
+  Wlad .wlad Y-NC Escalonamento Sa efetivamente executado
+           www CC B Sa → r2(x),w2(x)
+
+www.wladmirbrandao.com                                                         16 / 17
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            17 / 17
+

@@ -1,0 +1,60 @@
+02/07/2026, 12:42                                                    HO04: Álgebra Relacional I
+
+HO04: Álgebra Relacional I
+
+Vencimento Sem prazo de entrega
+Pontos Nenhum
+
+Hands-On
+
+Esta é a tarefa HO04: Álgebra Relacional I, uma atividade prática que estimula o aluno a
+especificar e interpretar consultas em bancos de dados relacionais usando operações
+da álgebra relacional.
+
+Problema
+
+Especificar as seguintes consultas em álgebra relacional para recuperar os dados em um
+banco de dados relacional, considerando o conjunto de dados (dataset) denominado IMDB-
+sample disponível na calculadora RelaX (https://dbis-uibk.github.io/relax) :
+
+ 1. Projetar o primeiro nome e o último nome dos atores de sexo feminino;
+ 2. Projetar o nome dos filmes com ano superior à 1999;
+ 3. Projetar o nome do filme e o nome do diretor de cada filme;
+ 4. Projetar o nome do filme, nome do ator e o papel que cada ator teve no filme para filmes
+
+    com ranking acima da nota 6;
+ 5. Projetar o nome do diretor e o número de filmes que cada diretor dirigiu;
+ 6. Projetar o gênero e o número de filmes de cada gênero;
+ 7. Projetar o gênero, o ranking (nota) médio, mínimo e máximo dos filmes do gênero.
+
+Produto
+
+O aluno deve entregar um texto contendo a solução para o problema descrito anteriormente.
+
+Recursos
+
+Para a execução da tarefa o aluno deve consultar as referências bibliográficas especificadas
+no Programa do Curso (https://pucminas.instructure.com/courses/260154/pages/programa) . A
+seguir encontram-se indicados alguns recursos e materiais de apoio para a execução da
+
+https://pucminas.instructure.com/courses/260154/assignments/1288122                              1/2
+02/07/2026, 12:42                                                    HO04: Álgebra Relacional I
+
+tarefa. Outras referências bibliográficas podem ser utilizadas, desde que devidamente citadas
+
+no produto.
+
+Livro (Elmasri & Navathe, 2016):
+
+Capítulo 8: Álgebra Cálculo Relacional
+
+Slides e Videos:
+
+Tópico             #07:                                              Álgebra                     Relacional  I
+
+(https://pucminas.instructure.com/courses/260154/pages/topico-number-07-algebra-
+
+relacional-i)
+
+https://pucminas.instructure.com/courses/260154/assignments/1288122                                             2/2
+

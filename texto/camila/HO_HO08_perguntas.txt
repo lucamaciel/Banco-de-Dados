@@ -1,0 +1,59 @@
+02/07/2026, 12:49                                                    HO08: SQL (DML)
+
+HO08: SQL (DML)
+
+     Vencimento 9 abr por 8:30
+     Pontos Nenhum
+     Disponível 8 abr em 0:00 - 14 abr em 8:30
+ Esta tarefa foi travada 14 abr em 8:30.
+
+  Hands-On
+
+Esta é a tarefa HO08: SQL (DML), uma atividade prática que estimula o aluno a especificar e
+interpretar consultas em bancos de dados relacionais usando a linguagem de consulta
+estruturada SQL (Structure Query Language).
+
+Problema
+
+Especificar as seguintes consultas em SQL para recuperar os dados em um banco de dados
+relacional, considerando o conjunto de dados (dataset) denominado IMDB-sample disponível
+na calculadora RelaX (http://verde.icei.pucminas.br) :
+
+ 1. Projetar o primeiro nome e o último nome dos atores que são diretores;
+ 2. Projetar o primeiro nome e o último nome dos atores que não são diretores;
+ 3. Projetar o primeiro nome e o último nome dos atores e diretores;
+ 4. Projetar o nome dos filmes que não são dirigidos por nenhum diretor;
+ 5. Projetar primeiro nome e o último nome dos atores que não atuaram em pelo menos dois
+
+    filmes;
+ 6. Projetar, por gênero e ano, o número médio de filmes com menos de dois atores atuando.
+
+Produto
+
+O aluno deve entregar um texto contendo a solução para o problema descrito anteriormente.
+
+Recursos
+
+Para a execução da tarefa o aluno deve consultar as referências bibliográficas especificadas
+no Programa do Curso (https://pucminas.instructure.com/courses/260154/pages/programa) . A
+seguir encontram-se indicados alguns recursos e materiais de apoio para a execução da
+
+https://pucminas.instructure.com/courses/260154/assignments/1288126                           1/2
+02/07/2026, 12:49                                                    HO08: SQL (DML)
+
+tarefa. Outras referências bibliográficas podem ser utilizadas, desde que devidamente citadas
+
+no produto.
+
+Livro (Elmasri & Navathe, 2016):
+    Capítulo 6: SQL Básica
+    Capítulo 7: Mais SQL: Consultas Complexas, Triggers, Views e Modificação de
+    Esquema
+
+Slides e Videos:
+    Tópico #10: SQL (DML) (https://pucminas.instructure.com/courses/260154/pages/topico-
+
+     number-10-sql-dml)
+
+https://pucminas.instructure.com/courses/260154/assignments/1288126                            2/2
+

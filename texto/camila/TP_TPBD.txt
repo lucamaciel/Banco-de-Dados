@@ -1,0 +1,598 @@
+PONTIFÍCIA UNIVERSIDADE CATÓLICA MINAS GERAIS
+                       CIÊNCIA DA COMPUTAÇÃO
+                       CAMILA CARDOSO DE MENEZES
+
+    TRABALHO PRÁTICO - BANCO DE DADOS
+
+              BELO HORIZONTE, MINAS GERAIS
+                                    2026
+                                                                                                                 1
+
+1 Introdução
+
+O envelhecimento da população tem aumentado a demanda por instituições especiali-
+zadas no cuidado e na assistência de pessoas idosas. Nesse contexto, as Instituições de
+Longa Permanência para Idosos (ILPIs) desempenham um papel fundamental ao ofere-
+cer moradia, acompanhamento e suporte para idosos que necessitam de cuidados contí-
+nuos.
+A Vida Nobre Residencial para Idosos é uma instituição localizada em Belo Ho-
+rizonte, Minas Gerais, dedicada ao acolhimento e cuidado de idosos, que são residentes
+fixos. Atualmente, a instituição atende cerca de 18 idosos, proporcionando assistência
+diária e um ambiente adequado para seu bem-estar e qualidade de vida.
+Além dos cuidados prestados aos residentes, a instituição conta com o apoio da comu-
+nidade por meio de doações de diversos tipos de itens, como roupas, alimentos não pe-
+recíveis, produtos de higiene pessoal, fraldas e outros materiais essenciais para a manu-
+tenção das atividades e atendimento das necessidades dos idosos. Essas contribuições
+representam uma importante forma de apoio à instituição e auxiliam diretamente na
+melhoria da qualidade de vida dos residentes.
+Diante da importância do gerenciamento adequado dessas informações, este trabalho
+propõe a modelagem e implementação de um banco de dados relacional capaz de apoiar
+o controle das doações realizadas à instituição. O sistema busca organizar informações
+relacionadas aos doadores, às doações recebidas, aos itens doados e aos processos de dis-
+tribuição, contribuindo para uma gestão mais eficiente e estruturada dos recursos dispo-
+nibilizados à instituição.
+
+                      Figura 1: Banner Vida Nobre Residencial para Idosos
+
+Informações da Instituição
+
+    • Nome: Vida Nobre Residencial para Idosos
+    • Localização: Belo Horizonte, Minas Gerais
+    • Número de residentes: 18 idosos
+    • Contato (WhatsApp): (31) 99879-5412
+    • Responsável pelo contato: Karla
+    • Site: https://saibamais.link/vidanobre/
+    • Instagram: https://www.instagram.com/familiavidanobre/
+                                                                                                                 2
+
+2 Descrição do Minimundo
+
+A seguir, é apresentada a descrição do minimundo da instituição estudada. Com o ob-
+jetivo de facilitar a identificação dos elementos que compõem o modelo conceitual, as
+entidades, os atributos e os relacionamentos foram destacados por meio de cores distin-
+tas, seguindo a mesma metodologia utilizada em sala de aula.
+
+Legenda
+
+    • Entidades
+
+    • Atributos
+
+    • Relacionamentos
+
+Descrição
+
+A Vida Nobre Residencial para Idosos é uma instituição de longa permanência respon-
+sável pelo acolhimento e assistência de idosos residentes. A instituição é identificada
+por um código e possui nome, endereço e telefone para contato.
+A instituição possui funcionários responsáveis pelo recebimento das doações e pelo
+controle da distribuição dos itens aos residentes. Cada funcionário é identificado pelo
+CPF e possui nome, telefone e cargo. Todo funcionário está vinculado a uma
+única instituição, enquanto uma instituição pode possuir diversos funcionários.
+Os idosos residentes são identificados pelo CPF e possuem nome, sexo, data de
+nascimento e data de admissão. Todo idoso está vinculado a um responsável,
+enquanto um responsável pode ser responsável por diversos idosos. Cada res-
+ponsável é identificado pelo CPF e possui nome, telefone e grau de parentesco.
+Todo idoso está vinculado à instituição e uma instituição pode abrigar diver-
+sos idosos.
+As doações são realizadas por doadores externos à instituição. Cada doador é iden-
+tificado pelo CPF e possui nome e telefone. Um doador pode realizar diversas
+doações ao longo do tempo, porém cada doação é realizada por apenas um doa-
+dor.
+Cada doação é identificada por um código e possui data de recebimento. Além
+disso, toda doação é registrada por um funcionário responsável pelo recebimento. Um
+funcionário pode registrar diversas doações, enquanto cada doação é registrada
+por apenas um funcionário.
+As doações são compostas por itens. Cada item é identificado por um código e pos-
+sui nome, descrição, categoria e unidade de medida. Um item pode estar pre-
+sente em diversas doações e uma doação pode conter diversos itens. Ao fazer
+uma doação, deve ser registrada a quantidade de cada item recebida.
+Os itens recebidos são armazenados pela instituição e posteriormente distribuídos aos
+idosos de acordo com suas necessidades. Para registrar esse processo, são realizadas
+distribuições. Cada distribuição é identificada por um código e possui data e ob-
+servações. Toda distribuição é destinada a um único idoso e registrada por
+um único funcionário. Um idoso pode receber diversas distribuições ao longo
+do tempo e um funcionário pode registrar diversas distribuições.
+                                                                                                                 3
+Uma distribuição pode conter diversos itens e um mesmo item pode partici-
+par de diversas distribuições. Para isso, deve ser registrada a quantidade de cada
+item entregue ao idoso em cada distribuição.
+Dessa forma, o sistema deverá permitir o gerenciamento das informações da institui-
+ção, dos funcionários, dos idosos, dos doadores, das doações recebidas, dos itens
+cadastrados e das distribuições realizadas, possibilitando o acompanhamento com-
+pleto do fluxo das doações desde sua entrada na instituição até sua destinação aos resi-
+dentes.
+
+3 Modelo Conceitual
+
+Com base na Descrição do Minimundo, foi elaborado o Modelo Conceitual (Diagrama
+Entidade-Relacionamento em Notação Peter Chen).
+
+                                        Figura 2: Diagrama DER
+
+4 Modelo Lógico
+
+A partir do Modelo Conceitual, foi elaborado o Modelo Lógico: Diagrama de Esquema,
+que contempla as tabelas, atributos, chaves primárias e estrangeiras do sistema de banco
+de dados.
+                                                                                                                 4
+
+                                    Figura 3: Diagrama de Esquema
+
+5 Modelo de Implementação
+
+Após a elaboração do modelo conceitual e sua transformação para o modelo lógico, foi
+desenvolvido o Modelo de Implementação: Diagrama de Implementação em Notação
+Pé-de-Galinha;
+                                                                                                                 5
+
+             Figura 4: Diagrama de Implementação em Notação Pé-de-Galinha
+
+6 Criação do banco de dados
+
+A seguir, é apresentado o script SQL responsável pela criação do banco de dados desen-
+volvido neste trabalho. O script foi elaborado com base no modelo lógico e no diagrama
+de implementação em notação Pé-de-Galinha.
+
+CREATE TABLE Instituicao (
+        codigo INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        endereco VARCHAR(200) NOT NULL,
+        telefone CHAR(11)
+
+);
+CREATE TABLE Responsavel (
+
+       cpf CHAR(11) PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        parentesco VARCHAR(50) NOT NULL,
+        telefone CHAR(11) NOT NULL
+);
+CREATE TABLE Funcionario (
+       cpf CHAR(11) PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        cargo VARCHAR(50) NOT NULL,
+        telefone CHAR(11) NOT NULL,
+        codigo_instituicao INT NOT NULL,
+       CONSTRAINT fk _f u nc io na r io _i ns t it ui ca o
+                                                                                                                 6
+
+               FOREIGN KEY ( codigo_instituicao )
+               REFERENCES Instituicao(codigo)
+);
+
+CREATE TABLE Idoso (
+       cpf CHAR(11) PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        sexo CHAR(1) NOT NULL,
+        data_nascimento DATE NOT NULL,
+        data_admissao DATE NOT NULL,
+
+        cpf_responsavel CHAR(11) NOT NULL,
+        codigo_instituicao INT NOT NULL,
+
+       CONSTRAINT fk_idoso_responsavel
+               FOREIGN KEY ( cpf_responsavel )
+               REFERENCES Responsavel(cpf),
+
+       CONSTRAINT fk_idoso_instituicao
+               FOREIGN KEY ( codigo_instituicao )
+               REFERENCES Instituicao(codigo)
+
+);
+
+CREATE TABLE Doador (
+       cpf CHAR(11) PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        telefone CHAR(11) NOT NULL
+
+);
+
+CREATE TABLE Item (
+        codigo INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        descricao VARCHAR(255) ,
+        categoria VARCHAR(50) ,
+        unidade_medida VARCHAR(30) NOT NULL
+
+);
+
+CREATE TABLE Doacao (
+        codigo INT AUTO_INCREMENT PRIMARY KEY,
+        data_recebimento DATE NOT NULL,
+
+        cpf_doador CHAR(11) NOT NULL,
+        cpf_funcionario CHAR(11) NOT NULL,
+
+       CONSTRAINT fk_doacao_doador
+               FOREIGN KEY ( cpf_doador )
+               REFERENCES Doador(cpf),
+
+       CONSTRAINT fk_doacao_funcionario
+               FOREIGN KEY ( cpf_funcionario )
+               REFERENCES Funcionario(cpf)
+                                                                                                                 7
+
+);
+
+CREATE TABLE Distribuicao (
+        codigo INT AUTO_INCREMENT PRIMARY KEY,
+        data_distribuicao DATE NOT NULL,
+        observacao TEXT ,
+
+        cpf_funcionario CHAR(11) NOT NULL,
+        cpf_idoso CHAR(11) NOT NULL,
+
+       CONSTRAINT f k_ d is t ri b u ic a o_ f u nc i on a r io
+               FOREIGN KEY ( cpf_funcionario )
+               REFERENCES Funcionario(cpf),
+
+       CONSTRAINT fk_distribuicao_idoso
+               FOREIGN KEY ( cpf_idoso )
+               REFERENCES Idoso(cpf)
+
+);
+
+CREATE TABLE Doacao_Item (
+        codigo_doacao INT NOT NULL,
+        codigo_item INT NOT NULL,
+        qtd_recebida INT NOT NULL,
+
+       PRIMARY KEY ( codigo_doacao , codigo_item ) ,
+
+       CONSTRAINT fk_doacao_item_doacao
+               FOREIGN KEY ( codigo_doacao )
+               REFERENCES Doacao(codigo),
+
+       CONSTRAINT fk_doacao_item_item
+               FOREIGN KEY ( codigo_item )
+               REFERENCES Item(codigo)
+
+);
+
+CREATE TABLE Item_Distribuicao (
+        codigo_distribuicao INT NOT NULL,
+        codigo_item INT NOT NULL,
+        qtd_entregue INT NOT NULL,
+
+       PRIMARY KEY ( codigo_distribuicao , codigo_item ) ,
+
+       CONSTRAINT f k _ i t e m _ d i s t r i b u i c a o _ d i s t r i b u i c a o
+               FOREIGN KEY ( codigo_distribuicao )
+               REFERENCES Distribuicao(codigo),
+
+       CONSTRAINT fk_ it em_ di st rib ui ca o_i te m
+               FOREIGN KEY ( codigo_item )
+               REFERENCES Item(codigo)
+
+);
+                                                                                       8
+
+7 População do banco de dados
+
+A seguir, é apresentado o script SQL responsável pela população do banco de dados
+desenvolvido neste trabalho. Os dados não sensíveis utilizados, como o nome da insti-
+tuição e algumas informações relacionadas ao minimundo, foram obtidos a partir das
+informações fornecidas pela própria instituição.
+
+−− 1 . INSTITUICAO                                                             250 −  Belo
+INSERT INTO Instituicao ( nome , endereco , telefone )
+VALUES
+( ’ Vida Nobre R e s i d e n c i a l para I d o s o s ’ , ’ Rua das Acacias ,
+
+        H o r i z o n t e /MG’ , ’ 3 1 9 9 8 7 9 5 4 1 2 ’ ) ;
+
+−− 2 . RESPONSAVEL
+INSERT INTO Responsavel ( cpf , nome , parentesco , telefone )
+VALUES
+( ’ 02304522645 ’, ’ Maria Aparecida Silva ’, ’ Filha ’, ’ 31997320529 ’),
+( ’ 02304522655 ’ , ’ Carlos Eduardo Souza ’ , ’ Filho ’ , ’ 31991613115 ’),
+( ’ 02304522765 ’ , ’ Ana Paula F e r r e i r a ’ , ’ S o b r i n h a ’ , ’ 31993601531 ’ ) ,
+( ’ 03887650398 ’ , ’ P a t r i c i a Gomes Lima ’ , ’ F i l h a ’ , ’ 31997113240 ’ ),
+( ’ 03948472904 ’, ’ Roberto Almeida Costa ’, ’ Filho ’, ’ 31997137205 ’),
+( ’ 02305628178 ’ , ’ Luciana Martins Rocha ’ , ’ Neta ’ , ’ 31997129186 ’ ),
+( ’ 02003898180 ’, ’ Paulo Henrique Souza ’, ’ Sobrinho ’, ’ 31997138107 ’),
+( ’ 02301938372 ’, ’ Cristina Duarte Silva ’, ’ Filha ’, ’ 31993726821 ’),
+( ’ 29327892019 ’, ’ Fernando Ribeiro Alves ’, ’ Filho ’, ’ 31997193726 ’),
+( ’ 02039183902 ’ , ’ Mariana Lopes Ferreira ’ , ’ Neta ’ , ’ 31997119273 ’);
+
+−− 3 . FUNCIONARIO
+INSERT INTO Funcionario ( cpf , nome , cargo , telefone ,
+
+      codigo_instituicao)
+VALUES
+( ’ 02304522676 ’ , ’ Karla Mendes ’ , ’ Coordenadora ’ , ’ 31984573721 ’ , 1),
+( ’ 02018476718 ’ , ’ Marceli Rocha ’ , ’ Cuidadora ’ , ’ 31987629288 ’ , 1),
+( ’ 02083918839 ’, ’ Wesley Martins ’, ’ Administrador ’, ’ 31982817603 ’,
+
+      1);
+
+−− 4 . IDOSO
+INSERT INTO Idoso ( cpf , nome , sexo , data_nascimento , data_admissao ,
+
+        cpf_responsavel , codigo_instituicao)
+VALUES
+( ’ 0 1 9 3 8 2 7 3 9 1 7 ’ , ’ J o s e P e r e i r a ’ , ’M’ , ’ 1942 −03 −15 ’ , ’ 2023 −02 −10 ’ , ’
+
+      02304522645 ’ ,1),
+( ’ 18371837282 ’ , ’ Helena Costa ’ , ’F ’ , ’ 1938−09−22 ’ , ’ 2022−11−05 ’ , ’
+
+      02304522655 ’ ,1),
+( ’ 1 7 2 9 1 8 2 8 2 7 1 ’ , ’ A n t o n i o R i b e i r o ’ , ’M’ , ’ 1945 −07 −08 ’ , ’ 2024 −01 −20 ’ , ’
+
+      02304522765 ’ ,1),
+( ’ 0 2 3 0 2 9 3 7 1 8 2 ’ , ’ Joao B a t i s t a ’ , ’M’ , ’ 1938 −11 −02 ’ , ’ 2021 −03 −15 ’ , ’
+
+      03948472904 ’ ,1),
+( ’ 18283818391 ’ , ’ Conceicao S i l v a ’ , ’F ’ , ’ 1942−07−25 ’ , ’ 2023−06−18 ’ , ’
+
+      02305628178 ’ ,1),
+( ’ 0 2 3 0 4 5 6 2 7 6 1 ’ , ’ S e b a s t i a o C o s t a ’ , ’M’ , ’ 1937 −02 −11 ’ , ’ 2020 −08 −09 ’ , ’
+                                                                                                                 9
+
+      02003898180 ’ ,1),
+( ’ 13910293819 ’ , ’ Rita de Cassia ’ , ’F ’ , ’ 1944−09−30 ’ , ’ 2024−01−05 ’ , ’
+
+      02301938372 ’ ,1),
+( ’ 0 2 3 0 1 9 2 8 1 9 2 ’ , ’ V i c e n t e A l v e s ’ , ’M’ , ’ 1939 −04 −17 ’ , ’ 2022 −04 −22 ’ , ’
+
+      29327892019 ’ ,1),
+( ’ 02301939192 ’ , ’ Helena Duarte ’ , ’F ’ , ’ 1941−08−08 ’ , ’ 2021−11−13 ’ , ’
+
+      02039183902 ’ ,1);
+
+−− 5 . DOADOR
+INSERT INTO Doador ( cpf , nome , telefone )
+VALUES
+( ’ 02304522656 ’, ’ Fernanda Almeida ’, ’ 31940281771 ’),
+( ’ 03887606693 ’ , ’ Ricardo Lima ’ , ’ 31991613115 ’ ),
+( ’ 02391039183 ’, ’ Juliana Castro ’, ’ 31974826150 ’),
+( ’ 02391039283 ’ , ’ Pedro Henrique Gomes ’ , ’ 31973716400 ’ );
+
+−− 6 . ITEM
+INSERT INTO Item ( nome , descricao , categoria , unidade_medida )
+VALUES
+( ’ F r a l d a G e r i a t r i c a ’ , ’ Pacote com 20 u n i d a d e s ’ , ’ H i g i e n e ’ , ’ Pacote ’
+
+      ),
+( ’ Sabonete ’, ’ Sabonete neutro ’, ’ Higiene ’, ’ Unidade ’),
+( ’ Cobertor ’ , ’ Cobertor s o l t e i r o ’ , ’ Roupa de cama ’ , ’ Unidade ’ ),
+( ’ Arroz ’ , ’ Pacote de 5kg ’ , ’ Alimento ’ , ’ Pacote ’),
+( ’ Leite Integral ’ , ’ Caixa de 1 l i t r o ’ , ’ Alimento ’ , ’ Caixa ’),
+( ’ Camiseta ’ , ’ Camiseta de algodao ’ , ’ Vestuario ’ , ’ Unidade ’);
+
+−− 7 . DOACAO
+INSERT INTO Doacao ( data_recebimento , cpf_doador , cpf_funcionario )
+VALUES
+( ’ 2026−01−08 ’ , ’ 02304522656 ’ , ’ 02304522676 ’ ), ( ’ 2026−01−22 ’ , ’
+
+      03887606693 ’, ’ 02018476718 ’),
+( ’ 2026−02−03 ’ , ’ 02391039183 ’ , ’ 02083918839 ’ ), ( ’ 2026−02−15 ’ , ’
+
+      02391039283 ’, ’ 02304522676 ’),
+( ’ 2026−02−28 ’ , ’ 02304522656 ’ , ’ 02018476718 ’ ), ( ’ 2026−03−10 ’ , ’
+
+      03887606693 ’, ’ 02083918839 ’),
+( ’ 2026−03−25 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−04−05 ’ , ’
+
+      02391039283 ’, ’ 02018476718 ’),
+( ’ 2026−04−18 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−05−01 ’ , ’
+
+      03887606693 ’, ’ 02304522676 ’),
+( ’ 2026−05−10 ’ , ’ 02391039183 ’ , ’ 02018476718 ’ ), ( ’ 2026−05−15 ’ , ’
+
+      02391039283 ’, ’ 02304522676 ’),
+( ’ 2026−05−20 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−06−02 ’ , ’
+
+      03887606693 ’, ’ 02018476718 ’),
+( ’ 2026−06−15 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−06−28 ’ , ’
+
+      02391039283 ’, ’ 02083918839 ’),
+( ’ 2026−07−01 ’ , ’ 02304522656 ’ , ’ 02304522676 ’ ), ( ’ 2026−07−02 ’ , ’
+
+      03887606693 ’, ’ 02018476718 ’),
+( ’ 2026−07−03 ’ , ’ 02391039183 ’ , ’ 02083918839 ’ ), ( ’ 2026−07−04 ’ , ’
+
+      02391039283 ’, ’ 02304522676 ’),
+( ’ 2026−07−05 ’ , ’ 02304522656 ’ , ’ 02018476718 ’ ), ( ’ 2026−07−06 ’ , ’
+                                                                                                               10
+
+     03887606693 ’, ’ 02083918839 ’),
+( ’ 2026−07−07 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−07−08 ’ , ’
+
+     02391039283 ’, ’ 02018476718 ’),
+( ’ 2026−07−09 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−07−10 ’ , ’
+
+     03887606693 ’, ’ 02304522676 ’),
+( ’ 2026−07−11 ’ , ’ 02391039183 ’ , ’ 02018476718 ’ ), ( ’ 2026−07−12 ’ , ’
+
+     02391039283 ’, ’ 02304522676 ’),
+( ’ 2026−07−13 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−07−14 ’ , ’
+
+     03887606693 ’, ’ 02018476718 ’),
+( ’ 2026−07−15 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−07−16 ’ , ’
+
+     02391039283 ’, ’ 02083918839 ’),
+( ’ 2026−07−17 ’ , ’ 02304522656 ’ , ’ 02304522676 ’ ), ( ’ 2026−07−18 ’ , ’
+
+     03887606693 ’, ’ 02018476718 ’),
+( ’ 2026−07−19 ’ , ’ 02391039183 ’ , ’ 02083918839 ’ ), ( ’ 2026−07−20 ’ , ’
+
+     02391039283 ’, ’ 02304522676 ’),
+( ’ 2026−07−21 ’ , ’ 02304522656 ’ , ’ 02018476718 ’ ), ( ’ 2026−07−22 ’ , ’
+
+     03887606693 ’, ’ 02083918839 ’),
+( ’ 2026−07−23 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−07−24 ’ , ’
+
+     02391039283 ’, ’ 02018476718 ’),
+( ’ 2026−07−25 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−07−26 ’ , ’
+
+     03887606693 ’, ’ 02304522676 ’),
+( ’ 2026−07−27 ’ , ’ 02391039183 ’ , ’ 02018476718 ’ ), ( ’ 2026−07−28 ’ , ’
+
+     02391039283 ’, ’ 02304522676 ’),
+( ’ 2026−07−29 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−07−30 ’ , ’
+
+     03887606693 ’, ’ 02018476718 ’),
+( ’ 2026−07−31 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−08−01 ’ , ’
+
+     02391039283 ’, ’ 02083918839 ’),
+( ’ 2026−08−02 ’ , ’ 02304522656 ’ , ’ 02304522676 ’ ), ( ’ 2026−08−03 ’ , ’
+
+     03887606693 ’, ’ 02018476718 ’),
+( ’ 2026−08−04 ’ , ’ 02391039183 ’ , ’ 02083918839 ’ ), ( ’ 2026−08−05 ’ , ’
+
+     02391039283 ’, ’ 02304522676 ’),
+( ’ 2026−08−06 ’ , ’ 02304522656 ’ , ’ 02018476718 ’ ), ( ’ 2026−08−07 ’ , ’
+
+     03887606693 ’, ’ 02083918839 ’),
+( ’ 2026−08−08 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−08−09 ’ , ’
+
+     02391039283 ’, ’ 02018476718 ’),
+( ’ 2026−08−10 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−08−11 ’ , ’
+
+     03887606693 ’, ’ 02304522676 ’),
+( ’ 2026−08−12 ’ , ’ 02391039183 ’ , ’ 02018476718 ’ ), ( ’ 2026−08−13 ’ , ’
+
+     02391039283 ’, ’ 02304522676 ’),
+( ’ 2026−08−14 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−08−15 ’ , ’
+
+     03887606693 ’, ’ 02018476718 ’),
+( ’ 2026−08−16 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−08−17 ’ , ’
+
+     02391039283 ’, ’ 02083918839 ’),
+( ’ 2026−08−18 ’ , ’ 02304522656 ’ , ’ 02304522676 ’ ), ( ’ 2026−08−19 ’ , ’
+
+     03887606693 ’, ’ 02018476718 ’),
+( ’ 2026−08−20 ’ , ’ 02391039183 ’ , ’ 02083918839 ’ ), ( ’ 2026−08−21 ’ , ’
+
+     02391039283 ’, ’ 02304522676 ’),
+( ’ 2026−08−22 ’ , ’ 02304522656 ’ , ’ 02018476718 ’ ), ( ’ 2026−08−23 ’ , ’
+
+     03887606693 ’, ’ 02083918839 ’),
+( ’ 2026−08−24 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−08−25 ’ , ’
+
+     02391039283 ’, ’ 02018476718 ’),
+                                                                                                                11
+
+( ’ 2026−08−26 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−08−27 ’ , ’
+      03887606693 ’, ’ 02304522676 ’),
+
+( ’ 2026−08−28 ’ , ’ 02391039183 ’ , ’ 02018476718 ’ ), ( ’ 2026−08−29 ’ , ’
+      02391039283 ’, ’ 02304522676 ’),
+
+( ’ 2026−08−30 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−08−31 ’ , ’
+      03887606693 ’, ’ 02018476718 ’),
+
+( ’ 2026−09−01 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−09−02 ’ , ’
+      02391039283 ’, ’ 02083918839 ’),
+
+( ’ 2026−09−03 ’ , ’ 02304522656 ’ , ’ 02304522676 ’ ), ( ’ 2026−09−04 ’ , ’
+      03887606693 ’, ’ 02018476718 ’),
+
+( ’ 2026−09−05 ’ , ’ 02391039183 ’ , ’ 02083918839 ’ ), ( ’ 2026−09−06 ’ , ’
+      02391039283 ’, ’ 02304522676 ’),
+
+( ’ 2026−09−07 ’ , ’ 02304522656 ’ , ’ 02018476718 ’ ), ( ’ 2026−09−08 ’ , ’
+      03887606693 ’, ’ 02083918839 ’),
+
+( ’ 2026−09−09 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−09−10 ’ , ’
+      02391039283 ’, ’ 02018476718 ’),
+
+( ’ 2026−09−11 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−09−12 ’ , ’
+      03887606693 ’, ’ 02304522676 ’),
+
+( ’ 2026−09−13 ’ , ’ 02391039183 ’ , ’ 02018476718 ’ ), ( ’ 2026−09−14 ’ , ’
+      02391039283 ’, ’ 02304522676 ’),
+
+( ’ 2026−09−15 ’ , ’ 02304522656 ’ , ’ 02083918839 ’ ), ( ’ 2026−09−16 ’ , ’
+      03887606693 ’, ’ 02018476718 ’),
+
+( ’ 2026−09−17 ’ , ’ 02391039183 ’ , ’ 02304522676 ’ ), ( ’ 2026−09−18 ’ , ’
+      02391039283 ’, ’ 02083918839 ’),
+
+( ’ 2026−09−19 ’ , ’ 02304522656 ’ , ’ 02304522676 ’ ), ( ’ 2026−09−20 ’ , ’
+      03887606693 ’, ’ 02018476718 ’),
+
+( ’ 2026−09−21 ’ , ’ 02391039183 ’ , ’ 02083918839 ’ ), ( ’ 2026−09−22 ’ , ’
+      02391039283 ’, ’ 02304522676 ’),
+
+( ’ 2026−09−23 ’ , ’ 02304522656 ’ , ’ 02018476718 ’ );
+
+−− 8 . DOACAO_ITEM
+INSERT INTO Doacao_Item ( codigo_doacao , codigo_item , qtd_recebida )
+VALUES
+(1, 1, 10), (1, 2, 20), (2, 3, 5), (2, 6, 12), (3, 4, 8), (3, 5,
+
+      24), (4, 1, 6), (4, 3, 4),
+(5, 1, 10), (6, 2, 15), (7, 3, 5), (8, 4, 20), (9, 5, 12), (10, 6,
+
+      8), (11, 1, 14), (12, 2, 30),
+(13, 3, 4), (14, 4, 10), (15, 5, 24), (16, 6, 5), (17, 1, 8), (18,
+
+      2, 20), (19, 3, 6), (20, 4, 15),
+(21, 5, 18), (22, 6, 10), (23, 1, 12), (24, 2, 25), (25, 3, 7),
+
+      (26, 4, 11), (27, 5, 30), (28, 6, 4),
+(29, 1, 9), (30, 2, 18), (31, 3, 5), (32, 4, 14), (33, 5, 20), (34,
+
+       6, 6), (35, 1, 15), (36, 2, 22),
+(37, 3, 3), (38, 4, 12), (39, 5, 16), (40, 6, 9), (41, 1, 11), (42,
+
+       2, 28), (43, 3, 8), (44, 4, 13),
+(45, 5, 25), (46, 6, 7), (47, 1, 10), (48, 2, 14), (49, 3, 4), (50,
+
+       4, 16), (51, 5, 22), (52, 6, 5),
+(53, 1, 13), (54, 2, 19), (55, 3, 6), (56, 4, 10), (57, 5, 18),
+
+      (58, 6, 12), (59, 1, 7), (60, 2, 26),
+(61, 3, 9), (62, 4, 15), (63, 5, 21), (64, 6, 8), (65, 1, 14), (66,
+
+       2, 17), (67, 3, 5), (68, 4, 12),
+                                                                                                                12
+
+(69, 5, 19), (70, 6, 6), (71, 1, 12), (72, 2, 24), (73, 3, 4), (74,
+       4, 14), (75, 5, 23), (76, 6, 11),
+
+(77, 1, 10), (78, 2, 21), (79, 3, 7), (80, 4, 9), (81, 5, 17), (82,
+       6, 5), (83, 1, 16), (84, 2, 20),
+
+(85, 3, 6), (86, 4, 13), (87, 5, 26), (88, 6, 8), (89, 1, 8), (90,
+      2, 15), (91, 3, 5), (92, 4, 11),
+
+(93, 5, 20), (94, 6, 7), (95, 1, 12), (96, 2, 23), (97, 3, 3), (98,
+       4, 15), (99, 5, 18), (100, 6, 9),
+
+(101, 1, 14), (102, 2, 16), (103, 3, 6), (104, 4, 10), (105, 5, 24)
+      ;
+
+−− 9 . DISTRIBUICAO
+INSERT INTO Distribuicao ( data_distribuicao , observacao ,
+
+      cpf_funcionario , cpf_idoso)
+VALUES
+( ’ 2026−05−03 ’ , ’ D i s t r i b u i c a o de i t e n s de h i g i e n e ’ , ’ 02018476718 ’ , ’
+
+      01938273917 ’),
+( ’ 2026−05−12 ’ , ’ Entrega de c o b e r t o r ’ , ’ 02304522676 ’ , ’ 18371837282 ’ )
+
+      ,
+( ’ 2026−05−18 ’ , ’ Entrega de alimentos ’ , ’ 02083918839 ’ , ’ 17291828271 ’
+
+      ),
+( ’ 2026−05−22 ’ , ’ Reposicao de f r a l d a s ’ , ’ 02018476718 ’ , ’ 01938273917 ’
+
+      );
+
+−− 1 0 . ITEM_DISTRIBUICAO
+INSERT INTO Item_Distribuicao ( codigo_distribuicao , codigo_item ,
+
+      qtd_entregue)
+VALUES
+(1, 1, 2),
+(1, 2, 4),
+(2, 3, 1),
+(3, 4, 2),
+(3, 5, 6),
+(4, 1, 1);
+

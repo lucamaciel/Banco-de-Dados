@@ -1,0 +1,266 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+processamento de consulta
+Processamento de Consulta
+
+o SGBDs processam, otimizam e executam consultas
+randã m Consulta
+                           Parsing → análise sintática
+   B .co Parsing
+oso dao Representação Interna
+
+  ard ran 4.0 Otimização
+mir C mirb -ND Plano de Execução
+                                 Varredura → tokenização
+                                 Análise → regras gramaticais SQL
+                                 Validação → metadados ∈ esquema
+
+                           Otimização → escolha de estratégia eﬁciente
+                           para execução da consulta
+lad lad -NC Geração de Código
+Wwww.wCC BY Código de ExecuçãoÁrvore de Consulta → ou grafo de consulta é
+                           uma representação interna da consulta
+
+                           Plano de Execução → estratégia de execução
+
+Execução                   Geração de Código → código compilado ou
+
+Resultado                  interpretado para execução
+
+www.wladmirbrandao.com                                                  3 / 18
+Processamento de Consulta: Tradução
+
+o Parsing → consulta é traduzida para álgebra relacional
+  randã m Tradução → decomposição em blocos de expressões SELECT-FROM-WHERE
+o B o.co SELECT CPF, Nome FROM PROFESSOR WHERE Salario >
+     os da (SELECT AVG(Salario) FROM PROFESSOR WHERE Sexo=’M’);
+ir Cardirbran D 4.0 SELECT CPF, Nome
+ m m -N FROM PROFESSOR
+lad lad C WHERE Salario > X;
+                        CPF, Nome ( Salario > X (PROFESSOR ))
+W w.w BY-N SELECT AVG(Salario)
+ ww CC FROM PROFESSOR
+                        AVG (Salario)( Sexo= M (PROFESSOR ))
+
+WHERE Sexo = ’M’;
+
+www.wladmirbrandao.com                                                       4 / 18
+Processamento de Consulta: Algoritmos
+
+  o Processar uma consulta envolve a escolha de algoritmos e estratégias a serem
+  dã aplicados na execução de sequências de operações da álgebra relacional
+
+     Bran .com Ordenação → agregação, conjunto, junção e projeção (distinct)
+     so ao Pesquisa → junção e seleção
+     ardo rand .0 Hashing → agregação, conjunto, junção, projeção e seleção
+  mir C mirb -ND 4 A escolha do algoritmo e estratégia adequados é feita pelo SGBD, dependendo da
+  d d C tecnologia de armazenamento e da organização de dados
+     Wla w.wla BY-N Memória primária livre → hashing em operação de junção
+     ww CC Arquivo ordenado → pesquisa binária em operação de seleção
+
+www.wladmirbrandao.com                                                                             5 / 18
+Algoritmos: Ordenação Externa
+
+o Estratégia de ordenação e intercalação (merge-sort) de registros em disco
+randã m Ordenação → partes (runs) do arquivo são transferidas do disco para
+B .co memória primária, ordenadas em memória primária e regravadas em disco
+oso dao BM → # buﬀers disponíveis em memória primária
+ard ran 4.0 BD → # blocos do arquivo em disco
+ir C irb D R =          BD
+ladm ladm C-N Intercalação → mesclagem de runs ordenadas em discoBM→ # runs
+
+W w.w BY-N Grau → D = min((BM − 1),R) → # runs mescladas em cada passo
+ww CC S = logD R → # passos de intercalação
+
+Custo O (n log n) → (2 × BD ) + (2 × BD × logD R )
+
+www.wladmirbrandao.com                                                       6 / 18
+Algoritmos: Ordenação Externa
+
+  o Exemplo de merge-sort com 24 registros em 12 blocos e 3 buﬀers, realizando
+  dã ordenação em 12/3 = 4 runs e intercalação de grau 2 em log24 = 2 passos
+   Bran .com 23 5 14 21 2 19 11 6 24 8 3 17 15 1 4 20 22 12 16 10 9 13 18 7
+
+    ir Cardirobsroanda4o.0 2 5 14 19 21 23 3 6 8 11 17 24 1 4 12 15 20 22 7 9 10 13 16 18
+    Wwlawdwm.wClaCdBmY-NC-ND 2 3 5 6 8 11 14 17 19 21 23 24 1 4 7 9 10 12 13 15 16 18 20 22
+
+            1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
+
+www.wladmirbrandao.com                                                                       7 / 18
+Algoritmos: Ordenação Externa
+
+o Para ordenar um arquivo que ocupa 1024 blocos em disco usando 5 buﬀers:
+randã m Ordenação → 205 runs ordenadas em disco
+B .co R =
+oso dao Intercalação → grau 4 em 4 passos1024=204, 8= 205
+  ard ran .0 D = min((5 − 1),205) = 45
+  ir C irb D 4 S = log4 205 ≈ 3,84 = 4
+     m m -N Passo 1 → 205 runs mescladas 4 a 4
+     lad lad C Passo 2 → 52 runs mescladas 4 a 4
+     W .w Y-N Passo 3 → 13 runs mescladas 4 a 4
+     www CC B Passo 4 → 4 runs mescladas
+Custo → (2 × 1024) + (2 × 1024 × 4) = 10.240
+
+www.wladmirbrandao.com                                                     8 / 18
+Algoritmos: Projeção ( )
+
+  o Estratégias envolvem eliminar registros duplicados
+     randã m Ordenação-Intercalação → O(n logn)
+       o B o.co Ordena-se o resultado da projeção e varre-se sequencialmente registros
+       s a removendo duplicatas em registros adjacentes
+     ardo rand 4.0 Hashing → O(n)
+       mir C mirb -ND Computa-se um endereço de partição (bucket) a partir de uma função hash
+       d d C sobre cada registro de resultado, alocando-o no bucket correspondente
+       Wla .wla Y-N Antes da alocação veriﬁca-se se o registro já está presente no bucket, somente
+       www CC B alocando-o se não estiver presente
+
+www.wladmirbrandao.com                                                                              9 / 18
+Algoritmos: Seleção ( )
+
+  o Inúmeras estratégias possíveis, dependendo da existência de índices e da
+  dã característica e complexidade da condição de seleção
+
+     Bran .com Arquivo Não Indexado
+       oso dao Pesquisa Linear → O(n)
+          ard ran 4.0 Recupera-se cada registro e veriﬁca-se se valores em campos satisfazem a
+          ir C irb D condição de seleção
+       dm dm C-N Pesquisa Binária → O(logn)
+          Wla .wla Y-N Condição de seleção envolve comparação de < ≤ = ≥ > em campo de ordenação
+       www CC B Hashing → O(1)
+
+                            Condição de seleção envolve comparação de = em campo hash
+
+www.wladmirbrandao.com                                                                            10 / 18
+Algoritmos: Seleção ( )
+
+     ão Arquivo Indexado
+       rand om Índice Primário, de Agrupamento, Secundário ou Multinível → O (logn)
+          o B o.c Condição de seleção envolve comparação de < ≤ = ≥ > em campo de indexação
+       ardosranda .0 Índice Hash → O(1)
+          ir C irb 4 Condição de seleção envolve comparação de = em campo de indexação
+
+     dm dm C-ND Seleção Conjuntiva → operador ∧ na condição de seleção
+       Wla .wla Y-N Índice Composto → O(logn)
+          www CC B Condição de seleção envolve um subconjunto dos campos de indexação, desde
+
+                            que todos os campos iniciais estejam presentes
+
+www.wladmirbrandao.com                                                                        11 / 18
+Algoritmos: Seleção ( )
+
+     ão Seleção Conjuntiva → operador ∧ na condição de seleção
+       rand m Índice Individual → O(logn)
+          o B o.co Pesquisa-se no índice e veriﬁca-se condições remanescentes da seleção
+       rdos da Índice Múltiplo → O(logn)
+          a ran 4.0 Pesquisa-se em cada índice secundário separadamente, realiza-se a intersecção
+          ir C irb D de ponteiros recuperados, e veriﬁca-se condições remanescentes da seleção
+
+     ladm ladm C-N Seleção Disjuntiva → operador ∨ na condição de seleção
+       W w.w BY-N Índice Múltiplo → O(logn)
+          ww CC Pesquisa-se em cada índice secundário separadamente e realiza-se a união de
+
+                            ponteiros recuperados. Demanda índice para cada campo na condição de seleção
+
+www.wladmirbrandao.com                                                                                    12 / 18
+Algoritmos: Operações de Conjunto (× ∪ ∩ −)
+
+  o Estratégias envolvem combinação de registros
+     randã m Força Bruta → O(n2)
+       B .co Produto Cartesiano (×) → combinam-se todos os registros de cada conjunto
+     oso dao Ordenação-Intercalação → O(n logn)
+       ard ran 4.0 Ordenam-se os registros dos dois conjuntos, varrem-se os dois conjuntos
+       ir C irb D simultâneamente e a operação de conjunto apropriada é efetuada
+     dm dm C-N Hashing → O(n)
+       Wla .wla Y-N Computam-se endereços de bucket a partir de uma função hash para alocação
+       w B de registros do menor conjunto
+       ww CC Computa-se a função hash para cada registro do outro conjunto
+
+                   Aloca-se (união) ou desaloca-se (diferença ou intersecção) o registro no
+                   bucket correspondente de acordo com a operação de conjunto utilizada
+
+www.wladmirbrandao.com                                                                         13 / 18
+Algoritmos: Agregação ( )
+
+  o Estratégias dependem da existência de índices e de campos de agrupamento
+     randã m Completa → campo de agrupamento (group by) não especiﬁcado
+       B .co O (n) → varre-se arquivo de dados ou de índice computando função
+       so ao O (log n) → para índice B+ Tree no campo usado na função de agregação
+     ardo rand 4.0 Particionada → campo de agrupamento (group by) especiﬁcado
+       ir C irb D Ordenação → O(n logn)
+          m m -N Ordena-se arquivo pelo campo de agrupamento, varrendo-o e computando função
+          lad lad -NC de agregação para cada partição
+       W .w Y Hashing → O(n)
+          ww C B Particiona-se o arquivo em buckets usando campo de agrupamento e computa-se
+          w C função de agregação para cada bucket
+
+                   Índice de Agrupamento → O (n)
+                            Arquivo já particionado, bastando computar função de agregação
+
+www.wladmirbrandao.com                                                                        14 / 18
+Algoritmos: Junção ( )
+
+  o Estratégias dependem da existência de índices e da característica e
+  dã complexidade da condição de junção
+
+     Bran .com Junção de Loop Aninhado → O(n2)
+       oso dao Força bruta
+       ard ran .0 Para cada registro ri ∈ R, recuperar cada registro sj ∈ S
+       ir C irb D 4 Combinar ri e sj se satisfazem a condição de junção
+
+     dm dm C-N Junção de Loop Único → O(n logn)
+       Wla .wla Y-N Aplicável caso haja índice em ao menos um arquivo
+       ww C B Para cada registro ri ∈ R , onde R é o arquivo com maior custo de busca
+       w C Usar o índice em S para recuperar os registros que satisfazem a condição de
+
+                   junção, combinando-os com o registro ri
+
+www.wladmirbrandao.com                                                                  15 / 18
+Algoritmos: Junção ( )
+
+     ão Junção Ordenação-Intercalação → O (n log n)
+       rand m Ordena-se arquivos por campos presentes na condição de junção
+       B .co Varrem-se simultâneamente ambos os arquivos pelo campo de ordenação,
+       so ao combinando os registros que satisfazem a condiçào de junção
+       ardo rand .0 Registros em cada arquivo são acessados apenas uma vez
+
+     ir C irb D 4 Junção Hash → O(n)
+       dm dm C-N Para condição de junção com comparação de =
+       la la -N Varre-se o arquivo R de menor tamanho, aplicando uma função hash sobre o
+       W w.w BY campo presente na condição de junção para criar buckets em memória
+       ww CC Para cada registro em S , use a função hash para encontrar registros em R que
+
+                   satisfazem a condiçào de junção, e combine-os com o registro de S
+
+www.wladmirbrandao.com                                                                      16 / 18
+Algoritmos: Junção Externa ( )
+
+  o Estratégia envolve a combinação de estratégias de junção e de conjunto
+   randã m 1. Junte os arquivos R e S usando a melhor estratégia de junção
+   o B o.co 2. Use a operação diferença para encontrar os registros do arquivo R (aberto)
+
+     os a não presentes no resultado da junção
+   ard rand .0 3. Produto cartesiano dos registros não presentes de R com registro NULO de S
+   mir C mirb -ND 4 4. Use a operação união para combinar os registros das etapas 1 e 3
+  Wwlawdw.wClaCdBY-NC Custo → ( ) + (−) + (×) + (∪)
+
+www.wladmirbrandao.com                                                                        17 / 18
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            18 / 18
+

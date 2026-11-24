@@ -1,0 +1,73 @@
+02/07/2026, 13:00                                                    HO13: Sintonia (Tuning)
+
+HO13: Sintonia (Tuning)
+
+    Vencimento 28 mai por 10:30
+    Pontos Nenhum
+    Disponível 25 mai em 0:00 - 28 mai em 10:30
+
+Esta tarefa foi travada 28 mai em 10:30.
+
+Hands-On
+
+Esta é a tarefa HO13: Sintonia (Tuning), uma atividade prática que estimula o aluno a
+absorver e fixar conceitos e técnicas relacionadas ao processo de sintonia (tuning) em
+bancos de dados relacionais.
+
+Problema
+
+Reescrever as consultas abaixo para maximizar a probabilidade delas serem executadas de
+maneira eficiente:
+
+           SELECT DISTINCT A.CPF, A.Nome
+           FROM Funcionarios A
+           WHERE A.CPF IN (SELECT CPF_Supervisor FROM Funcionarios)
+           AND A.CPF NOT IN (SELECT CPF FROM Clientes)
+
+                   SELECT A.CodFilme, B.Nome
+                   FROM Midias A, Filmes B
+                   WHERE A.CodFilme = B.Codigo
+                   AND A.Tipo = "DVD"
+                   OR A.Tipo = "VHS"
+
+                   SELECT A.CPF_Cliente, A.ID_Midia, A.DataLocacao
+                   FROM Aluguel A, Clientes B
+                   WHERE A.CPF_Cliente = B.CPF
+                   AND B.Sexo != "F"
+                   AND EXISTS (SELECT * FROM Pagamentos C
+                   WHERE C.CPF_Cliente = A.CPF_Cliente
+                   AND C.ID_Midia = A.ID_Midia
+                   AND C.DataLocacao = A.DataLocacao)
+
+https://pucminas.instructure.com/courses/260154/assignments/1288131                           1/3
+02/07/2026, 13:00                                                    HO13: Sintonia (Tuning)
+
+Considere o modelo relacional apresentado abaixo. Considere também que você não conhece
+os caminhos de acesso (índices) criados sobre os arquivos.
+
+Produto
+
+O aluno deve entregar um texto contendo a solução para o problema descrito anteriormente.
+
+Recursos
+
+Para a execução da tarefa o aluno deve consultar as referências bibliográficas especificadas
+no Programa do Curso. A seguir encontram-se indicados alguns recursos e materiais de
+apoio para a execução da tarefa. Outras referências bibliográficas podem ser utilizadas, desde
+que devidamente citadas no produto.
+
+    Livro (Elmasri & Navathe, 2016):
+         Capítulo 17: Estruturas de Indexação para Arquivos e Projeto Físico de Banco de
+         Dados
+
+https://pucminas.instructure.com/courses/260154/assignments/1288131                             2/3
+02/07/2026, 13:00                                                    HO13: Sintonia (Tuning)
+
+Capítulo 18: Estratégias para Processamento de Consulta
+
+Slides e Videos:
+
+Tópico #18: Projeto Físico
+
+https://pucminas.instructure.com/courses/260154/assignments/1288131                           3/3
+

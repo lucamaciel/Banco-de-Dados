@@ -1,0 +1,242 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+modelo relacional
+Modelo Relacional
+
+  o Modelo de implementação (representativo) baseado no paradigma relacional
+     randã m Dados são organizados de maneira tabular:
+       o B o.co Entidade → Relação
+       rdos nda Relacionamento → Relacionamento
+       a ra 4.0 Atributo → Atributo
+       mir C mirb -ND Registro → Tupla
+     Wwlawdw.wClaCdBY-NC Pode ser criado a partir do EER utilizando um procedimento em 7 etapas
+
+www.wladmirbrandao.com                                                                           3 / 18
+Diagrama EER: Sistema de Matrícula
+
+                        so Braanod.cãoom Pago    Sigla
+
+                                          possui 1                             Área         N
+                                                                               Nome  1 integra
+                                               N
+                             Data                             Nome
+
+                                                                                     Sigla
+                                ardo rand .0 N
+                                   Sigla                                                        Nome
+                             matricula
+                             mir C mirb -ND 4 N CustoCurso1 possui N                 Módulo     1 possui
+
+                        Wwlawdw.wClaCdBY-NC Aluno    Professores                                       N
+                                                                                                      Tópico
+                                          Horas                                                       Horas
+
+                                                                               Nome  Sigla
+                                                                                        Nome
+                                                                          CPF
+                                          Data Nascimento
+
+                        CPF        Nome          Primeiro Nome
+
+                             Sexo
+
+                                          Sobrenome
+
+www.wladmirbrandao.com                                                                                        4 / 18
+Mapeamento EER
+
+  o Etapa 1 → Entidades Fortes
+     randã m Crie uma relação para cada entidade forte e inclua todos os atributos
+     B .co simples
+     oso dao Inclua apenas atributos simples de um atributo composto
+     ard ran 4.0 Escolha um dos atributos chave da entidade forte como chave primária da
+     ir C irb D nova relação
+     dm dm C-N Se a chave escolhida for composta, o conjunto de atributos simples que a
+     Wwlaww.wClaC BY-N compõe formarão a chave primária
+
+www.wladmirbrandao.com                                                                    5 / 18
+Mapeamento EER
+
+o Etapa 1 → Entidades Fortes
+     ndã CURSO
+      Bra .com Sigla Nome Horas Custo
+                        AREA
+                          Sigla Nome
+oso dao MODULO
+ard ran 4.0 Sigla Nome
+                             mir C mirb -ND ALUNO
+                        Wwlawdw.wClaCdBY-NC CPF Nome Sobrenome Sexo DataNasc
+
+www.wladmirbrandao.com                                                        6 / 18
+Mapeamento EER
+
+  o Etapa 2 → Entidades Fracas
+     randã m Crie uma relação para cada entidade fraca e inclua todos os atributos
+     B .co simples
+     oso dao Inclua como atributos de chave estrangeira da relação, os atributos de
+     ard ran .0 chave primária da relação que corresponde à entidade proprietária
+     ir C irb D 4 Escolha a chave estrangeira e um atributo chave parcial como chave
+     Wwlawdwm.wClaCdBmY-NC-N primária da nova relação
+
+www.wladmirbrandao.com                                                                7 / 18
+Mapeamento EER
+
+o Etapa 2 → Entidades Fracas
+     ndã CURSO
+      Bra .com Sigla Nome Horas Custo
+                                  AREA
+                                    Sigla Nome
+oso dao MODULO
+ard ran 4.0 Sigla Nome
+                        TOPICO
+                          Modulo
+                             mir C mirb -ND ALUNOSigla Nome Horas
+                        Wwlawdw.wClaCdBY-NC CPF Nome Sobrenome Sexo DataNasc
+
+www.wladmirbrandao.com                                                        8 / 18
+Mapeamento EER
+
+  o Etapa 3 → Relacionamentos Binários 1:N
+     randã m Identiﬁque a relação R 1 que representa a entidade participante no lado N do
+     B .co relacionamento
+     oso dao Inclua como chave estrangeira em R1 a chave primária de R2, que
+     Wwlawdwm.wirClaCCdaBmrYdi-rNbCra-Nn D 4.0 representa a outra entidade participante do relacionamento
+
+www.wladmirbrandao.com                                                                                     9 / 18
+Mapeamento EER
+
+o Etapa 3 → Relacionamentos Binários 1:N
+ndã CURSO
+Bra .com Sigla Nome Horas Custo Area
+                                  AREA
+                                    Sigla Nome SuperArea
+oso dao MODULO
+ard ran 4.0 Sigla Nome Curso
+                        TOPICO
+                          Modulo
+                             mir C mirb -ND ALUNOSigla Nome Horas
+                        Wwlawdw.wClaCdBY-NC CPF Nome Sobrenome Sexo DataNasc
+
+www.wladmirbrandao.com                                                        10 / 18
+Mapeamento EER
+
+  o Etapa 4 → Relacionamentos Binários N:N
+     randã m Crie uma nova relação R3 para cada relacionamento N:N
+     o B o.co Inclua como chave estrangeira em R 3 as chaves primárias das relações R 1 e
+     os a R 2, que representam as entidades participantes no relacionamento
+     ard rand 4.0 A chave primária de R3 será formada pela combinação das chaves
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND estrangeiras em R3
+
+www.wladmirbrandao.com                                                                     11 / 18
+Mapeamento EER
+
+o Etapa 4 → Relacionamentos Binários N:N
+ndã CURSO
+Bra .com Sigla Nome Horas Custo Area
+                                        AREA
+                                          Sigla Nome SuperArea
+oso dao MODULO
+ard ran 4.0 Sigla Nome Curso
+                              TOPICO
+                                Modulo
+mir C mirb -ND MATRICULA                Sigla Nome Horas
+Wwlawdw.wClaCdBY-NC Curso Aluno
+                        Data  Pago  ALUNO
+                                       CPF Nome Sobrenome Sexo DataNasc
+
+www.wladmirbrandao.com                                                   12 / 18
+Mapeamento EER
+
+  o Etapa 5 → Relacionamentos Binários 1:1
+     randã m Identiﬁque as relações que correspondem às entidades participantes
+     o B o.co Existem três estratégias:
+      ardosranda .0 1. Mesclagem → consiste em mesclar as entidades e o relacionamento em uma
+       4 única relação
+      mir C mirb -ND 2. Chave Estrangeira → consiste em mapear o relacionamento 1:1 como um
+       d d C relacionamento 1:N
+      Wla .wla Y-N 3. Referência Cruzada → consiste em mapear o relacionamento 1:1 como um
+       www CC B relacionamento N:N
+
+www.wladmirbrandao.com                                                                         13 / 18
+Mapeamento EER
+
+  o Etapa 6 → Atributos Multivalorados
+     randã m Crie uma nova relação para cada atributo multivalorado A
+     o B o.co A nova relação incluirá um atributo de A, mais o atributo da chave primária
+     os a da relação que representa a entidade ou relacionamento que tenha A como
+     Wwlawdwm.wirClaCCdaBmrYdi-rNbCra-NndD 4.0 atributo multivalorado
+
+www.wladmirbrandao.com                                                                     14 / 18
+Mapeamento EER
+
+o Etapa 6 → Atributos Multivalorados
+     ndã CURSO
+      Bra .com Sigla Nome Horas Custo Area
+                                                  AREA
+                                                    Sigla Nome SuperArea
+oso dao MODULO
+ard ran 4.0 Sigla Nome Curso
+                                        TOPICO
+                                          Modulo
+mir C mirb -ND MATRICULA
+lad lad -NC Curso Aluno
+                                                  Sigla Nome Horas
+
+                                              ALUNO
+                                                 CPF Nome Sobrenome Sexo DataNasc
+Wwww.wCC BY PROFESSOR   Data            Pago
+
+                        Curso CPF Nome
+
+www.wladmirbrandao.com                                                             15 / 18
+Mapeamento EER
+
+  o Etapa 7 → Relacionamentos de Alto Grau
+     randã m Crie uma relação R3 para cada relacionamento n-ário, em que n > 2
+     o B o.co Inclua como chave estrangeira em R 3 as chaves primárias das relações que
+     os a representam as entidades participantes
+     ard rand 4.0 A chave primária de R3 é a combinação de todas as chaves estrangeiras que
+     Wwlawdwm.wirClaCCdBmYi-rNbC-ND referenciam as relações das entidades participantes
+
+www.wladmirbrandao.com                                                                       16 / 18
+Modelo Relacional: Sistema de Matrícula
+
+                        o CURSO
+                        dã Sigla Nome Horas Custo Area
+                                        AREA
+                                          Sigla Nome SuperArea
+                        Bran .com MODULO
+                        so ao Sigla Nome Curso
+                              TOPICO
+                                Modulo
+                        ardo rand 4.0 MATRICULA
+                        ir C irb D Curso Aluno
+                                        Sigla Nome Horas
+
+                                    ALUNO
+                                       CPF Nome Sobrenome Sexo DataNasc
+                        ladm ladm-NC-N PROFESSORDataPago
+                        Wwww.wCC BY Curso CPF
+                        Nome
+
+www.wladmirbrandao.com                                                   17 / 18
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            18 / 18
+

@@ -1,0 +1,69 @@
+02/07/2026, 12:55                                                    HO11: Indexação Multinível
+
+HO11: Indexação Multinível
+
+Vencimento 15 jul por 23:59
+Pontos Nenhum
+Disponível 4 mai em 0:00 - 15 jul em 23:59
+
+Hands-On
+
+Esta é a tarefa HO11: Indexação Multinível, uma atividade prática que estimula o aluno a
+absorver e fixar conceitos relacionados à indexação de arquivos em bancos de dados
+relacionais.
+
+Problema
+
+Construir um índice multinível estático na chave primária e índices multinível dinâmicos com
+árvore B+ em cada chave estrangeira para cada arquivo (tabela) presente no modelo
+relacional abaixo, apresentando a blocagem (fator de bloco), o número de blocos necessários
+para armazenar o índice, o espaço total gasto para armazenar cada arquivo de índice e o
+número de acessos a blocos necessários para recuperar um registro usando cada índice
+construído.
+
+https://pucminas.instructure.com/courses/260154/assignments/1288129                              1/3
+02/07/2026, 12:55                                                    HO11: Indexação Multinível
+
+Considere que o ponteiro para blocos de disco tem 16B, que o tamanho de bloco de disco é de
+2KB, que um nó de árvore B+ seja armazenado em um bloco de disco, que a ocupação na
+árvore B+ seja de 69%, que cada ponteiro de nó da árvore B+ ocupe 12B, que os arquivos
+possuem registros de tamanho fixo, não espalhados e que eles têm a seguinte configuração de
+número de registros e tamanhos de campos:
+
+          Atores (10.000 registros) → Codigo (16B), Nome (160B)
+          Clientes (100.000 registros) → CPF (11B), Nome (160B), Endereco (200B),
+          Telefone (16B), DataNascimento (12B), Sexo (1B)
+          Filmes (2.000.000 registros) → Codigo (16B), Nome (160B), Genero (80B)
+          Funcionarios (3.500 registros) → CPF (11B), Nome (160B)
+          Midias (10.000.000 registros) → Identificador (24B), Tipo (8B), PrecoDiaria (24B)
+          Aluguel (20.000.000 registros) → DataLocacao (12B), DataDevolucao (10B),
+          ValorPagar (24B)
+          Pagamentos (50.000.000 registros) → Codigo (48B), Data (12B), Valor (24B)
+          AtoresEmFilmes (1.000.000 registros)
+
+Observem a existência de chaves estrangeiras que obviamente devem ser consideradas como
+campos integrantes dos arquivos.
+
+Produto
+
+https://pucminas.instructure.com/courses/260154/assignments/1288129                              2/3
+02/07/2026, 12:55                                                    HO11: Indexação Multinível
+
+O aluno deve entregar um texto contendo a solução para o problema descrito anteriormente.
+
+Recursos
+
+Para a execução da tarefa o aluno deve consultar as referências bibliográficas especificadas
+no Programa do Curso. A seguir encontram-se indicados alguns recursos e materiais de
+apoio para a execução da tarefa. Outras referências bibliográficas podem ser utilizadas, desde
+que devidamente citadas no produto.
+
+    Livro (Elmasri & Navathe, 2016):
+         Capítulo 17: Estruturas de Indexação para Arquivos e Projeto Físico de Banco de
+         Dados
+
+    Slides e Videos:
+         Tópico #15: Indexação Multinível
+
+https://pucminas.instructure.com/courses/260154/assignments/1288129                              3/3
+

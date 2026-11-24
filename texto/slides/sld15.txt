@@ -1,0 +1,342 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+indexação multinível
+Indexação
+
+  o Índice multinível → diferentes níveis de índices são construídos, reduzindo o es-
+  dã paço de pesquisa
+
+     Bran .com Estático → compacto, sem espaço extra em blocos de índice para
+     o o acomodação de novos registros
+
+       rdos nda Tipicamente implementado como arquivo de índice, em que se contrói índices
+       a ra 4.0 sobre índices
+     mir C mirb -ND Dinâmico → ﬂexível, com espaço para alocação dinâmica de registros,
+     d d C tornando operações de alteração de dados mais eﬁcientes
+       Wla .wla Y-N Tipicamente implementado como árvore B (B Tree) ou B+ (B+ Tree), estruturas
+       www CC B baseadas em árvores de pesquisa de múltiplos caminhos, com restrições
+
+www.wladmirbrandao.com                                                                           3 / 21
+Índice Multinível Estático
+
+o Nível Base → índice com valores distintos no campo de ordenação
+ndã Nível Subsequente → índice primário sobre nível adjacente anterior
+Bra .com PROFESSOR
+  o o CPF                                                 ÍNDICE: NÍVEL 1 (BASE)                   ÍNDICE: NÍVEL 2
+
+os da 12345678900              Nome        ···            Ponteiro  CPF                            Ponteiro         CPF
+ard ran .0 12345678901  Roberto Machado
+ir C irb 4 21345678900                     ···            #00 12345678900                          #10 12345678900
+m m -ND 32145678900      Manuela Costa               #00
+d d C 52345678902       Carlos A. Martins                 #01 21345678900 #10                      #1F 97345671200       #20
+la la -N 68345618900    Ana Maria Freitas  ···
+                         Luiz A. Barbosa                  #02 52345678902
+  W .w Y ···            Amanda Ramirez     ···
+www CC B 97345671200                                 #01  ···       ···
+                                  ···
+                        Rebeca Lins Rêgo   ···            #0F 97345671200
+                                                                                              #1F
+                                           ···
+                                                     #02
+
+                                           ···
+
+                                           ···
+
+                                           ···
+                                                     #0F
+
+www.wladmirbrandao.com                                                                                                        4 / 21
+Índice Multinível Estático
+
+o Derivam-se níves até que o n-ésimo nível seja armazenado em apenas um bloco
+ndã PROFESSOR
+  ra om CPF                                               ÍNDICE: NÍVEL 1 (BASE)                   ÍNDICE: NÍVEL 2
+
+B .c 12345678900               Nome        ···            Ponteiro  CPF                            Ponteiro         CPF
+so ao 12345678901       Roberto Machado
+rdo nd 21345678900                         ···            #00 12345678900                          #10 12345678900
+a ra 4.0 32145678900     Manuela Costa               #00
+ir C irb D 52345678902  Carlos A. Martins                 #01 21345678900 #10                      #1F 97345671200 #20
+m m -N 68345618900      Ana Maria Freitas  ···
+                         Luiz A. Barbosa                  #02 52345678902
+  d d C ···             Amanda Ramirez     ···
+Wwlaww.wClaC BY-N 97345671200                        #01  ···       ···
+                                  ···
+                        Rebeca Lins Rêgo   ···            #0F 97345671200
+                                                                                              #1F
+                                           ···
+                                                     #02
+
+                                           ···
+
+                                           ···
+
+                                           ···
+                                                     #0F
+
+www.wladmirbrandao.com                                                                                                   5 / 21
+Índice Multinível Estático
+
+  o Pesquisa → complexidade logarítmica com base > 2, apenas um bloco em cada
+  dã nível precisa ser acessado
+
+     Bran .com Base logarítmica → fator de bloco do índice, ou fan-out (fo)
+     so ao Níveis → h ≈ logfor1 , onde r1 é o número de registros no nível base
+     ardo rand .0 Acessos a blocos → A = h
+  ir C irb D 4 Alteração → níveis ordenados, custo alto de operações de alteração do campo
+  m m -N de indexação
+  Wlad .wlad Y-NC Arquivo ISAM (Indexed Sequential Access Method) → arquivo sequencial inde-
+  www CC B xado com índice multinível na chave primária
+
+www.wladmirbrandao.com                                                                        6 / 21
+Índice Multinível Estático
+
+o Para um arquivo indexado de Professor, com 200.000 registros de tamanho ﬁxo
+dã de 185B, ordenado pela chave primária CPF e armazenado em um disco com blo-
+ran m cos de 4KB, teremos:
+so B ao.co Fator de Bloco → F =
+                        4KB         =  4×1.024B  ≈  22, 14  = 22
+                        185B              185B
+ardo rand 4.0 # Blocos → B =
+                        200.000  ≈  9.090, 91  = 9.091
+                           22
+mir C mirb -ND Espaço → S = 9.091 × 4KB = 36.364KB ≈ 35,51MB
+lad lad -NC Pesquisas nesse arquivo demandarão acessos a blocos de disco:
+  W w.w BY Pela chave primária → A = log2 9.091 ≈ 13,15 = 14
+  ww CC Por outro campo → A = 9.091
+
+www.wladmirbrandao.com                                                          7 / 21
+Índice Multinível Estático
+
+o Para Professor sendo arquivo ISAM, com CPF de 11B, e ponteiro de bloco ocu-
+dã pando 16B, teremos:
+Bran .com Fator de Bloco → FM =
+                                   4KB   =  4×1.024B  ≈ 151, 70 = 151
+                               11B +16B        27B
+rdoso ndao # Blocos → BM1 =
+                        9.091                            61
+                         151                             151
+ir Ca irbra 4.0 Espaço → SM = (61 + 1) × 4KB = 248KB
+                               ≈  60, 20    = 61, BM2 =       ≈  0, 40  =1
+
+dm dm C-ND Pesquisas nesse arquivo só podem ser realizadas pelo campo de indexação e de-
+la la -N mandarão acessos a blocos de disco:
+
+  W ww.w C BY AM = h ≈ log151 9.091 ≈ 1,81 = 2
+  w C +1 acesso para recuperar o registro no arquivo indexado
+
+www.wladmirbrandao.com                                                                    8 / 21
+Índice Multinível Dinâmico
+
+o Árvore (Tree) → estrutura hierárquica de nós (elementos) conectados
+  randã m Raiz → nó sem pai, de nível zero
+  B .co Folha → nó sem ﬁlhos
+  so ao Interno → nó não folha e não raiz
+  rdo nd O nível de um nó na árvore é o nível do seu pai mais um
+  a ra 4.0 Subárvore → árvore formada por um nó e todos os seus descendentes
+             mir C mirb -ND A
+Wlad .wlad Y-NC B
+www CC B C                                         E
+
+                            DF                     G  H
+
+                                                I                             9 / 21
+
+www.wladmirbrandao.com
+Índice Multinível Dinâmico
+
+o Árvore de Busca (Search Tree) → nós com restrições para eﬁciência em busca
+  randã m Binária → nó tem no máximo dois ﬁlhos
+     B .co Chave não pode ser menor que qualquer outra em subárvores da esquerda
+     so ao Chave não pode ser maior que qualquer outra em subárvores da direita
+                               ardo rand 4.0 7
+                        dmir CdmirbC-ND 2
+                        Wwlaww.wClaC BY-N 1     9
+
+                               4             8     10
+
+                            3     5
+
+www.wladmirbrandao.com                                                            10 / 21
+Índice Multinível Dinâmico
+
+o Árvore de busca binária (BST) → balanceamento fundamental para eﬁciência
+  randã m Balanceamento → altura de árvore ≈ log2 n , onde n = número de nós
+     B .co Subárvores esquerda e direita com ≈ mesmo número de nós
+                           oso dao 6
+                        ir Cardirbran D 4.0 4
+   dm dm C-N 3              7           4
+
+   Wwlaww.wClaC BY-N 2  5         2               6
+
+                               1     3         5     7
+
+1
+
+www.wladmirbrandao.com                                                        11 / 21
+Índice Multinível Dinâmico
+
+o Árvore de busca de múltiplos caminhos (m-way) → generalização de BST
+  ndã Cada nó tem m ﬁlhos
+  Bra .com Multiplicidade → cada nó contém m − 1 elementos
+     so ao h ≤ n ≤ mh − 1, onde h = altura e n = número de nós
+  ardo rand .0 Balanceamento → h ≈ logm n
+             mir C mirb -ND 4 3 6
+                        Wwlawdw.wClaCdBY-NC 1 2
+                            45                   78
+
+www.wladmirbrandao.com                                                  12 / 21
+Índice Multinível Dinâmico
+
+o B Tree → m-way com restrições que tornam busca e atualização muito eﬁcientes
+  ndã Nó raiz, não folha, tem ao menos dois ﬁlhos
+  Bra .com Nó interno tem ao menos m/2 ﬁlhos
+  so ao Nós folha estão no mesmo nível
+                   ardo rand 4.0 9 18
+                        dmir CdmirbC-ND 3 6
+Wwlaww.wClaC BY-N 1 2       12 15            21 24
+
+                        45  7 8 10 11 13 14 16 17 19 20 22 23 25 26
+
+www.wladmirbrandao.com                                                          13 / 21
+Índice Multinível Dinâmico
+
+  o B Tree → nós ao menos meio cheios, ≈ 69% quando árvore estabiliza
+     ndã Pesquisa → eﬁciente, poucos níveis e perfeitamente balanceada
+     Bra .com Alteração → eﬁciente, espaço para acomodar novos registros
+     so ao Ideal para armazenamento em memória secundária
+       ardo rand .0 Tipicamente conﬁgurada para que um nó ocupe um bloco em disco
+       ir C irb 4 Elemento → campo de indexação + ponteiro de bloco ( )
+       m m -ND Nó com m ponteiros de nó (•), um para cada ﬁlho
+          Wwlawdw.wClaCdBY-NC • 3 • 6 •
+
+                                                      • 1 • 2 •• 4 • 5 •• 7 • 8 •
+
+www.wladmirbrandao.com                                                             14 / 21
+Índice Multinível Dinâmico
+
+o Arquivo de Professor, com índice B Tree em Departamento de 8B, com um nó
+dã ocupando um bloco de disco, ponteiro de nó de 12B, ponteiro de bloco de 16B
+ran om Tamanho do elemento → (8B + 16B) = 24B
+o B o.c Nó ocupa 1 bloco → 4KB ≥ ((m − 1) × (24B + 12B)) + 12B
+ardosranda .0 # Elementos por nó → (m − 1) =
+                               4KB −12B        4.084B
+                               24B +12B          36B
+ir C irb D 4 Ordem da árvore → m = 113 + 1 = 114=           ≈ 113, 44 = 113
+
+dm dm C-N Altura da árvore → h ≈ log114 200.000 ≈ 2,57 = 3
+                        Wla .wla Y-N Nível
+                            w B 0           # Ponteiros de Nó
+                                                     114
+                         ww CC 1
+                        # Nós  # Registros         12.996
+                           1        113
+
+                         114      12.882
+
+                        2 12.996 1.468.584     -
+
+www.wladmirbrandao.com                                                          15 / 21
+Índice Multinível Dinâmico
+
+o Considerando uma ocupação de nós em 69%:
+randã m Fator de Bloco → FB = 113 × 0.69 ≈ 77,97 = 78
+B .co # Blocos → BB =
+                        200.000
+                           78
+oso dao Espaço → SB = 2.565 × 4KB = 10.260KB ≈ 10,01MB
+                                 ≈  2.564, 10  = 2.565
+
+ir Cardirbran 4.0 Pesquisas nesse índice só podem ser realizadas pelo campo de indexação e de-
+m m -ND mandarão acessos a blocos de disco:
+
+  lad lad -NC AB = h = 3
+  Wwww.wCC BY +1 acesso para recuperar o registro no arquivo indexado
+
+www.wladmirbrandao.com                                                                          16 / 21
+Índice Multinível Dinâmico
+
+o B+ Tree → extensão B Tree com restrições que tornam ainda mais eﬁcientes a
+dã busca e a remoção
+
+  ran om Nó Índice → raiz ou interno que armazena exclusivamente chave
+  o B o.c Nó Registro → folha que armazena registro de índice
+  rdos nda Nós folha em lista encadeada ordenada
+
+               ir Ca irbra D 4.0 • 3 • 5 •
+                        Wwlawdwm.wClaCdBmY-NC-N 1
+                        2•  3  4•                  5  6•
+
+www.wladmirbrandao.com                                                        17 / 21
+Índice Multinível Dinâmico
+
+o Arquivo de Professor, com índice B+ Tree em Departamento de 8B, com um nó
+dã ocupando um bloco de disco, ponteiro de nó de 12B, ponteiro de bloco de 16B
+Bran .com Nó Índice
+  so ao Tamanho do elemento → 8B
+  ardo rand .0 Nó ocupa 1 bloco → 4KB ≥ ((m − 1) × (8B + 12B)) + 12B
+                        ir C irb D 4 Elementos por nó → (m − 1) =
+                            4KB −12B                              4.084B
+                            8B +12B                                 20B
+                        m m -N Ordem da árvore → m = 204 + 1 = 205=       ≈ 204, 2 = 204
+
+Wlad .wlad Y-NC Altura da árvore → h ≈ log205200.000 ≈ 2,29 = 3
+www CC B Altura de nós índice → hi = h − 1 = 2
+
+www.wladmirbrandao.com                                                                    18 / 21
+Índice Multinível Dinâmico
+
+                        # Nósão Nível
+                           1nd 0
+                        ra m 1
+                          205B .co 2
+                        42.025  # Registros                              # Ponteiros de Nó
+                                     204                                          205
+
+                                   41.820                                       42.025
+                                8.573.100                                           -
+ardosroandao.0 Nó Registro
+  ir C irb 4 Tamanho do elemento → (8B + 16B) = 24B
+m m -ND Nó ocupa 1 bloco → 4KB ≥ ((m − 1) × (24B)) + 12B
+                        Wwlawdw.wClaCdBY-NC Elementos por nó → (m −1) =4KB −12B4.084B
+                                   24B                                   =    24B   ≈ 170, 16 = 170
+
+www.wladmirbrandao.com                                                                               19 / 21
+Índice Multinível Dinâmico
+
+o Considerando uma ocupação de nós em 69%:
+randã m Fator de Bloco → FB+ = 170 × 0.69 ≈ 117,30 = 118
+B .co # Blocos → BB+ =
+oso dao Nível 0 a hi − 1 → 1.695 ponteiros200.000
+                           118   ≈  1.694, 91    = 1.695
+
+ir Cardirbran 4.0 # Nós = # Blocos = →              1.695
+                                       1.695     ≈   143   ≈ 11, 85 = 12
+                                 (204×0.69) +hi
+m m -ND Espaço → SB+ = (1.695 + 12) × 4KB = 6.828KB ≈ 6,67MB
+lad lad -NC Pesquisas pelo campo de indexação demandam acessos a blocos:
+  W w.w BY AB+ = h = 3
+  ww CC +1 acesso para recuperar o registro no arquivo indexado
+
+www.wladmirbrandao.com                                                    20 / 21
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            21 / 21
+

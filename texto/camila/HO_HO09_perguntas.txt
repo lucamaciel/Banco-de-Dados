@@ -1,0 +1,64 @@
+02/07/2026, 12:53  HO09: Armazenamento e Organização de Dados
+
+HO09: Armazenamento e Organização de Dados
+
+    Vencimento 28 abr por 23:59
+    Pontos Nenhum
+    Disponível 23 abr em 0:00 - 28 abr em 23:59
+
+Esta tarefa foi travada 28 abr em 23:59.
+
+Hands-On
+
+Esta é a tarefa HO09: Armazenamento e Organização de Dados, uma atividade prática que
+estimula o aluno a absorver e fixar conceitos relacionados ao armazenamento e
+organização de dados em memória.
+
+Problema
+
+Apresentar a blocagem (fator de bloco), o número de blocos necessários para armazenar o
+arquivo, o espaço desperdiçado por bloco em cada arquivo e o espaço total gasto para
+armazenar cada arquivo (tabela) presente no modelo relacional abaixo.
+
+Considere que o tamanho de bloco de disco é de 2KB, que os arquivos possuem registros de
+tamanho fixo, não espalhados e que eles têm a seguinte configuração de número de registros
+e tamanhos de campos:
+
+          Atores (10.000 registros) → Codigo (16B), Nome (160B)
+          Clientes (100.000 registros) → CPF (11B), Nome (160B), Endereco (200B),
+          Telefone (16B), DataNascimento (12B), Sexo (1B)
+          Filmes (2.000.000 registros) → Codigo (16B), Nome (160B), Genero (80B)
+          Funcionarios (3.500 registros) → CPF (11B), Nome (160B)
+          Midias (10.000.000 registros) → Identificador (24B), Tipo (8B), PrecoDiaria (24B)
+          Aluguel (20.000.000 registros) → DataLocacao (12B), DataDevolucao (10B),
+          ValorPagar (24B)
+          Pagamentos (50.000.000 registros) → Codigo (48B), Data (12B), Valor (24B)
+          AtoresEmFilmes (1.000.000 registros)
+
+Observem a existência de chaves estrangeiras que obviamente devem ser consideradas como
+campos integrantes dos arquivos.
+
+https://pucminas.instructure.com/courses/260154/assignments/1288127                          1/2
+02/07/2026, 12:53  HO09: Armazenamento e Organização de Dados
+
+  Produto
+
+O aluno deve entregar um texto contendo a solução para o problema descrito anteriormente.
+
+Recursos
+
+Para a execução da tarefa o aluno deve consultar as referências bibliográficas especificadas
+no Programa do Curso. A seguir encontram-se indicados alguns recursos e materiais de
+apoio para a execução da tarefa. Outras referências bibliográficas podem ser utilizadas, desde
+que devidamente citadas no produto.
+
+    Livro (Elmasri & Navathe, 2016):
+         Capítulo 16: Armazenamento de Disco, Fundamentos de Estruturas de Arquivo,
+         Hashing e Arquitetura de Armazenamento Modernas
+
+    Slides e Videos:
+         Tópico #11: Armazenamento em Memória
+         Tópico #12: Organização de Dados
+
+https://pucminas.instructure.com/courses/260154/assignments/1288127                             2/2
+

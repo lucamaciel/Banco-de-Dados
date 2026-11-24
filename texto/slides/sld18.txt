@@ -1,0 +1,336 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+projeto físico
+Projeto Físico de BD
+
+o Criação de estrutura apropriada para armazenamento de dados com foco em
+dã desempenho na execução de consultas e transações
+Bran .com Fator de Impacto
+ oso dao Característica da consulta
+ ard ran .0 Frequência de execução
+ ir C irb D 4 Tempo de execução
+ Wwlawdwm.wClaCdBmY-NC-N Exclusividade em campo
+                        Decisão
+
+                           Recuperação de dados
+                                  Que arquivos são acessados?
+                                  Que campos estão especiﬁcados?
+
+                                          Junção e seleção → indexação
+
+                                  Condição em junção e seleção?
+                                          = → multiplicidade de índices
+                                             → limita uso de índice
+                                          < ≤ ≥ > → limitação índice hash
+
+www.wladmirbrandao.com                                                     3 / 20
+Projeto Físico de BD
+
+o Criação de estrutura apropriada para armazenamento de dados com foco em
+dã desempenho na execução de consultas e transações
+Bran .com Fator de Impacto
+ oso dao Característica da consulta
+ ard ran .0 Frequência de execução
+ ir C irb D 4 Tempo de execução
+ Wwlawdwm.wClaCdBmY-NC-N Exclusividade em campo
+                        Decisão
+
+                           Atualização de dados
+                                  Que arquivos são atualizados?
+                                  Que operações são realizadas?
+                                  Que campos estão especiﬁcados?
+
+                                          Seleção → considerar indexação
+                                          Modificação → evitar indexação
+                                  Condição em seleção?
+                                          = → multiplicidade de índices
+
+                        → limita uso de índice
+
+                        < ≤ ≥ > → limitação índice hash
+
+www.wladmirbrandao.com                                                     4 / 20
+Projeto Físico de BD
+
+o Criação de estrutura apropriada para armazenamento de dados com foco em
+dã desempenho na execução de consultas e transações
+Bran .com Fator de Impacto
+ oso ao Característica da consulta
+ ard rand .0 Frequência de execução
+ ir C irb D 4 Tempo de execução
+ Wwlawdwm.wClaCdBmY-NC-N Exclusividade em campo
+                        Decisão
+
+                           Execuções por unidade de tempo?
+                                  Frequente → considerar indexação
+                                  para recuperação frequente e evitar
+                                  indexação para atualização frequente
+                                  Pareto → 80% do processamento é
+                                  consumido por 20% das consultas e
+                                  transações
+
+                                          Top 20% → considerar indexação
+                                          para as de recuperação e evitar
+
+                        indexação para as de atualização
+
+www.wladmirbrandao.com                                                     5 / 20
+Projeto Físico de BD
+
+o Criação de estrutura apropriada para armazenamento de dados com foco em
+dã desempenho na execução de consultas e transações
+Bran .com Fator de Impacto
+ oso ao Característica da consulta
+ ard rand .0 Frequência de execução
+ ir C irb D 4 Tempo de execução
+ Wwlawdwm.wClaCdBmY-NC-N Exclusividade em campo
+                        Decisão
+
+                           Tempo médio e máximo esperado para
+                           execução?
+
+                                  Que consultas e transações tem forte
+                                  restrição de tempo de execução?
+
+                                  Críticas → considerar indexação para
+                                  recuperação e evitar indexação para
+                                  atualização
+
+www.wladmirbrandao.com                                                     6 / 20
+Projeto Físico de BD
+
+o Criação de estrutura apropriada para armazenamento de dados com foco em
+dã desempenho na execução de consultas e transações
+Bran .com Fator de Impacto
+ oso ao Característica da consulta
+ ard rand .0 Frequência de execução
+ ir C irb D 4 Tempo de execução
+ Wwlawdwm.wClaCdBmY-NC-N Exclusividade em campo
+                        Decisão
+
+                           Que campos são exclusivos?
+                                  Campos exclusivos são usados
+                                  frequentemente em junção e seleção
+                                  Considerar indexação para campos
+                                  exclusivos
+
+www.wladmirbrandao.com                                                     7 / 20
+Projeto Físico de BD
+
+  o Muitas decisões de projeto físico envolvem indexação
+     randã m CREATE [UNIQUE] INDEX <nome>
+     B .co ON <tabela> ( <coluna> [<ORDEM>] {, <coluna> [<ORDEM>]} )
+     o o [CLUSTER];
+     ardosranda .0 unique → campo de indexação será exclusivo
+     ir C irb D 4 cluster → índice será um arquivo ordenado pelo campo de indexação
+     dm dm C-N ordem → forma de ordenação do campo de indexação
+       la la -N asc → ordenação ascendente
+       Wwww.wCC BY desc → ordenação descendente
+
+www.wladmirbrandao.com                                                               8 / 20
+Projeto Físico de BD
+
+o Desnormalização → modiﬁcação no projeto lógico para se obter mais eﬁciência
+dã no processamento de consultas e transações
+
+  Bran .com Duplicação de atributos → inclusão de atributos de uma tabela em outra
+     o o Evita operações de junção entre as tabelas
+     os da Introduz redundância em tabelas
+     ard ran 4.0 Exemplo: introduzir o atributo Nome da tabela departamento na tabela
+     ir C irb D professor evita a necessidade de junção entre as tabelas se a consulta por
+     m m -N Nome de departamento e Nome de professor for frequentemente realizada
+                        lad lad -NC PROFESSOR
+                        Wwww.wCC BY CPF NomeNomeDepto  DEPARTAMENTO   Superior
+                        Sexo Salario Depto               Numero Nome
+
+www.wladmirbrandao.com                                                                      9 / 20
+Ajuste de BD
+
+  o Todo projeto precisa de ajustes ao ser executado
+  ndã Sintonia (Tuning) → processo de ajuste contínuo do projeto físico
+
+     Bra .com Monitora e revisa decisões de projeto
+       so ao Objetivo → redução do tempo de processamento de consultas e transações
+       ardo rand .0 Métricas → conjunto de medidas usadas no monitoramento
+          4 Processamento → tempo de otimização e execução de consultas e transações
+          ir C irb D Armazenamento → espaços ocupados por pools de buﬀer, tabelas (tablespaces) e
+          m m -N índices (indexspaces)
+          lad lad -NC I/O → # paginações em disco por unidade de tempo
+          W .w Y Concorrência → taxa de vazão (throughput) de transações, de emissão de
+          w B comandos de bloqueio, e de registro em log
+          ww CC Índice → # níveis, # nós folha não contíguos
+
+www.wladmirbrandao.com                                                                             10 / 20
+Ajuste de BD
+
+  o DBAs monitoram métricas para realizar ajustes e evitar problemas:
+     ndã Desperdício → tamanho de buﬀers inadequados
+     Bra .com Sobrecarga → logging e dumping desnecessários
+     so ao Aumento de Concorrência → disputa excessiva por bloqueios
+     ardo rand .0 Ineficiência → alocação inadequada de discos, buﬀers e processos
+
+  ir C irb D 4 Tais ajustes podem ocorrer de diferentes formas
+     dm dm C-N Sintonia de Índice → criação, remoção e reorganização de índices
+     Wla .wla -N Sintonia de Projeto → alterações no projeto lógico
+     www CC BY Sintonia de Consulta → reescrita de consultas
+
+www.wladmirbrandao.com                                                              11 / 20
+Sintonia de Índice
+
+  o Avaliação dos requisitos de projeto físico para reorganizar arquivos e índices
+     ndã Criação → consultas e transações podem estar demorando a serem
+     ra om executadas por ausência de índice
+     o B o.c Remoção → índices podem estar sendo pouco utilizados
+     rdos nda Reorganização → índices podem estar sendo muito atualizados
+       a ra 4.0 Exclusão → blocos de índice com espaço desperdiçado
+       ir C irb D Inclusão → overﬂow excessivo em índice agrupado
+     dm dm C-N Opções de indexação variam em soluções de SGBD comerciais
+       la la -N Sybase → índices de agrupamento esparsos em B+ Trees
+       W w.w BY Ingress → índices de agrupamento ISAM esparsos ou B+ Trees densos
+       ww CC Oracle → índices de agrupamento densos
+
+www.wladmirbrandao.com                                                              12 / 20
+Sintonia de Projeto
+
+o Avaliação dos requisitos de projeto físico para modiﬁcação dos projetos concei-
+dã tual e lógico
+ran om Duplicação de Atributos → inclusão de atributos de uma tabela em outra
+                        o B o.c PROFESSOR
+                        os da CPF Nome Sexo Salario Depto NomeDeptoDEPARTAMENTO
+
+mir Camrdirbra-Nn D 4.0 Particionamento Vertical → divisão de atributos de uma tabela em
+d d C múltiplas tabelas com mesma chave primária em relacionamento 1 : 1
+                                                                   Numero Nome Superior
+
+                        la la -N PROFESSOR
+                        Wwww.wCC BY CPF Nome Salario  PROFESSOR2
+
+                                                      CPF Sexo Depto
+
+www.wladmirbrandao.com                                                                    13 / 20
+Sintonia de Projeto
+
+o Avaliação dos requisitos de projeto físico para modiﬁcação dos projetos concei-
+dã tual e lógico
+ran om Particionamento Horizontal → distribuição de tuplas de uma tabela em
+o B o.c múltiplas tabelas com os mesmos atributos
+                        os da PROFESSOR
+                          ard ran .0 CPF
+                        ir C irb D 4 12345678900 Roberto Machado
+                        Nome                                 Sexo Salario Departamento
+
+                        m m -N 12345678901 Manuela Costa     M 1200.00      1
+
+                         lad lad -NC PROFESSOR TOP           F 2700.00      3
+                        W w.w BY CPF
+                        Nome                                 Sexo  Salario Departamento
+                        ww CC 21345678900 Carlos A. Martins    M
+                                                                   3200.00  1
+
+                        32145678900 Ana Maria Freitas        F 7500.00      2
+
+www.wladmirbrandao.com                                                                   14 / 20
+Sintonia de Consulta
+
+  o Avaliação dos requisitos de projeto físico para reescrever consultas
+     ndã Indícios → sinais de que consultas precisam ser reescritas
+       ra om Plano de Execução → índices relevantes não estão sendo usados
+       o B o.c Paginação → emissão de muitas solicitações de I/O
+     rdos da Casos Típicos → situações que demandam reescrita de consulta
+       a ran 4.0 Parsing → ordem aleatória de tabelas no FROM e operações no WHERE
+       ir C irb D Comparação → NULL, substring e campos de domínios diferentes
+          m m -N SELECT A.CPF, B.Nome
+           lad lad -NC FROM PROFESSOR A, DEPARTAMENTO B
+          W .w Y WHERE A.Depto IS NOT NULL
+            w B AND B.Nome LIKE ’%TI%’
+           ww CC AND A.Salario = B.Numero;
+
+www.wladmirbrandao.com                                                              15 / 20
+Sintonia de Consulta
+
+  o Avaliação dos requisitos de projeto físico para reescrever consultas
+     ndã Casos Típicos → situações que demandam reescrita de consulta
+       ra om Consultas Aninhadas → operadores all, any, some, in e exists
+          o B o.c SELECT CPF, Nome FROM PROFESSOR
+          os da WHERE Depto IN (SELECT Numero FROM DEPARTAMENTO);
+          ard ran .0 SELECT A.CPF, A.Nome FROM PROFESSOR A
+          ir C irb D 4 WHERE EXISTS (SELECT * FROM DEPARTAMENTO B
+                m m -N WHERE A.Depto = B.Numero);
+       d d C Deduplicação → operador distinct
+          Wwlaww.wClaC BY-N SELECT DISTINCT Nome FROM PROFESSOR;
+
+www.wladmirbrandao.com                                                     16 / 20
+Sintonia de Consulta
+
+  o Avaliação dos requisitos de projeto físico para reescrever consultas
+     ndã Casos Típicos → situações que demandam reescrita de consulta
+       ra om Condição Disjuntiva → operador or
+          o B o.c SELECT CPF, Nome FROM PROFESSOR
+          os da WHERE Sexo = ’M’ OR Salario > 2000,00;
+          ir Cardirbran 4.0 SELECT CPF, Nome FROM PROFESSOR
+          m m -ND WHERE Sexo = ’M’
+          d d C UNION
+          la la -N SELECT CPF, Nome FROM PROFESSOR
+          Wwww.wCC BY WHERE Salario > 2000,00;
+
+www.wladmirbrandao.com                                                    17 / 20
+Sintonia de Consulta
+
+  o Avaliação dos requisitos de projeto físico para reescrever consultas
+     ndã Casos Típicos → situações que demandam reescrita de consulta
+       ra om Condição Complexa → operadores and e or
+          o B o.c SELECT CPF, Nome FROM PROFESSOR
+          os da WHERE Depto = 1
+            ard ran .0 AND ((Salario BETWEEN 1000,00 AND 2000,00) OR
+               ir C irb 4 (Salario BETWEEN 5000,00 AND 7000,00));
+          m m -ND SELECT CPF, Nome FROM PROFESSOR
+          d d C WHERE Depto = 1 AND (Salario BETWEEN 1000,00 AND 2000,00)
+          la la -N UNION
+          W w.w BY SELECT CPF, Nome FROM PROFESSOR
+          ww CC WHERE Depto = 1 AND (Salario BETWEEN 5000,00 AND 7000,00);
+
+www.wladmirbrandao.com                                                      18 / 20
+Sintonia de Consulta
+
+o Avaliação dos requisitos de projeto físico para reescrever consultas
+ndã Casos Típicos → situações que demandam reescrita de consulta
+  ra om Consulta Complexa → subconsultas
+                        o B o.c SELECT A.CPF, A.Nome FROM PROFESSOR A
+                        os da WHERE A.Salario > (SELECT AVG(B.Salario) FROM PROFESSOR B
+
+                                   ard ran .0 WHERE A.Depto = B.Depto);
+                         ir C irb D 4 SELECT
+                          m m -N FROM
+                        d d C GROUP BY
+                        Wla .wla -N SELECT
+                          w BY WHERE
+                         ww CC AND
+                        Depto, AVG(Salario) AS Media INTO TEMP
+                        PROFESSOR
+                        Depto;
+
+                        A.CPF, A.Nome FROM PROFESSOR A, TEMP B
+                        A.Salario > B.Media
+                        A.Depto = B.Depto;
+
+www.wladmirbrandao.com                                                                   19 / 20
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            20 / 20
+

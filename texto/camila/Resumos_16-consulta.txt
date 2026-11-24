@@ -1,0 +1,99 @@
+hinemargica de naeamsica               hard drive - Disco magnético                                                                                                                                  abupppering
+
+ quanto mais perto da CPU [             Bloco é unidade mínima de                                                                                                                                    Área temporária em RAM , usada para leitura e escrita
+                                          transferência
+     ↓ rápida e + cora                                                                                                                                                                                  Double  buffering -  usa 2                               um  escreve e um é                                                                                                              processado
+                                        Bloco não muda dinamicamente                                                                                                                                                                                          ,
+                                                   de tamanho
+  Tips       Coracterística    ^                                                                                                                                                                        ⊥ não reduz o tempo físico de transferência
+ Regist .       dentro da CPU           Tempos de acesso
+                                   γ      Ol . Tempo de busca (seek)                                                                                                                                    ava tipoa de         em disco
+   Cache        rápida              a
+   RAM           rápida                     > - mover o braço até a trilha correta                                                                                                                      01. contígua
+memp. )                           P
+                secundária          i      &. 2 Latência estacional                                                                                                                                      Blocos consecutivos, rápida, difícil de fragmentar
+ SSD/ HD                          ·         - > setor passar sob cabeça
+                     lenta         e                                                                                                                                                                    D2 . Encadeada
+ fita mag-                          τ      03. Tempo de transferência
+     nética                                                                                                                                                                                               Cada bloco aponta para o próximo , por ligação
+                                            > - copiar os dodos
+                   ↑ veio cidade                                                                                                                                                                        03. Por segmento
+                   menor capacidade     ~
+                                                                                                                                                                                                          clustering/segmentos
+                        maior custo      Tempo total é a Soma
+  ↑ capacidade                                           desses                                                                                                                                         D4. Indexada
+
+menor velocidade                                                                                                                                                                                           bloco índice com ponteiros
+      menor custo
+
+en sch                    RAID O                 RAiD I              RAiD S               RAID to
+                                                                 I disco é usado    espelha e divide ,
+ Delide como        Divide os dedos    Discos são cúpias       como pari dode       metade do espaço
+dividir os dados,  entre os discos     idénticas /espelnada)
+                                                                      Capacidade           é perdido
+ se haverá cópia     Capacidade               Capacidode                                  Capacidade
+ e paridade                 NX T           (NXT) / 2                   (N - 1) x T
+N = ato de discos                                                                         (NXT) / 2
+                      se um disco
+T = tam do disco      talnar perde
+
+                              tudo
+
+and was agen                                SAN     obS :
+
+    DAS                         NAS     Storage      ATA , sATA e scsi
+direct attached            network
+                   attached            crea              são interfaces de comunicação,
+                                                             não arquiteturas de comazenamento
+Storage            Storage                 network
+
+* Diea
+
+Estrutura    Complexidade Busa         Complexidade I       Complexidade R
+   heap                     orns                                       orn)
+                                                    o 〜 L)
+ sequencial           orlogn)
+                                       orn)                    D(n)
+
+                     O(1)              &(1)                    orex
+
+   nash            o /logn             Ollogn)                 Ollogn)
+
+árvore
+
+ B/ B +
+
+Para Otimizar a consulta , seu SGBD pode                                                                                                                                                                                     Michig e Combina
+
+adoto diversas estratégias. Dentre elas :                   >  } não garante a melhor possível, mas                                                                                                               Passear a consulta e gerar uma anore inicial
+                                                                   Normalmente melhora                                                                                                                            faz primeiro operações que reduzem o toma-
+Se a consulta é frequentemente feita, ele
+Guarda na memória cash.                                                                                                                                                                                           n ho       do  problema                              /6 T                                                                                Y
+A ordem em que colocamos as operações                                                                                                                                                                                                                                                      ,
+no SELECT interfere na execução                                                                                                                                                                                                                                                                                                                           ,
+ obs : O plano de execução são os algoritmos
+                                                               > monitora várias métricas. Cria                                                                                                                   Executa : as de menor custo
+  que o SGBDirá utilizar em cada parte
+                                                               Várias árvores para a mesma consulta                                                                                                                              ~
+
+                                                               e calcula o custo                                                                                                                                                                                 enermipslo
+
+                                                               Adapta qual árvore irá usar de acordo com                                                                                                                         A- 1DOO                                                                                                               B-100n
+                                                                   a performance real do SGBD
+                                                                                                                                                                                                                                 a)                                  6- *                                                                                 = 501 000
+                                                                                                                                                                                                                                                                                                                                                                                                                                                  .
+
+                                                               - estilo "chat GPT" > - interpreta o que o                                                                                                                                                        IDOD                                                                                  5D0 . Dod
+
+                                                               DBA quer e veescreve um sinônimo melhor                                                                                                                           da) N -6                                                                                                                 =       1                              000  .  000
+                                                                                                                                                                                                                                                                                                                                                                                              .
+
+                                                               tem uma ideia de aprendizagem , mas                                                                                                                                                               1. DOD DOD                                                                            1 000 DDD..
+                                                                                                                                                                                                                                                                                                                                                    .
+
+                                                               possui        custo  maior                                                                                                            E  o mais
+                                                                                                                                                                                                  .
+
+                                                                             arriscado                                                                                                                                       varrer o menor e pesquisar no
+                                                                                                                                                                                                                                  maior compensa mais
+

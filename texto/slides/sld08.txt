@@ -1,0 +1,214 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+álgebra relacional ii
+Operação PROJEÇÃO
+
+  o Projeção Generalizada → estende operação de projeção permitindo que funções
+  dã sejam incluídas na lista de atributos para projeção
+
+                       Bran .com funcoes(R)
+  ardosroandao.0 Funções envolvem operações aritméticas e valores constantes
+  mir C mirb -ND 4 Exemplo:
+
+    lad lad -NC A ← CPF, Nome + + Sobrenome, Salario ∗ 1.1(PROFESSOR )
+    Wwww.wCC BY B ← CPF, NomeCompleto, Bonus(A)
+
+www.wladmirbrandao.com                                                           3 / 13
+Operação JUNÇÃO
+
+o Junção Interna (INNER JOIN) → operação de junção convencional (JOIN)
+randã m Exemplo → PROFESSOR Departamento = Numero DEPARTAMENTO
+                        o B o.co PROFESSOR
+                          s a CPF                                         DEPARTAMENTO
+
+                        ardo rand .0 12345678900NomeSexoSalarioDepartamentoNumero       Nome
+                        ir C irb D 4 12345678901RobertoM1200.00     1
+                        Manuela                F   2700.00          3        1    Administrativo
+
+ladm ladm-NC-N Resultado:                                                    2    Comercial
+
+                                                                             3    Tecnologia
+
+                        W w.w BY CPFNome     Sexo  Salario Departamento   Numero       Nome
+                        ww CC 12345678900RobertoM                             1   Administrativo
+                                                   1200.00  1
+
+                        12345678901 Manuela  F 2700.00      3             3       Tecnologia
+
+www.wladmirbrandao.com                                                                            4 / 13
+Operação JUNÇÃO
+
+o Junção Externa (OUTER JOIN) → a "relação externa" participa com tuplas não
+dã correspondentes da junção interna
+Bran .com Exemplo → PROFESSOR Departamento = Numero DEPARTAMENTO
+                        so ao PROFESSOR
+                          ardo rand .0 CPF                               DEPARTAMENTO
+
+                        4 12345678900                                    Numero
+                        mir C mirb -ND 12345678901
+                              Nome           Sexo  Salario Departamento                Nome
+                             Roberto           M
+                             Manuela           F   1200.00  1               1    Administrativo
+
+                                                   2700.00  3               2    Comercial
+Wwlawdw.wClaCdBY-NC Resultado:
+                                                                            3    Tecnologia
+
+                        CPF  Nome            Sexo Salario Departamento Numero    Nome
+
+                        12345678900 Roberto  M 1200.00      1            1       Administrativo
+
+                        12345678901 Manuela  F 2700.00      3            3       Tecnologia
+
+                                                                         2       Comercial
+
+www.wladmirbrandao.com                                                                           5 / 13
+Operação JUNÇÃO
+
+  o Junção Externa à Esquerda (LEFT OUTER JOIN) → junção externa em que a
+  dã "relação externa" é a da esquerda
+
+           Bran .com PROFESSOR Departamento = Numero DEPARTAMENTO
+  ardosroandao.0 Junção Externa à Direita (RIGHT OUTER JOIN) → junção externa em que a
+  ir C irb 4 "relação externa" é a da direita
+
+           dm dm C-ND PROFESSOR Departamento = Numero DEPARTAMENTO
+  Wla w.wla BY-N Junção Externa Completa (FULL OUTER JOIN) → junção externa em que ambas
+  ww CC as relações são "externas"
+
+                         PROFESSOR Departamento = Numero DEPARTAMENTO
+
+www.wladmirbrandao.com                                                                    6 / 13
+Operações de Conjunto
+
+  o Operações da teoria dos conjuntos usadas para mesclar elementos de dois
+  dã conjuntos, através de operações binárias
+
+     Bran .com União → adiciona todas as tuplas de ambas as relações
+     so ao Interseção → adiciona as tuplas comuns entre as relações
+     ardo rand .0 Diferença → adiciona as tuplas da primeira relação que não pertencem à
+     ir C irb 4 segunda relação
+  ladm ladm C-ND Relações devem ser compatíveis, possuindo o mesmo número de atributos
+  W .w Y-N alinhados de acordo com o domínio de dados
+  www CC B Tuplas duplicadas são eliminadas da relação resultante
+
+     Nomes dos atributos da primeira relação são mantidos na relação resultante
+
+www.wladmirbrandao.com                                                                    7 / 13
+Operações UNIÃO
+
+                                                                 dão R1 ∪ R2
+Bran .com Operador → unir (∪)
+so ao Função → unir tuplas de duas relações
+ardo rand .0 Operação comutativa
+                                         mir C mirb -ND 4 R1 ∪ R2 = R2 ∪ R1
+lad lad -NC Exemplo → PROFESSOR ∪ ALUNO
+W w.w BY PROFESSOR
+  ww CC Nome                                                                   UNIÃO
+                                         Depto  ALUNO            Departamento             Nome     Depto
+                                                           Nome                                       1
+                                                                                  Roberto Machado
+
+                        Roberto Machado  1      Roberto Machado  2
+
+                                                                               Manuela Costa       3
+
+                        Manuela Costa    3      Manuela Costa    3
+
+                                                                               Roberto Machado     2
+
+www.wladmirbrandao.com                                                                                    8 / 13
+Operações INTERSEÇÃO
+
+                                                                 ndão R1 ∩ R2
+o Bra o.com Operador → intersecionar (∩)
+rdos da Função → selecionar tuplas comuns nas duas relações
+a ran 4.0 Operação comutativa
+                                         dmir CdmirbC-ND R1 ∩ R2 = R2 ∩ R1
+Wla w.wla BY-N Exemplo → PROFESSOR ∩ ALUNO
+w C PROFESSOR
+  w C Nome
+                                         Depto  ALUNO            Departamento  INTERSEÇÃO
+                                                           Nome
+
+                                                                               Nome           Depto
+
+                        Roberto Machado  1      Roberto Machado  2
+
+                                                                               Manuela Costa  3
+
+                        Manuela Costa    3      Manuela Costa    3
+
+www.wladmirbrandao.com                                                                               9 / 13
+Operações DIFERENÇA
+
+                                                                 ndão R1 − R2
+o Bra o.com Operador → menos (−)
+rdos da Função → selecionar tuplas da primeira relação não contidas na segunda
+a ran 4.0 Operação não comutativa
+                                         dmir CdmirbC-ND R1 − R2 R2 − R1
+Wla w.wla BY-N Exemplo → PROFESSOR − ALUNO
+w C PROFESSOR
+  w C Nome
+                                         Depto  ALUNO            Departamento  DIFERENÇA
+                                                           Nome
+
+                                                                               Nome             Depto
+
+                        Roberto Machado  1      Roberto Machado  2
+
+                                                                               Roberto Machado  1
+
+                        Manuela Costa    3      Manuela Costa    3
+
+www.wladmirbrandao.com                                                                                 10 / 13
+Operações DIVISÃO
+
+                        ndão R1 ÷ R2
+     o Bra o.com Operador → dividir (÷)
+     rdos da Função → extrair subconjunto de tuplas de R1 presente em R2
+     a ran 4.0 Relação resultante possui os atributos de R1 não presentes em R2
+     mir C mirb -ND Relação resultante possui as tuplas de R1 que contêm as tuplas de R2
+     d d C Operação não comutativa
+
+          Wwlaww.wClaC BY-N R1 ÷ R2 R2 ÷ R1
+
+www.wladmirbrandao.com                                                                    11 / 13
+Operação DIVISÃO
+
+o Exemplo → CARGA ÷ EXATAS
+ndã Encontrar os professores que possuem cargas horárias em todos os cursos da
+ra om área de ciências exatas
+oso Bdao.c CARGA
+ ard ran .0 Professor              Curso     EXATAS          DIVISÃO
+  ir C irb 4 Felipe           Administração         Curso         Professor
+  m m -ND Max                 Administração                           Max
+  lad lad C Felipe             Computação       Computação
+  W .w Y-N Max                 Computação        Engenharia
+  www CC B Teldo               Computação
+
+                        Luiz  Engenharia
+
+                        Max   Engenharia
+
+www.wladmirbrandao.com                                                          12 / 13
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            13 / 13
+

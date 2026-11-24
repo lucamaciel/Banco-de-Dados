@@ -1,0 +1,261 @@
+       Camila Menezes - Monitora de Banco de Dados
+
+Aulão 01
+
+Banco de Dados
+
+Conceitos iniciais, SGBDs, Diagrama DER
+Camila Menezes - Monitora de Banco de Dados
+
+Repositório Wlad                             Repositório Camila
+Matérias
+
+Conceitos iniciais de              SGBDs            Diagrama conceitual
+   Banco de Dados                                             (DER)
+                           O que é, propriedades,
+  Sistemas de Banco de     limitações, arquitetura       Descrição de mini
+  Dados, características,                                mundo, atributos,
+                               de 3 esquemas,
+           etapas de               linguagens                 entidades,
+       implementação                                     relacionamentos,
+Conceitos iniciais de banco de dados
+
+Banco de dados vs                     Sistema de Banco de Dados
+
+     Coleção de dados                      Conjunto de dados relacionados e
+     organizados                           organizados, sua estrutura lógica
+     Dados podem ser                       (modelo de dados) e um software de
+     símbolos, sinais ou                   acesso.
+     códigos
+     Um BD tem finalidade,
+     realidade, coerência e
+     compartilhamento
+     Não é necessariamente
+     computadorizado
+Conceitos iniciais de banco de dados
+
+Banco de dados vs                     Sistema de Banco de Dados
+
+     Coleção de dados                 Conjunto de dados relacionados e
+     organizados
+     Dados podem ser                  organizados, sua estrutura lógica
+     símbolos, sinais ou
+     códigos                          (modelo de dados) e um software de
+     Um BD tem finalidade,
+     realidade, coerência e           acesso.  SGBD!!!!
+     compartilhamento
+     Não é necessariamente
+     computadorizado
+       Conceitos iniciais de banco de dados
+
+Etapas de implementação
+
+de um Banco de Dados
+
+01- Especificação e Descrição do Mini mundo
+02- Análise de requisitos
+03- Projeto conceitual
+04- Projeto lógico
+05- Projeto físico
+       Conceitos iniciais de banco de dados
+
+Etapas de implementação
+
+de um Banco de Dados
+
+01- Especificação e Descrição do Mini mundo
+02- Análise de requisitos
+03- Projeto conceitual
+04- Projeto lógico Diagrama DER
+05- Projeto físico
+SGBDs
+
+Sistema Gerenciador do Banco de Dados
+
+Software que gerencia o banco de dados
+
+Fazendo uma analogia...                                  BD → livros
+                                                         SGBD → bibliotecário
+BD → Conjunto de dados armazenados e organizados em      SBD → biblioteca
+uma estrutura lógica
+SGBD → Software que gerencia o BD
+SBD → Sistema completo, que inclui BD, SGBD, usuários e
+aplicações
+SGBDs
+
+Sistema Gerenciador do Banco de Dados
+
+Software que gerencia o banco de dados
+
+Objetivo:                      Prós:                Contras:
+
+Definir → especificação  Flexibilidade              inadequado se tiver
+Construir →              Uso de padrões             apenas um usuário, baixa
+armazenamento de dados   Roda em vários servidores  complexidade ou alta
+Manipular → inserir,     Interfaces múltiplas       especialização (funções
+remover                  Mecanismos de backup e     de segurança sofisticadas)
+Compartilhar → acesso    recuperação
+simultâneo
+Modelo de Dados                                     Abstração = ocultar detalhes
+
+Modelo de Dados
+
+Estrutura lógica que define armazenamento, organização e manipulação dos dados
+
+Conceitual                Representativo            Físico
+
+Alto nível de abstração   Médio nível de abstração  Baixo nível de abstração
+
+Estrutura vista da        Modelo de implementação   Como os dados são no
+perspectiva dos usuários  Tuplas, colunas, objetos  disco
+                          como é no banco
+Entidade, atributo,                                 arquivo, registro, campo
+relacionamento
+                                                    como são realmente
+mundo real                                          armazenados
+Modelo de Dados
+
+                               Especificado no projeto e não
+                               muda com frequência
+                               ex: Tabela funcionários não
+                               muda sempre
+
+Instâncias são um “print” do   Catálogo é onde são
+banco de dados em algum        armazenados todos os
+momento. Elas mudam            esquemas, usuários,
+facilmente                     permissões, tabelas, índices e
+ex: Adicionar um novo cargo a  visões do sistema.
+um funcionário
+Conceitos iniciais de banco de dados
+
+Arquitetura
+
+de 3 esquemas
+
+É uma abordagem que possui:                            É muito importante pois
+
+                                                       garante
+
+Nível Externo → visão com linhas e colunas de tabelas  independência de dados
+
+Nível Conceitual → além de tabelas, enxerga relacionamentos (podemos alterar o nível
+
+e restrições                                           de um esquema sem
+
+Nível interno → armazenamento físico                   precisar alterar o nível
+
+                                                       adjacente ou superior)
+
+Na prática, SGBDs não implementam os 3,
+
+apenas 1 ou 2.                            Exemplo: alterar uma coluna em uma
+
+Seria ideal, mas prejudica a performance  tabela sem alterar o código
+       Conceitos iniciais de banco de dados
+
+Linguagens
+
+  Vision Definition
+  Language
+  Data Definition
+  Language
+  Storage Definition
+  Language
+  Data Manipulation
+  Language
+
+  SQL, que veremos futuramente, mistura as 4
+       DER                   1             N            Atributo
+                                                             Atributo
+DER             Entidade        Relaciona     Entidade
+
+      Atributo                  mento
+
+      Atributo
+
+                Atributo        Atributo
+                   Atributo
+       Camila Menezes - Monitora de Banco de Dados
+
+Correção
+
+AS01
+
+do semestre passado
+           AS01
+
+Obs: Wlad não deixa destacar provas!!!
+AS01
+
+   Sistemas de banco de dados referem-se ao conjunto de dados
+   relacionados e sua respectiva forma de acesso e organização.
+   Formalmente, eles são compostos por uma coleção de dados organizados
+   (banco de dados), uma estrutura lógica dos dados determinando a forma
+   como podem ser armazenados, organizados e manipulados (modelo de
+   dados), e um software que provê acesso ao banco de dados a usuários e
+   aplicações (sistema gerenciador de banco de dados)
+AS01
+AS01
+
+                          O modelo de dados é a forma como os dados
+                          são organizados de forma conceitual. O
+                          esquema é o projeto/estrutura física específica
+                          de um banco de dados (tabelas, colunas,
+                          linhas). Já o catálogo é o metadado que guarda
+                          a descrição do próprio banco (dados sobre os
+                          dados), gerenciado automaticamente pelo
+                          SGBD.
+AS01
+AS01
+
+      Processamento por arquivos são o controle
+      de acesso e segurança granular por perfil de
+      usuário
+      Mecanismos automáticos de backup e
+      recuperação que restauram o sistema em
+      caso de falha
+      Gerenciamento de acesso concorrente
+      associado ao controle de redundância, o
+      que impede a corrupção e a inconsistência
+      dos dados quando múltiplos usuários
+      trabalham simultaneamente.
+AS01
+AS01
+
+              A Arquitetura de Três Esquemas (interno, conceitual e externo)
+              garante a Independência de Dados, que é a capacidade de alterar
+              a estrutura em um nível do banco de dados sem precisar
+              modificar o nível imediatamente superior. Isso facilita a
+              manutenção e evolução do sistema, evitando que mudanças
+              técnicas impactem as aplicações ou a visão dos usuários finais.
+AS01
+AS01
+
+             SQL (Structured Query Language) é a linguagem padrão utilizada
+             para interagir com Bancos de Dados Relacionais. Ela serve para
+             criar, manipular, consultar e controlar a estrutura e os dados
+             armazenados em um SGBD.
+
+             Ela é composta de outras 4 linguagens:
+                  VDL (definição da visão de usuário e esquema conceitual)
+                  DDL (definição de dados do esquema conceitual)
+                  SDL (definição de armazenamento do esquema interno)
+                  DML (linguagem de manipulação de dados)
+    AS01
+
+Obs: Obrigatório ter título!!!!!
+AS01
+       Camila Menezes - Monitora de Banco de Dados
+
+Dúvidas?
+
+Banco de Dados
+       Camila Menezes - Monitora de Banco de Dados
+
+Obrigada!
+
+Banco de Dados
+Camila Menezes - Monitora de Banco de Dados
+
+Repositório Wlad                             Repositório Camila
+

@@ -1,0 +1,226 @@
+      Sistemas de Banco de Dados
+
+     Fundamentos em Bancos de Dados Relacionais
+                   Wladmir Cardoso Brandão
+
+                                  www.wladmirbrandao.com
+
+                    Material distribuído sob licença CC BY-NC-ND 4.0
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+otimização de consulta
+Otimização de Consulta
+
+o Escolha de algoritmos e estratégias eﬁcientes para execução de sequências de
+dã operações de álgebra relacional
+ran om Consulta
+so B o.c Parsing
+                        Heurística → aplicação de regras
+                              Consultas interpretadas
+ardo randa .0 Representação Interna
+                        Custo → estimativa de custo de execução
+ir C irb 4 Otimização
+m m -ND Plano de Execução
+lad lad -NC Geração de Código
+                        Consultas compiladas
+
+                        Semântica → compreensão e substituição
+                              Consulta é substituída por outra "melhor"
+W w.w BY Código de Execução
+  ww CC Execução
+                        Execução do plano tipicamente de forma encadeada
+                         (pipeline) sem geração de arquivos intermediários
+
+Resultado
+
+www.wladmirbrandao.com                                                          3 / 14
+Árvore de Consulta
+
+o Estrutura em árvore que representa uma expressão de álgebra relacional
+  ndã Folha → arquivo de entrada
+  Bra .com Interno → operação da álgebra relacional
+  so ao Raíz → operação de projeção ﬁnal da álgebra relacional
+  ardo rand .0 Ordem → operações executadas da folha esquerda para a raíz
+               ir C irb 4 Departamento.Nome, Professor.CPF, Professor.Nome
+                        dm dm C-ND CPF=CPF
+                        Wla .wla Y-N Departamento=Numero
+                        www CC B Sexo= F                  ALUNO
+
+                                   DEPARTAMENTO
+
+                        PROFESSOR
+
+www.wladmirbrandao.com                                                      4 / 14
+Otimização Heurística
+
+  o Heurística → método para modiﬁcação da representação interna de uma con-
+  dã sulta, visando tornar seu plano de execução eﬁciente
+
+     ran om Não garante que a melhor representação interna, aquela que gere o plano
+     o B o.c de execução mais eﬁciente, seja gerada
+     os da Aplicação de um conjunto de regras sobre uma árvore de consulta inicial
+
+       ard ran .0 Árvore inicial obtida a partir do parsing da consulta
+       ir C irb D 4 Operações algébricas que reduzam o tamanho dos resultados intermediários
+       m m -N devem ser executadas primeiro
+
+          d d C Operações unárias de seleção, projeção e agregação antes de operações binárias
+          la la -N de junção, e de conjunto
+       W w.w BY Operações algébricas de menor custo devem ser executadas primeiro
+          ww CC Operações binárias mais eﬁcientes antes
+
+www.wladmirbrandao.com                                                                          5 / 14
+Otimização Heurística
+
+o Árvore Inicial → o parsing da consulta pode ser feito no sentido natural, da es-
+dã querda para a direita, ou reverso, da direita para a esquerda
+
+  ran om Arquivos e operações são inseridos na árvore na ordem de parsing
+rdoso nBdao.c SELECT
+ a ra 4.0 FROM          A.CPF, A.Nome     A .CPF , A .Nome        A .CPF , A .Nome
+mir C mirb -ND WHERE    ALUNO A,
+ Wwlawdw.wClaCdBY-NC ANDPROFESSOR P       P .Sexo= F              P .CPF =A .CPF
+                        A.CPF = P.CPF
+                        P.Sexo = ’F’;     A .CPF =P .CPF       P .Sexo= F           A
+
+                                       A                    P  P
+
+www.wladmirbrandao.com                                                                 6 / 14
+Otimização Heurística
+
+  o Regras → modiﬁcam árvore de consulta inicial, baseando-se no princípio reduzir
+  dã para combinar
+
+     ran om Redução → operações unárias precedem operações binárias
+       o B o.c Primeira operação em cada nó folha deve ser seleção, seguida de projeção,
+       os da seguida de agregação
+
+     ard ran 4.0 Combinação → operações de menor custo precedem as de custo maior
+       mir C mirb -ND Nós folhas devem ser reordenados de forma que junções mais eﬁcientes sejam
+       Wwlawdw.wClaCdBY-NC executadas primeiro, evitando-se produtos cartesianos
+
+www.wladmirbrandao.com                                                                            7 / 14
+Otimização Heurística
+
+o Considerando parsing no sentido reverso, e existência de índice multinível em
+dã CPF de professor e aluno, e índice primário em Numero de departamento:
+ ran om SELECT D.Nome, A.CPF FROM ALUNO A, DEPARTAMENTO D, PROFESSOR P
+
+  B .c WHERE A.CPF = P.CPF AND A.Sexo = ’F’
+   so ao AND P.Depto = D.Numero AND P.Salario > 5.000,00
+                        ardo rand 4.0 D.Nome,A.CPF
+                        mir C mirb -ND P.CPF=A.CPF     D .Nome, A .CPF
+
+lad lad -NC P.Depto=D.Numero                        P .Depto=D .Numero
+
+Wwww.wCC BY P.Salario>5.000,00 DA .Sexo= FA .CPF =P .CPF                 D
+
+                        A           A .Sexo= F      P .Salario>5.000,00
+
+P                                   A                  P
+
+www.wladmirbrandao.com                                                           8 / 14
+Otimização Heurística
+
+o Projeções internas reduzem ainda mais o tamanho dos resultados intermediários
+                        randã m D.Nome,A.CPF
+                        o B o.co P.Depto=D.Numero
+ardosranda .0 A.CPF=P.CPF                                        SELECT   D.Nome, A.CPF
+ir C irb D 4 A.CPF                                                  FROM  DEPARTAMENTO D,
+                                             D .Numero, D .Nome           PROFESSOR P,
+                                                                  WHERE   ALUNO A
+ladm ladm C-N A.Sexo= F                      D                       AND  D.Numero = P.Depto
+                        P .CPF , P .Depto                            AND  P.CPF = A.CPF
+                                                                     AND  P.Salario > 5.000,00
+W w.w BY-N A                                                              A.Sexo = ’F’
+                        P .Salario>5.000,00
+
+ww CC Consulta pode ser reescrita de forma que a árvore inicial resultante do parsingP
+
+se aproxime da árvore de consulta otimizada
+
+www.wladmirbrandao.com                                                                          9 / 14
+Otimização Heurística
+
+o Plano de Execução → métodos de acesso, algoritmos e estratégias usados no
+dã processamento das operações na árvore de consulta otimizada
+                        Bran .com D.Nome,A.CPF
+                        oso dao P.Depto=D.Numero
+ir Cardirbran 4.0 A.CPF=P.CPF                                    1. Pesquisa Linear → arquivo não
+m m -ND A.CPF                                                        indexado A
+                                             D .Numero, D .Nome
+                                                                 2. Pesquisa Linear → arquivo não
+Wlad .wlad Y-NC A.Sexo= F                    D                       indexado P
+                        P .CPF , P .Depto
+                                                                 3. Junção de loop único → varre
+www CC B A                                                           arquivo não indexado A e
+                        P .Salario>5.000,00                          pesquisa arquivo de índice de P
+
+                        P                                        4. Junção de loop único → varre
+                                                                     resultado intermediário e
+
+                                                                 pesquisa arquivo de índice de D
+
+www.wladmirbrandao.com                                                                                10 / 14
+Otimização Baseada em Custo
+
+  o Função de Custo → computa estimativa de custo para algumas estratégias de
+  dã execução de consulta, escolhendo a estratégia de menor estimativa
+
+     ran om Tempo de Resposta → # estratégias de execução avaliadas é limitado
+     o B o.c Consultas Compiladas → otimização feita na compilação
+     rdos nda Evidências de Custo → combinadas pela função de custo
+
+       a ra 4.0 Computação → custo de processamento (CPU) de dados em memória primária
+       mir C mirb -ND Memória → consumo de buﬀers de memória primária
+       d d C Disco → consumo de blocos de disco
+       la la -N I/O → custo com operações de paginação, transferência de dados entre
+       W w.w BY memória primária e secundária
+       ww CC Comunicação → custo de transferência de dados via rede
+
+www.wladmirbrandao.com                                                                  11 / 14
+Otimização Baseada em Custo
+
+  o Catálogo → armazena informação necessária para estimar custo
+     ndã Arquivo → organização, tamanho, blocagem, # blocos, tamanho de registro,
+     ra om # de registros
+     o B o.c Índice → tipo, # níveis, # blocos em 1◦ nível
+     rdos nda Registro → distribuição de valores
+       a ra 4.0 Seletividade → fração de registros que satisfazem uma condição de igualdade
+       ir C irb D em um campo
+          dm dm C-N Exemplo → 50% de registros de professor tem Sexo = ’M’
+       Wla .wla -N Cardinalidade → # médio de registros que satisfazem uma condição de
+       w BY associação por igualdade em um campo
+          ww CC Exemplo → cada registro de departamento está associado em média a 5 registros
+
+                            de professor
+
+www.wladmirbrandao.com                                                                         12 / 14
+Otimização Semântica
+
+  o Compreensão → SGBD precisa compreender o signiﬁcado da consulta para reescrevê-
+  dã la de uma forma melhor, que gere um plano de execução mais eﬁciente
+  Bran .com A seguinte consulta demanda força bruta para execução:
+
+     oso ao SELECT CPF, Nome FROM PROFESSOR
+     ard rand .0 WHERE CPF IN (SELECT CPF FROM ALUNO)
+  mir C mirb -ND 4 Mas pode ser reescrita para:
+     lad lad -NC SELECT A.CPF, A.Nome FROM PROFESSOR A, ALUNO B
+     W .w Y WHERE A.CPF = B.CPF
+  www CC B Forma que demanda junção por loop único se professor ou aluno tiverem ín-
+
+     dice em CPF
+
+www.wladmirbrandao.com  13 / 14
+Referências Bibliográﬁcas
+
+     [1] Elmasri, Ramez; Navathe, Sham. Fundamentals of Database Systems. 7ed.
+            Pearson, 2016.
+
+     [2] Silberschatz, Abraham; Korth, Henry F.; Sudarshan, S. Database System
+            Concepts. 6ed. McGraw-Hill, 2011.
+
+     [3] Date, Christopher J. An Introduction to Database Systems. 8ed. Pearson,
+            2004.
+
+www.wladmirbrandao.com                                                            14 / 14
+
