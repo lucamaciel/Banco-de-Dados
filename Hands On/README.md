@@ -20,4 +20,4 @@ Resoluções seguindo os slides e a especificação SAM do Prof. Wladmir Brandã
 | 14 | Processamento de Transação | [HO14-Processamento-Transacao.md](HO14-Processamento-Transacao.md) |
 | 15 | Controle de Concorrência | [HO15-Controle-Concorrencia.md](HO15-Controle-Concorrencia.md) |
 
-Os arquivos antigos `Hands_on1.txt`, `Hands_on2.txt` e `Hands_on6.txt` foram mantidos como rascunhos. Atenção: o `Hands_on6.txt` corresponde ao HO04 e usa nomes de colunas que não existem no IMDB-sample.
+Os rascunhos antigos estão em `rascunhos/`. Atenção: o `Hands_on6.txt` corresponde ao HO04 e usa nomes de colunas que não existem no IMDB-sample.
